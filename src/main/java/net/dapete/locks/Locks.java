@@ -7,9 +7,10 @@ import java.util.function.Supplier;
 /**
  * Key-based locking with implementations of {@link Lock}.
  *
+ * @param <K> type of key
  * @param <L> type of {@link Lock}
  */
-public class Locks<L extends Lock> extends AbstractLocks<L> {
+public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
 
     Locks(Supplier<L> lockSupplier) {
         super(lockSupplier);
@@ -20,15 +21,23 @@ public class Locks<L extends Lock> extends AbstractLocks<L> {
      * @param <L>          type of {@link Lock}
      * @return instance using {@link Lock} implementations created by the specified {@code lockSupplier}
      */
-    public static <L extends Lock> Locks<L> withSupplier(Supplier<L> lockSupplier) {
+    public static <K, L extends Lock> Locks<K, L> withSupplier(Supplier<L> lockSupplier) {
         return new Locks<>(lockSupplier);
     }
 
     /**
      * @return {@link ReentrantLocks} instance using {@link ReentrantLock}
      */
-    public static ReentrantLocks reentrant() {
-        return new ReentrantLocks();
+    public static <K> ReentrantLocks<K> reentrant() {
+        return new ReentrantLocks<>();
+    }
+
+    /**
+     * @param clazz type of key
+     * @return {@link ReentrantLocks} instance using {@link ReentrantLock}
+     */
+    public static <K> ReentrantLocks<K> reentrant(Class<K> clazz) {
+        return new ReentrantLocks<>();
     }
 
     /**
@@ -37,7 +46,7 @@ public class Locks<L extends Lock> extends AbstractLocks<L> {
      * @param key key
      * @return already locked lock
      */
-    public L lock(Object key) {
+    public L lock(K key) {
         final var lock = get(key);
         lock.lock();
         return lock;

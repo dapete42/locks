@@ -8,9 +8,10 @@ import java.util.function.Supplier;
 /**
  * Key-based locking with implementations of {@link ReadWriteLock}.
  *
+ * @param <K> type of key
  * @param <L> type of ReadWriteLock
  */
-public class ReadWriteLocks<L extends ReadWriteLock> extends AbstractLocks<L> {
+public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K, L> {
 
     ReadWriteLocks(Supplier<L> lockSupplier) {
         super(lockSupplier);
@@ -21,15 +22,23 @@ public class ReadWriteLocks<L extends ReadWriteLock> extends AbstractLocks<L> {
      * @param <L>          type of {@link Lock}
      * @return instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}
      */
-    public static <L extends ReadWriteLock> ReadWriteLocks<L> withSupplier(Supplier<L> lockSupplier) {
+    public static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
         return new ReadWriteLocks<>(lockSupplier);
     }
 
     /**
      * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
      */
-    public static ReentrantReadWriteLocks reentrant() {
-        return new ReentrantReadWriteLocks();
+    public static <K> ReentrantReadWriteLocks<K> reentrant() {
+        return new ReentrantReadWriteLocks<>();
+    }
+
+    /**
+     * @param clazz type of key
+     * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
+     */
+    public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> clazz) {
+        return new ReentrantReadWriteLocks<>();
     }
 
     /**
@@ -38,7 +47,7 @@ public class ReadWriteLocks<L extends ReadWriteLock> extends AbstractLocks<L> {
      * @param key key
      * @return already locked lock
      */
-    public L readLock(Object key) {
+    public L readLock(K key) {
         final var lock = get(key);
         lock.readLock().lock();
         return lock;
@@ -50,7 +59,7 @@ public class ReadWriteLocks<L extends ReadWriteLock> extends AbstractLocks<L> {
      * @param key key
      * @return already locked lock
      */
-    public L writeLock(Object key) {
+    public L writeLock(K key) {
         final var lock = get(key);
         lock.writeLock().lock();
         return lock;

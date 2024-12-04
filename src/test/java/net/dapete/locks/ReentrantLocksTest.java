@@ -11,7 +11,7 @@ class ReentrantLocksTest {
 
     @Test
     void testLocksAreReleasedWhenUnused() throws Exception {
-        final var locks = Locks.reentrant();
+        final var locks = Locks.reentrant(Integer.class);
 
         var lock = locks.lock(1);
         lock.unlock();
@@ -34,7 +34,7 @@ class ReentrantLocksTest {
 
     @Test
     void testLocking() throws Exception {
-        final var locks = Locks.reentrant();
+        final var locks = Locks.reentrant(Integer.class);
 
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);

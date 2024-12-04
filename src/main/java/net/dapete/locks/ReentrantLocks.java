@@ -2,9 +2,9 @@ package net.dapete.locks;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReentrantLocks extends Locks<ReentrantLock> {
+public class ReentrantLocks<K> extends Locks<K, ReentrantLock> {
 
-    public ReentrantLocks() {
+    ReentrantLocks() {
         super(ReentrantLock::new);
     }
 

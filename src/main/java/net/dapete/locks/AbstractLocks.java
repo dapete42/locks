@@ -10,11 +10,12 @@ import java.util.function.Supplier;
 /**
  * Abstract base implementation of key-based locking.
  *
+ * @param <K> type of key
  * @param <L> type of lock
  */
-abstract class AbstractLocks<L> {
+abstract class AbstractLocks<K, L> {
 
-    private final Map<Object, LockReference<L>> lockReferenceMap = new ConcurrentHashMap<>();
+    private final Map<Object, LockReference<K, L>> lockReferenceMap = new ConcurrentHashMap<>();
 
     private final ReferenceQueue<L> lockReferenceQueue = new ReferenceQueue<>();
 
@@ -32,9 +33,9 @@ abstract class AbstractLocks<L> {
      * @param key key
      * @return lock
      */
-    public L get(Object key) {
+    public L get(K key) {
         processQueue();
-        return lockReferenceMap.computeIfAbsent(key, this::newLockReference).get();
+        return lockReferenceMap.computeIfAbsent(key, o -> newLockReference(key)).get();
     }
 
     /**
@@ -47,7 +48,7 @@ abstract class AbstractLocks<L> {
         return lockReferenceMap.size();
     }
 
-    private LockReference<L> newLockReference(Object key) {
+    private LockReference<K, L> newLockReference(K key) {
         final var lock = lockSupplier.get();
         return new LockReference<>(key, lock, lockReferenceQueue);
     }
@@ -58,8 +59,8 @@ abstract class AbstractLocks<L> {
     private void processQueue() {
         lockReferenceQueueLock.lock();
         try {
-            LockReference<?> lockReference;
-            while ((lockReference = (LockReference<?>) lockReferenceQueue.poll()) != null) {
+            LockReference<?, ?> lockReference;
+            while ((lockReference = (LockReference<?, ?>) lockReferenceQueue.poll()) != null) {
                 lockReferenceMap.remove(lockReference.getKey());
             }
         } finally {

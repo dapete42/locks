@@ -11,7 +11,7 @@ class ReentrantReadWriteLocksTest {
 
     @Test
     void testReadLocksAreReleasedWhenUnused() throws Exception {
-        final var readWriteLocks = ReadWriteLocks.reentrant();
+        final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
         var readWriteLock = readWriteLocks.readLock(1);
         readWriteLock.readLock().unlock();
@@ -35,17 +35,17 @@ class ReentrantReadWriteLocksTest {
 
     @Test
     void testLocking() throws Exception {
-        final var readWritelocks = ReadWriteLocks.reentrant();
+        final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
 
-        var readWriteLock = readWritelocks.readLock(1);
+        var readWriteLock = readWriteLocks.readLock(1);
         try {
 
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
-                final var readWriteLock2 = readWritelocks.writeLock(1);
+                final var readWriteLock2 = readWriteLocks.writeLock(1);
                 try {
                     threadHasLocked.set(true);
                 } finally {
