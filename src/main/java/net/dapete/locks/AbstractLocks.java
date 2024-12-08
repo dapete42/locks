@@ -1,8 +1,8 @@
 package net.dapete.locks;
 
 import java.lang.ref.ReferenceQueue;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
@@ -15,11 +15,11 @@ import java.util.function.Supplier;
  */
 abstract class AbstractLocks<K, L> {
 
-    private final Map<Object, LockReference<K, L>> lockReferenceMap = new ConcurrentHashMap<>();
+    private final Lock instanceLock = new ReentrantLock();
+
+    private final Map<Object, LockReference<K, L>> lockReferenceMap = new HashMap<>();
 
     private final ReferenceQueue<L> lockReferenceQueue = new ReferenceQueue<>();
-
-    private final Lock lockReferenceQueueLock = new ReentrantLock();
 
     private final Supplier<L> lockSupplier;
 
@@ -35,7 +35,20 @@ abstract class AbstractLocks<K, L> {
      */
     public L get(K key) {
         processQueue();
-        return lockReferenceMap.computeIfAbsent(key, o -> newLockReference(key)).get();
+        instanceLock.lock();
+        try {
+            final var lockReference = lockReferenceMap.get(key);
+            final var lock = lockReference == null ? null : lockReference.get();
+            if (lock == null) {
+                final var newLock = lockSupplier.get();
+                lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
+                return newLock;
+            } else {
+                return lock;
+            }
+        } finally {
+            instanceLock.unlock();
+        }
     }
 
     /**
@@ -45,26 +58,26 @@ abstract class AbstractLocks<K, L> {
      */
     public int size() {
         processQueue();
-        return lockReferenceMap.size();
-    }
-
-    private LockReference<K, L> newLockReference(K key) {
-        final var lock = lockSupplier.get();
-        return new LockReference<>(key, lock, lockReferenceQueue);
+        instanceLock.lock();
+        try {
+            return lockReferenceMap.size();
+        } finally {
+            instanceLock.unlock();
+        }
     }
 
     /**
      * Removes all locks that have been marked as unreachable by the garbage collector.
      */
     private void processQueue() {
-        lockReferenceQueueLock.lock();
+        instanceLock.lock();
         try {
             LockReference<?, ?> lockReference;
             while ((lockReference = (LockReference<?, ?>) lockReferenceQueue.poll()) != null) {
                 lockReferenceMap.remove(lockReference.getKey());
             }
         } finally {
-            lockReferenceQueueLock.unlock();
+            instanceLock.unlock();
         }
     }
 
