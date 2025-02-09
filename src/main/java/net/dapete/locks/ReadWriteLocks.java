@@ -18,27 +18,33 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
+     * Return an instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}.
+     *
      * @param lockSupplier Supplier for instances of {@link L} (usually the constructor of a class implementing {@link ReadWriteLock})
      * @param <K>          type of key
      * @param <L>          type of {@link Lock}
-     * @return instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}
+     * @return instance using {@code ReadWriteLock} implementations created by the specified {@code lockSupplier}
      */
     public static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
         return new ReadWriteLocks<>(lockSupplier);
     }
 
     /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@code ReentrantReadWriteLock}
+     *
      * @param <K> type of key
-     * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
+     * @return {@code ReentrantReadWriteLocks} instance
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant() {
         return new ReentrantReadWriteLocks<>();
     }
 
     /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}.
+     *
      * @param keyClass class of key
      * @param <K>      type of key
-     * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
+     * @return {@code ReentrantReadWriteLocks} instance
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> keyClass) {
         return new ReentrantReadWriteLocks<>();
