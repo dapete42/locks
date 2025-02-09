@@ -11,11 +11,11 @@ Required permissions on GitHub:
 * Push to `release`
 * Create releases in GitHub
 
-1. Locally, create a new release using the gitflow-maven-plugin:
+1. Create a new release using the gitflow-maven-plugin:
    ```
    ./mvnw gitflow:release
    ```
-   You will be prompted for a version number.
+   You will be prompted for a version number. This will update the `main` and `release` branches and create a tag in the form `v1.2.3`.
 
 2. Create a release in GitHub from this tag.
 
