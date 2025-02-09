@@ -18,6 +18,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
 
     /**
      * @param lockSupplier Supplier for instances of {@link L} (usually the constructor of a class implementing {@link Lock})
+     * @param <K>          type of key
      * @param <L>          type of {@link Lock}
      * @return instance using {@link Lock} implementations created by the specified {@code lockSupplier}
      */
@@ -26,6 +27,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
     }
 
     /**
+     * @param <K> type of key
      * @return {@link ReentrantLocks} instance using {@link ReentrantLock}
      */
     public static <K> ReentrantLocks<K> reentrant() {
@@ -33,7 +35,8 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
     }
 
     /**
-     * @param keyClass type of key
+     * @param keyClass class of key
+     * @param <K>      type of key
      * @return {@link ReentrantLocks} instance using {@link ReentrantLock}
      */
     public static <K> ReentrantLocks<K> reentrant(Class<K> keyClass) {
@@ -47,7 +50,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @return already locked lock
      */
     public L lock(K key) {
-        final var lock = get(key);
+        final L lock = get(key);
         lock.lock();
         return lock;
     }

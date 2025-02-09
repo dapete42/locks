@@ -37,10 +37,10 @@ abstract class AbstractLocks<K, L> {
         processQueue();
         instanceLock.lock();
         try {
-            final var lockReference = lockReferenceMap.get(key);
-            final var lock = lockReference == null ? null : lockReference.get();
+            final LockReference<K, L> lockReference = lockReferenceMap.get(key);
+            final L lock = lockReference == null ? null : lockReference.get();
             if (lock == null) {
-                final var newLock = lockSupplier.get();
+                final L newLock = lockSupplier.get();
                 lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
                 return newLock;
             } else {

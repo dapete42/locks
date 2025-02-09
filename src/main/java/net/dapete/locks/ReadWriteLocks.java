@@ -19,6 +19,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
 
     /**
      * @param lockSupplier Supplier for instances of {@link L} (usually the constructor of a class implementing {@link ReadWriteLock})
+     * @param <K>          type of key
      * @param <L>          type of {@link Lock}
      * @return instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}
      */
@@ -27,6 +28,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
+     * @param <K> type of key
      * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant() {
@@ -34,7 +36,8 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * @param keyClass type of key
+     * @param keyClass class of key
+     * @param <K>      type of key
      * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> keyClass) {
@@ -48,7 +51,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return already locked lock
      */
     public L readLock(K key) {
-        final var lock = get(key);
+        final L lock = get(key);
         lock.readLock().lock();
         return lock;
     }
@@ -60,7 +63,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return already locked lock
      */
     public L writeLock(K key) {
-        final var lock = get(key);
+        final L lock = get(key);
         lock.writeLock().lock();
         return lock;
     }

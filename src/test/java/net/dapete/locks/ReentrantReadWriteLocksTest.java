@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,9 +12,9 @@ class ReentrantReadWriteLocksTest {
 
     @Test
     void testReadLocksAreReleasedWhenUnused() throws Exception {
-        final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
+        final ReentrantReadWriteLocks<Integer> readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
-        var readWriteLock = readWriteLocks.readLock(1);
+        ReentrantReadWriteLock readWriteLock = readWriteLocks.readLock(1);
         readWriteLock.readLock().unlock();
 
         int size = readWriteLocks.size();
@@ -35,17 +36,17 @@ class ReentrantReadWriteLocksTest {
 
     @Test
     void testLocking() throws Exception {
-        final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
+        final ReentrantReadWriteLocks<Integer> readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
 
-        var readWriteLock = readWriteLocks.readLock(1);
+        ReentrantReadWriteLock readWriteLock = readWriteLocks.readLock(1);
         try {
 
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
-                final var readWriteLock2 = readWriteLocks.writeLock(1);
+                final ReentrantReadWriteLock readWriteLock2 = readWriteLocks.writeLock(1);
                 try {
                     threadHasLocked.set(true);
                 } finally {
