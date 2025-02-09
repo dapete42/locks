@@ -19,4 +19,4 @@ Required permissions on GitHub:
 
 2. Create a release in GitHub from this tag.
 
-3. The release will be built and pushed to Sonatype OSSRH to be published to Maven Central.
+3. The release will be built and deployed to Maven Central.
