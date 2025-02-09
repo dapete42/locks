@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,9 +12,9 @@ class ReentrantLocksTest {
 
     @Test
     void testLocksAreReleasedWhenUnused() throws Exception {
-        final var locks = Locks.reentrant(Integer.class);
+        final ReentrantLocks<Integer> locks = Locks.reentrant(Integer.class);
 
-        var lock = locks.lock(1);
+        ReentrantLock lock = locks.lock(1);
         lock.unlock();
 
         int size = locks.size();
@@ -34,17 +35,17 @@ class ReentrantLocksTest {
 
     @Test
     void testLocking() throws Exception {
-        final var locks = Locks.reentrant(Integer.class);
+        final ReentrantLocks<Integer> locks = Locks.reentrant(Integer.class);
 
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
 
-        var lock = locks.lock(1);
+        ReentrantLock lock = locks.lock(1);
         try {
 
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
-                final var lock2 = locks.lock(1);
+                final ReentrantLock lock2 = locks.lock(1);
                 try {
                     threadHasLocked.set(true);
                 } finally {

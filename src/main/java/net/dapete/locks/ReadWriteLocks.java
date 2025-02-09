@@ -48,7 +48,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return already locked lock
      */
     public L readLock(K key) {
-        final var lock = get(key);
+        final L lock = get(key);
         lock.readLock().lock();
         return lock;
     }
@@ -60,7 +60,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return already locked lock
      */
     public L writeLock(K key) {
-        final var lock = get(key);
+        final L lock = get(key);
         lock.writeLock().lock();
         return lock;
     }
