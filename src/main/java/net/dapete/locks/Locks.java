@@ -50,7 +50,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @return already locked lock
      */
     public L lock(K key) {
-        final L lock = get(key);
+        final var lock = get(key);
         lock.lock();
         return lock;
     }
