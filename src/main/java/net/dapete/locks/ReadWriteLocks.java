@@ -34,10 +34,10 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * @param clazz type of key
+     * @param keyClass type of key
      * @return {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> clazz) {
+    public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> keyClass) {
         return new ReentrantReadWriteLocks<>();
     }
 

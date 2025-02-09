@@ -33,10 +33,10 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
     }
 
     /**
-     * @param clazz type of key
+     * @param keyClass type of key
      * @return {@link ReentrantLocks} instance using {@link ReentrantLock}
      */
-    public static <K> ReentrantLocks<K> reentrant(Class<K> clazz) {
+    public static <K> ReentrantLocks<K> reentrant(Class<K> keyClass) {
         return new ReentrantLocks<>();
     }
 
