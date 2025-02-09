@@ -6,7 +6,7 @@
 
     <groupId>net.dapete.locks</groupId>
     <artifactId>locks</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
 
     <name>locks</name>
     <description>Library for key-based locking</description>
@@ -53,6 +53,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.amashchenko.maven.plugin</groupId>
+                    <artifactId>gitflow-maven-plugin</artifactId>
+                    <version>1.21.0</version>
+                </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
@@ -101,6 +106,18 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <configuration>
+                    <mvnExecutable>${project.basedir}/mvnw</mvnExecutable>
+                    <gitFlowConfig>
+                        <developmentBranch>main</developmentBranch>
+                        <productionBranch>release</productionBranch>
+                        <versionTagPrefix>v</versionTagPrefix>
+                    </gitFlowConfig>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
