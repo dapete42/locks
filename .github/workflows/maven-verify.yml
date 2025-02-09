@@ -1,10 +1,8 @@
 ---
 
-name: Maven
+name: Maven verify
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -22,10 +20,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Maven package
-        run: ./mvnw -B package
+      - name: Maven verify
+        run: ./mvnw javadoc:jar source:jar verify
       - uses: codecov/codecov-action@v5
-      - uses: actions/upload-artifact@v4
-        with:
-          name: locks
-          path: target/locks-*.jar
