@@ -3,8 +3,8 @@
 name: Maven deploy
 
 on:
-  push:
-    branches: [main,release]
+  release:
+    types: [created]
 
 jobs:
   publish:
@@ -14,21 +14,17 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          # for Codecov
-          fetch-depth: 2
-      - name: Set up JDK 21
+      - name: Set up JDK 21 and Maven Central
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
       - name: Maven deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
         run: ./mvnw -B javadoc:jar source:jar deploy
-      - uses: codecov/codecov-action@v5
-      - uses: actions/upload-artifact@v4
-        with:
-          name: locks
-          path: target/locks-*.jar
