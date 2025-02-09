@@ -4,8 +4,19 @@ TODO
 
 ## For Developers
 
-Assuming you have the appropriate permissions on the Git repository, you can release a new release using this command:
+### How to Release
 
-```
-./mvnw gitflow:release
-```
+Required permissions on GitHub:
+* Push to `main`
+* Push to `release`
+* Create releases in GitHub
+
+1. Locally, create a new release using the gitflow-maven-plugin:
+   ```
+   ./mvnw gitflow:release
+   ```
+   You will be prompted for a version number.
+
+2. Create a release in GitHub from this tag.
+
+3. The release will be built and pushed to Sonatype OSSRH to be published to Maven Central.
