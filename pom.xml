@@ -166,6 +166,7 @@
                 <artifactId>central-publishing-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <autoPublish>true</autoPublish>
                     <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
