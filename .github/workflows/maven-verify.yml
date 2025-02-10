@@ -25,3 +25,5 @@ jobs:
       - name: Maven verify
         run: ./mvnw -B javadoc:jar source:jar verify
       - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
