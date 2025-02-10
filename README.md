@@ -1,3 +1,8 @@
+[![Maven](https://github.com/dapete42/locks/actions/workflows/maven-verify.yml/badge.svg)](https://github.com/dapete42/locks/actions/workflows/maven-verify.yml)
+[![CodeQL](https://github.com/dapete42/locks/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/dapete42/locks/actions/workflows/codeql-analysis.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/dapete42/locks/badge)](https://www.codefactor.io/repository/github/dapete42/locks)
+[![codecov](https://codecov.io/gh/dapete42/locks/branch/main/graph/badge.svg)](https://codecov.io/gh/dapete42/locks)
+
 # Key-Based Locking
 
 TODO
