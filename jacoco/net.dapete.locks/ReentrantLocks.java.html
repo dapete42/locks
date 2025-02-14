@@ -2,11 +2,18 @@
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Key-based locking with {@link ReentrantLock}s.
+ * &lt;p&gt;
+ * Instances can be created using {@link Locks#reentrant()} and {@link Locks#reentrant(Class)}.
+ *
+ * @param &lt;K&gt; type of key
+ */
 public class ReentrantLocks&lt;K&gt; extends Locks&lt;K, ReentrantLock&gt; {
 
     ReentrantLocks() {
-<span class="fc" id="L8">        super(ReentrantLock::new);</span>
-<span class="fc" id="L9">    }</span>
+<span class="fc" id="L15">        super(ReentrantLock::new);</span>
+<span class="fc" id="L16">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

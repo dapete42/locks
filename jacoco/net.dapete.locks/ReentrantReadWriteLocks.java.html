@@ -2,11 +2,18 @@
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Key-based locking with {@link ReentrantReadWriteLock}s.
+ * &lt;p&gt;
+ * Instances can be created using {@link ReadWriteLocks#reentrant()} and {@link ReadWriteLocks#reentrant(Class)}.
+ *
+ * @param &lt;K&gt; type of key
+ */
 public class ReentrantReadWriteLocks&lt;K&gt; extends ReadWriteLocks&lt;K, ReentrantReadWriteLock&gt; {
 
     ReentrantReadWriteLocks() {
-<span class="fc" id="L8">        super(ReentrantReadWriteLock::new);</span>
-<span class="fc" id="L9">    }</span>
+<span class="fc" id="L15">        super(ReentrantReadWriteLock::new);</span>
+<span class="fc" id="L16">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
