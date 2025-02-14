@@ -25,3 +25,15 @@ Required permissions on GitHub:
 2. Create a release in GitHub from this tag.
 
 3. The release will be built and deployed to Maven Central.
+
+### How to Create and Push Maven Site
+
+Required permissions on GitHub:
+* Push to `gh-pages`
+
+1. Check out current `release` branch.
+
+2. Create and push the Maven Site to GitHub pages:
+   ```
+   ./mvnw site-deploy
+   ```
