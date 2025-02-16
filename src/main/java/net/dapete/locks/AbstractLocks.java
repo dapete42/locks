@@ -28,7 +28,7 @@ abstract class AbstractLocks<K, L> {
     }
 
     /**
-     * Returns a new lock for the supplied key.
+     * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
      *
      * @param key key
      * @return lock

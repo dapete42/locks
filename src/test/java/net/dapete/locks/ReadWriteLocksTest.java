@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReentrantReadWriteLocksTest {
+class ReadWriteLocksTest {
 
     @Test
     void testReadLocksAreReleasedWhenUnused() throws Exception {
@@ -20,8 +20,8 @@ class ReentrantReadWriteLocksTest {
         assertEquals(1, size);
 
         /*
-         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, even
-         * {@code System.gc()} is just a suggestion, but this seems to work.
+         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
+         * suggestion, but this seems to work.
          */
         readWriteLock = null;
         for (int i = 300; i > 0 && size > 0; i--) {
@@ -71,5 +71,24 @@ class ReentrantReadWriteLocksTest {
         assertTrue(threadHasLocked.get());
     }
 
+    @Test
+    void readLock() {
+        final var locks = ReadWriteLocks.reentrant(Integer.class);
+
+        final var lock = locks.readLock(1);
+
+        lock.readLock().unlock();
+    }
+
+    @Test
+    void writeLock() {
+        final var locks = ReadWriteLocks.reentrant(Integer.class);
+
+        final var lock = locks.writeLock(1);
+
+        assertTrue(lock.isWriteLocked());
+
+        lock.writeLock().unlock();
+    }
 
 }

@@ -4,9 +4,9 @@ name: Maven verify
 
 on:
   push:
-    branches: [main,release]
+    branches: [ main,release ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
@@ -24,4 +24,11 @@ jobs:
           cache: maven
       - name: Maven verify
         run: ./mvnw -B javadoc:jar source:jar verify
+      - uses: codecov/test-results-action@v1
+        if: ${{ !cancelled() }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - uses: codecov/codecov-action@v5
+        if: ${{ !cancelled() }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

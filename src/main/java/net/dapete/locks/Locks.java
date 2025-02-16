@@ -50,7 +50,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
     }
 
     /**
-     * Return a {@link Lock} (of type {@link L}) already locked using {@link Lock#lock()}.
+     * Return a {@code Lock} already locked using {@link Lock#lock()}.
      *
      * @param key key
      * @return already locked lock
