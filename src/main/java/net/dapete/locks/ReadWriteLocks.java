@@ -51,10 +51,10 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * Return a {@link ReadWriteLock} (of type {@link L}) where the {@link ReadWriteLock#readLock()} is already locked using {@link Lock#lock()}.
+     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#readLock()} already locked using {@link Lock#lock()}.
      *
      * @param key key
-     * @return already locked lock
+     * @return already read locked lock
      */
     public L readLock(K key) {
         final var lock = get(key);
@@ -63,10 +63,10 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * Return a {@link ReadWriteLock} (of type {@link L}) where the {@link ReadWriteLock#writeLock()} is already locked using {@link Lock#lock()}.
+     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#writeLock()} ()} already locked using {@link Lock#lock()}.
      *
      * @param key key
-     * @return already locked lock
+     * @return already write locked lock
      */
     public L writeLock(K key) {
         final var lock = get(key);
