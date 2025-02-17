@@ -259,8 +259,15 @@
                 <artifactId>spdx-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>build-spdx</id>
+                        <id>package-createSPDX</id>
                         <phase>package</phase>
+                        <goals>
+                            <goal>createSPDX</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>site-createSPDX</id>
+                        <phase>pre-site</phase>
                         <goals>
                             <goal>createSPDX</goal>
                         </goals>
