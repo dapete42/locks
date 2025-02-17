@@ -92,6 +92,11 @@
                     <version>0.7.0</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>2.9.1</version>
+                </plugin>
+                <plugin>
                     <groupId>com.amashchenko.maven.plugin</groupId>
                     <artifactId>gitflow-maven-plugin</artifactId>
                     <version>1.21.0</version>
@@ -177,6 +182,11 @@
                     <version>3.5.2</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.spdx</groupId>
+                    <artifactId>spdx-maven-plugin</artifactId>
+                    <version>1.0.0-RC1</version>
+                </plugin>
+                <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>4.9.1.0</version>
@@ -215,6 +225,47 @@
                     <autoPublish>true</autoPublish>
                     <publishingServerId>central</publishingServerId>
                 </configuration>
+            </plugin>
+            <!-- SBOMs -->
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <projectType>library</projectType>
+                    <schemaVersion>1.4</schemaVersion>
+                    <includeBomSerialNumber>true</includeBomSerialNumber>
+                    <includeCompileScope>true</includeCompileScope>
+                    <includeProvidedScope>true</includeProvidedScope>
+                    <includeRuntimeScope>true</includeRuntimeScope>
+                    <includeSystemScope>true</includeSystemScope>
+                    <includeTestScope>false</includeTestScope>
+                    <includeLicenseText>false</includeLicenseText>
+                    <outputReactorProjects>true</outputReactorProjects>
+                    <outputFormat>all</outputFormat>
+                    <outputName>${project.artifactId}-${project.version}-cyclonedx</outputName>
+                    <skipNotDeployed>false</skipNotDeployed>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.spdx</groupId>
+                <artifactId>spdx-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-spdx</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>createSPDX</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- site -->
             <plugin>
