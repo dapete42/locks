@@ -332,10 +332,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <stylesheet>java</stylesheet>
-                            <doclint>none</doclint>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
