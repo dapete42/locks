@@ -27,7 +27,4 @@
  *     as the Supplier, e.g. {@code Locks.withSupplier(SuperEpicLock::new)}.
  * </p>
  */
-@NullMarked
 package net.dapete.locks;
-
-import org.jspecify.annotations.NullMarked;
