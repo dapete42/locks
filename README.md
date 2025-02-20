@@ -28,6 +28,8 @@ Required permissions on GitHub:
 
 ### How to Create and Push Maven Site
 
+**Note:** This happens automatically after a release has been created.
+
 Required permissions on GitHub:
 * Push to `gh-pages`
 
