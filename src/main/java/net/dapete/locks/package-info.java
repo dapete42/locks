@@ -4,10 +4,8 @@
  * or {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock}s which are identified by a key. These locks are guaranteed to by different for each key and
  * will be kept as long as they are referenced.
  * </p>
- * <p>
- * The possible ways to obtain these are:
- * </p>
  * <table>
+ *     <caption>Obtaining instances</caption>
  *     <thead>
  *         <tr>
  *             <th>Type of Lock</th>
@@ -60,7 +58,7 @@
  *     This can also be used if 'fair' versions of {@code ReentrantLock} or {@code ReentrantReadWriteLock} are needed, for example:
  * </p>
  * <pre>
- *     {@code Locks.withSupplier(() -> new ReentrantLock(true))}.
+ *     {@code Locks.withSupplier(() -> new ReentrantLock(true))}
  * </pre>
  */
 package net.dapete.locks;
