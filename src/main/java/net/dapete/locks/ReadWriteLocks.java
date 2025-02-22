@@ -30,7 +30,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * Return a {@link ReentrantReadWriteLocks} instance using {@code ReentrantReadWriteLock}
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}.
      *
      * @param <K> type of key
      * @return {@code ReentrantReadWriteLocks} instance
