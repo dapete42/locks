@@ -60,5 +60,70 @@
  * <pre>
  *     {@code Locks.withSupplier(() -> new ReentrantLock(true))}
  * </pre>
+ * <h2 id="examples-heading">
+ *     Examples
+ * </h2>
+ * <p>
+ *     Following the same pattern as described in the JDK documentation for {@link java.util.concurrent.locks.Lock Lock}, using {@link net.dapete.locks.Locks}
+ *     should look similar to this:
+ * </p>
+ * <pre>
+ *     {@code public class LocksExample {
+ *
+ *         private final ReentrantLocks<String> locks = Locks.reentrant();
+ *
+ *         public void doSomething(String url) {
+ *             var lock = locks.lock(url);
+ *             try {
+ *                 // do something with the URL
+ *             } finally {
+ *                 lock.unlock();
+ *             }
+ *         }
+ *
+ *     }}
+ * </pre>
+ * <p>
+ *     It is important to keep the lock in a local variable while it is being used. It is stored in a {@link java.lang.ref.WeakReference WeakReference}, so it
+ *     could be removed by the garbage collector at any time while it is not referenced.
+ * </p>
+ * <p>
+ *     An alternative way which may be useful if the lock is not always used or used multiple times would be to split the {@code var lock = …} line in two:
+ * </p>
+ * <pre>
+ *     {@code var lock = locks.get(url);
+ *     lock.lock();}
+ * </pre>
+ * <p>
+ *     For {@link net.dapete.locks.ReadWriteLocks} it is similar to the first example:
+ * </p>
+ * <pre>
+ *     {@code public class ReadWriteLocksExample {
+ *
+ *         private final ReentrantReadWriteLocks<String> locks = ReadWriteLocks.reentrant();
+ *
+ *         public void doSomethingRead(String url) {
+ *             var lock = locks.readLock(url);
+ *             try {
+ *                 // do something with the URL
+ *             } finally {
+ *                 lock.readLock().unlock();
+ *             }
+ *         }
+ *
+ *         public void doSomethingWrite(String url) {
+ *             var lock = locks.writeLock(url);
+ *             try {
+ *                 // do something with the URL
+ *             } finally {
+ *                 lock.writeLock().unlock();
+ *             }
+ *         }
+ *
+ *     }}
+ * </pre>
+ * <p>
+ *     Again the {@code var lock = …} lines could be split, which may be useful if both read and write locks are used in the method.
+ * </p>
  */
 package net.dapete.locks;
