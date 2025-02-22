@@ -46,7 +46,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param <K>      type of key
      * @return {@code ReentrantReadWriteLocks} instance
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant(Class<K> keyClass) {
+    public static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return new ReentrantReadWriteLocks<>();
     }
 
