@@ -1,1 +1,1 @@
-tagSearchIndex = [];updateSearchResults();
+tagSearchIndex = [{"l":"Examples","h":"package net.dapete.locks","d":"Section","u":"net.dapete.locks/net/dapete/locks/package-summary.html#examples-heading"}];updateSearchResults();

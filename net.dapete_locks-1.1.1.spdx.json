@@ -2,13 +2,13 @@
   "SPDXID" : "SPDXRef-DOCUMENT",
   "spdxVersion" : "SPDX-2.3",
   "creationInfo" : {
-    "created" : "2025-02-20T21:19:20Z",
+    "created" : "2025-03-08T19:38:14Z",
     "creators" : [ "Tool: spdx-maven-plugin" ],
     "licenseListVersion" : "3.26.0"
   },
   "name" : "locks",
   "dataLicense" : "CC0-1.0",
-  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.1.0",
+  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.1.1",
   "packages" : [ {
     "SPDXID" : "SPDXRef-gnrtd0",
     "copyrightText" : "NOASSERTION",
@@ -16,7 +16,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/net.dapete/locks@1.1.0",
+      "referenceLocator" : "pkg:maven/net.dapete/locks@1.1.1",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : true,
@@ -27,11 +27,11 @@
     "name" : "locks",
     "packageFileName" : "NOASSERTION",
     "packageVerificationCode" : {
-      "packageVerificationCodeValue" : "070f41ab53ed8b6309c8c43df366468becd0d3a7"
+      "packageVerificationCodeValue" : "71c09f4e1a61c51450424eacb5c7ae9d4cb2e67f"
     },
     "primaryPackagePurpose" : "LIBRARY",
     "summary" : "Library for key-based locking",
-    "versionInfo" : "1.1.0"
+    "versionInfo" : "1.1.1"
   }, {
     "SPDXID" : "SPDXRef-gnrtd11",
     "copyrightText" : "UNSPECIFIED",
@@ -56,7 +56,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@5.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@5.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -65,7 +65,7 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Jupiter (Aggregator)",
     "summary" : "Module \"junit-jupiter\" of JUnit 5.",
-    "versionInfo" : "5.11.4"
+    "versionInfo" : "5.12.0"
   }, {
     "SPDXID" : "SPDXRef-gnrtd13",
     "copyrightText" : "UNSPECIFIED",
@@ -73,7 +73,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -82,7 +82,7 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Jupiter API",
     "summary" : "Module \"junit-jupiter-api\" of JUnit 5.",
-    "versionInfo" : "5.11.4"
+    "versionInfo" : "5.12.0"
   }, {
     "SPDXID" : "SPDXRef-gnrtd14",
     "copyrightText" : "UNSPECIFIED",
@@ -107,7 +107,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@1.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@1.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -116,7 +116,7 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Platform Commons",
     "summary" : "Module \"junit-platform-commons\" of JUnit 5.",
-    "versionInfo" : "1.11.4"
+    "versionInfo" : "1.12.0"
   }, {
     "SPDXID" : "SPDXRef-gnrtd16",
     "copyrightText" : "UNSPECIFIED",
@@ -141,7 +141,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@5.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@5.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -150,7 +150,7 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Jupiter Params",
     "summary" : "Module \"junit-jupiter-params\" of JUnit 5.",
-    "versionInfo" : "5.11.4"
+    "versionInfo" : "5.12.0"
   }, {
     "SPDXID" : "SPDXRef-gnrtd18",
     "copyrightText" : "UNSPECIFIED",
@@ -158,7 +158,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -167,7 +167,7 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Jupiter Engine",
     "summary" : "Module \"junit-jupiter-engine\" of JUnit 5.",
-    "versionInfo" : "5.11.4"
+    "versionInfo" : "5.12.0"
   }, {
     "SPDXID" : "SPDXRef-gnrtd19",
     "copyrightText" : "UNSPECIFIED",
@@ -175,7 +175,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@1.11.4",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@1.12.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -184,13 +184,13 @@
     "licenseDeclared" : "NOASSERTION",
     "name" : "JUnit Platform Engine API",
     "summary" : "Module \"junit-platform-engine\" of JUnit 5.",
-    "versionInfo" : "1.11.4"
+    "versionInfo" : "1.12.0"
   } ],
   "files" : [ {
     "SPDXID" : "SPDXRef-gnrtd1",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "ab3a953eec1bac350a9098237aa1ba1f10502fc5"
+      "checksumValue" : "348e67a526edeacfec7bb783e3f5e6eb97dfd22e"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/module-info.java",
@@ -201,10 +201,10 @@
     "SPDXID" : "SPDXRef-gnrtd2",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "6bbd16bc2d6fd898da51946a965544949bddb04c"
+      "checksumValue" : "2961813aaa9fc7142c521fbcfa0f601f012ea601"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/Locks.java",
+    "fileName" : "./src/main/java/net/dapete/locks/AbstractLocks.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
@@ -212,7 +212,7 @@
     "SPDXID" : "SPDXRef-gnrtd3",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "59c67807b0e75f0526b6a22757a4aad771564ed9"
+      "checksumValue" : "67472df432745f7bbcd7b7062b8c00bc0fcd85da"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/ReadWriteLocks.java",
@@ -223,28 +223,6 @@
     "SPDXID" : "SPDXRef-gnrtd4",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "671ceed1e28de3f751e69710d8abe6aff54d5a12"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/ReentrantLocks.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
-    "SPDXID" : "SPDXRef-gnrtd5",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
-      "checksumValue" : "2961813aaa9fc7142c521fbcfa0f601f012ea601"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/AbstractLocks.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
-    "SPDXID" : "SPDXRef-gnrtd6",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
       "checksumValue" : "bc49e135237156c69648806306177744e2b6a06a"
     } ],
     "copyrightText" : "NOASSERTION",
@@ -253,18 +231,18 @@
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef-gnrtd7",
+    "SPDXID" : "SPDXRef-gnrtd5",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "7c4344a8a55e3ab139096b4052349fb702010367"
+      "checksumValue" : "671ceed1e28de3f751e69710d8abe6aff54d5a12"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/package-info.java",
+    "fileName" : "./src/main/java/net/dapete/locks/ReentrantLocks.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef-gnrtd8",
+    "SPDXID" : "SPDXRef-gnrtd6",
     "checksums" : [ {
       "algorithm" : "SHA1",
       "checksumValue" : "5050ad78f6e68dba636f1c2c6e5b2e8987bc542c"
@@ -275,13 +253,35 @@
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
+    "SPDXID" : "SPDXRef-gnrtd7",
+    "checksums" : [ {
+      "algorithm" : "SHA1",
+      "checksumValue" : "a521a74f28e33678734bb19008ec23a4fec4b26d"
+    } ],
+    "copyrightText" : "NOASSERTION",
+    "fileName" : "./src/main/java/net/dapete/locks/package-info.java",
+    "fileTypes" : [ "SOURCE" ],
+    "licenseConcluded" : "NOASSERTION",
+    "licenseInfoInFiles" : [ "NOASSERTION" ]
+  }, {
+    "SPDXID" : "SPDXRef-gnrtd8",
+    "checksums" : [ {
+      "algorithm" : "SHA1",
+      "checksumValue" : "c46fb9919d5e9634b889e0f37d80ec9cbc16a8e6"
+    } ],
+    "copyrightText" : "NOASSERTION",
+    "fileName" : "./src/main/java/net/dapete/locks/Locks.java",
+    "fileTypes" : [ "SOURCE" ],
+    "licenseConcluded" : "NOASSERTION",
+    "licenseInfoInFiles" : [ "NOASSERTION" ]
+  }, {
     "SPDXID" : "SPDXRef-gnrtd9",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "c142738d6dc9895a8a335db6e3c2a27672660b4a"
+      "checksumValue" : "76f97b0daa0a8ddd62b1a1ab20c7443c71db1c27"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/test/java/net/dapete/locks/LocksTest.java",
+    "fileName" : "./src/test/java/net/dapete/locks/ReadWriteLocksTest.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
@@ -289,10 +289,10 @@
     "SPDXID" : "SPDXRef-gnrtd10",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "6f14ac6ac367f5a73128ffcd1e23a42d27d3d848"
+      "checksumValue" : "835b6df90a82c1a5f21ee3bcf15abf370ecbe269"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/test/java/net/dapete/locks/ReadWriteLocksTest.java",
+    "fileName" : "./src/test/java/net/dapete/locks/LocksTest.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
@@ -305,15 +305,15 @@
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
+    "relatedSpdxElement" : "SPDXRef-gnrtd2"
+  }, {
+    "spdxElementId" : "SPDXRef-gnrtd0",
+    "relationshipType" : "CONTAINS",
+    "relatedSpdxElement" : "SPDXRef-gnrtd9"
+  }, {
+    "spdxElementId" : "SPDXRef-gnrtd0",
+    "relationshipType" : "CONTAINS",
     "relatedSpdxElement" : "SPDXRef-gnrtd5"
-  }, {
-    "spdxElementId" : "SPDXRef-gnrtd0",
-    "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd10"
-  }, {
-    "spdxElementId" : "SPDXRef-gnrtd0",
-    "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd4"
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
@@ -325,7 +325,7 @@
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd9"
+    "relatedSpdxElement" : "SPDXRef-gnrtd10"
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
@@ -333,7 +333,7 @@
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd8"
+    "relatedSpdxElement" : "SPDXRef-gnrtd6"
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "DYNAMIC_LINK",
@@ -342,7 +342,7 @@
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd2"
+    "relatedSpdxElement" : "SPDXRef-gnrtd8"
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
@@ -351,7 +351,7 @@
   }, {
     "spdxElementId" : "SPDXRef-gnrtd0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-gnrtd6"
+    "relatedSpdxElement" : "SPDXRef-gnrtd4"
   }, {
     "spdxElementId" : "SPDXRef-gnrtd12",
     "relationshipType" : "TEST_DEPENDENCY_OF",
