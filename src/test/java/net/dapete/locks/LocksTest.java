@@ -44,6 +44,7 @@ class LocksTest {
         Runnable runnable = () -> {
             threadHasStarted.set(true);
             final var lock2 = locks.lock(1);
+            assertEquals(lock, lock2);
             try {
                 threadHasLocked.set(true);
             } finally {

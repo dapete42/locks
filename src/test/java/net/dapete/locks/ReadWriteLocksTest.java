@@ -46,6 +46,7 @@ class ReadWriteLocksTest {
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
                 final var readWriteLock2 = readWriteLocks.writeLock(1);
+                assertEquals(readWriteLock, readWriteLock2);
                 try {
                     threadHasLocked.set(true);
                 } finally {
