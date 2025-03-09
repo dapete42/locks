@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LocksTest {
 
     @Test
-    void testLocksAreReleasedWhenUnused() throws InterruptedException {
+    void testLocksAreReleasedWhenUnused() {
         final var locks = Locks.reentrant(Integer.class);
 
-        var lock = locks.lock(1);
-        lock.unlock();
+        locks.lock(1).unlock();
 
         assertEquals(1, locks.size());
 
@@ -22,16 +22,12 @@ class LocksTest {
          * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
          * suggestion, but this seems to work.
          */
-        lock = null;
-        for (int i = 300; i > 0 && locks.size() > 0; i--) {
-            System.gc();
-            Thread.sleep(100);
-        }
-        assertEquals(0, locks.size());
+        System.gc();
+        await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
     }
 
     @Test
-    void testLocking() throws InterruptedException {
+    void testLocking() {
         final var locks = Locks.reentrant(Integer.class);
 
         var lock = locks.lock(1);
@@ -50,17 +46,12 @@ class LocksTest {
             }
         };
         new Thread(runnable).start();
-        while (!threadHasStarted.get()) {
-            Thread.yield();
-        }
-        TimeUnit.SECONDS.sleep(1);
-
+        await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasStarted);
         assertFalse(threadHasLocked.get());
 
         lock.unlock();
-        TimeUnit.SECONDS.sleep(1);
 
-        assertTrue(threadHasLocked.get());
+        await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
 
     @Test

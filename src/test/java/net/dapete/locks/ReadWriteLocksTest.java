@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadWriteLocksTest {
 
     @Test
-    void testReadLocksAreReleasedWhenUnused() throws Exception {
+    void testReadLocksAreReleasedWhenUnused() {
         final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
-        var readWriteLock = readWriteLocks.readLock(1);
-        readWriteLock.readLock().unlock();
+        readWriteLocks.readLock(1).readLock().unlock();
 
         assertEquals(1, readWriteLocks.size());
 
@@ -22,17 +22,12 @@ class ReadWriteLocksTest {
          * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
          * suggestion, but this seems to work.
          */
-        readWriteLock = null;
-        for (int i = 300; i > 0 && readWriteLocks.size() > 0; i--) {
-            // not guaranteed to do anything
-            System.gc();
-            Thread.sleep(100);
-        }
-        assertEquals(0, readWriteLocks.size());
+        System.gc();
+        await().atMost(30, TimeUnit.SECONDS).until(() -> readWriteLocks.size() == 0);
     }
 
     @Test
-    void testLocking() throws Exception {
+    void testLocking() {
         final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
@@ -52,22 +47,14 @@ class ReadWriteLocksTest {
                 }
             };
             new Thread(runnable).start();
-
-            while (!threadHasStarted.get()) {
-                Thread.yield();
-            }
-
-            TimeUnit.SECONDS.sleep(1);
-
+            await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasStarted);
             assertFalse(threadHasLocked.get());
 
         } finally {
             readWriteLock.readLock().unlock();
         }
 
-        TimeUnit.SECONDS.sleep(1);
-
-        assertTrue(threadHasLocked.get());
+        await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
 
     @Test
