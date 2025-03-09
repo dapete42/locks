@@ -16,20 +16,18 @@ class LocksTest {
         var lock = locks.lock(1);
         lock.unlock();
 
-        int size = locks.size();
-        assertEquals(1, size);
+        assertEquals(1, locks.size());
 
         /*
          * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
          * suggestion, but this seems to work.
          */
         lock = null;
-        for (int i = 300; i > 0 && size > 0; i--) {
+        for (int i = 300; i > 0 && locks.size() > 0; i--) {
             System.gc();
             Thread.sleep(100);
-            size = locks.size();
         }
-        assertEquals(0, size);
+        assertEquals(0, locks.size());
     }
 
     @Test
