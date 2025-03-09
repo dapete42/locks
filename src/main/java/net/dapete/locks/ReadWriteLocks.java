@@ -63,7 +63,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
     }
 
     /**
-     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#writeLock()} ()} already locked using {@link Lock#lock()}.
+     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#writeLock()} already locked using {@link Lock#lock()}.
      *
      * @param key key
      * @return already write locked lock
