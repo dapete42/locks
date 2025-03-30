@@ -15,4 +15,8 @@ public class ReentrantLocks<K> extends Locks<K, ReentrantLock> {
         super(ReentrantLock::new);
     }
 
+    ReentrantLocks(boolean fair) {
+        super(() -> new ReentrantLock(fair));
+    }
+
 }
