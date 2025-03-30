@@ -58,6 +58,18 @@ class ReadWriteLocksTest {
     }
 
     @Test
+    void reentrant_fair() {
+        final var locks = ReadWriteLocks.reentrant(true, Integer.class);
+
+        final var lock = locks.readLock(1);
+        try {
+            assertTrue(lock.isFair());
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    @Test
     void readLock() {
         final var locks = ReadWriteLocks.reentrant(Integer.class);
 

@@ -58,6 +58,19 @@ class LocksTest {
         await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
 
+
+    @Test
+    void reentrant_fair() {
+        final var locks = Locks.reentrant(true, Integer.class);
+
+        final var lock = locks.lock(1);
+        try {
+            assertTrue(lock.isFair());
+        } finally {
+            lock.unlock();
+        }
+    }
+
     @Test
     void get_differentForDifferentKeys() {
         final var locks = Locks.reentrant(Integer.class);

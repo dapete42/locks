@@ -15,4 +15,8 @@ public class ReentrantReadWriteLocks<K> extends ReadWriteLocks<K, ReentrantReadW
         super(ReentrantReadWriteLock::new);
     }
 
+    ReentrantReadWriteLocks(boolean fair) {
+        super(() -> new ReentrantReadWriteLock(fair));
+    }
+
 }
