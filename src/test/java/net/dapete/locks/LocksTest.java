@@ -5,64 +5,70 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LocksTest {
 
     @Test
-    void testLocksAreReleasedWhenUnused() throws InterruptedException {
+    void testLocksAreReleasedWhenUnused() {
         final var locks = Locks.reentrant(Integer.class);
 
-        var lock = locks.lock(1);
-        lock.unlock();
+        locks.lock(1).unlock();
 
-        int size = locks.size();
-        assertEquals(1, size);
+        assertEquals(1, locks.size());
 
         /*
          * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
          * suggestion, but this seems to work.
          */
-        lock = null;
-        for (int i = 300; i > 0 && size > 0; i--) {
-            System.gc();
-            Thread.sleep(100);
-            size = locks.size();
-        }
-        assertEquals(0, size);
+        System.gc();
+        await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
     }
 
     @Test
-    void testLocking() throws InterruptedException {
+    void testLocking() {
         final var locks = Locks.reentrant(Integer.class);
 
-        var lock = locks.lock(1);
-
-        // lock the lock in another thread and wait until it's running
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
-        Runnable runnable = () -> {
-            threadHasStarted.set(true);
-            final var lock2 = locks.lock(1);
-            assertEquals(lock, lock2);
-            try {
-                threadHasLocked.set(true);
-            } finally {
-                lock2.unlock();
-            }
-        };
-        new Thread(runnable).start();
-        while (!threadHasStarted.get()) {
-            Thread.yield();
+
+        final var lock = locks.lock(1);
+        try {
+
+            // lock the lock in another thread and wait until it's running
+            Runnable runnable = () -> {
+                threadHasStarted.set(true);
+                final var lock2 = locks.lock(1);
+                assertEquals(lock, lock2);
+                try {
+                    threadHasLocked.set(true);
+                } finally {
+                    lock2.unlock();
+                }
+            };
+            new Thread(runnable).start();
+            await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasStarted);
+            assertFalse(threadHasLocked.get());
+
+        } finally {
+            lock.unlock();
         }
-        TimeUnit.SECONDS.sleep(1);
 
-        assertFalse(threadHasLocked.get());
+        await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
+    }
 
-        lock.unlock();
-        TimeUnit.SECONDS.sleep(1);
 
-        assertTrue(threadHasLocked.get());
+    @Test
+    void reentrant_fair() {
+        final var locks = Locks.reentrant(true, Integer.class);
+
+        final var lock = locks.lock(1);
+        try {
+            assertTrue(lock.isFair());
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Test

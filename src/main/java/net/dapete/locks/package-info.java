@@ -16,7 +16,10 @@
  *     <tbody>
  *         <tr>
  *             <td>{@link java.util.concurrent.locks.ReentrantLock RentrantLock}</td>
- *             <td>{@link net.dapete.locks.Locks#reentrant() Locks.reentrant()}<br>{@link net.dapete.locks.Locks#reentrant(Class)}</td>
+ *             <td>{@link net.dapete.locks.Locks#reentrant() Locks.reentrant()}<br>
+ *                 {@link net.dapete.locks.Locks#reentrant(Class)}<br>
+ *                 {@link net.dapete.locks.Locks#reentrant(boolean)}<br>
+ *                 {@link net.dapete.locks.Locks#reentrant(boolean, Class)}</td>
  *             <td>{@link net.dapete.locks.ReentrantLocks}</td>
  *         </tr>
  *         <tr>
@@ -26,7 +29,10 @@
  *         </tr>
  *         <tr>
  *             <td>{@link java.util.concurrent.locks.ReentrantReadWriteLock ReentrantReadWriteLock}</td>
- *             <td>{@link net.dapete.locks.ReadWriteLocks#reentrant()}<br>{@link net.dapete.locks.ReadWriteLocks#reentrant(Class)}</td>
+ *             <td>{@link net.dapete.locks.ReadWriteLocks#reentrant()}<br>
+ *                 {@link net.dapete.locks.ReadWriteLocks#reentrant(Class)}<br>
+ *                 {@link net.dapete.locks.ReadWriteLocks#reentrant(boolean)}<br>
+ *                 {@link net.dapete.locks.ReadWriteLocks#reentrant(boolean, Class)}</td>
  *             <td>{@link net.dapete.locks.ReentrantReadWriteLocks}</td>
  *         </tr>
  *         <tr>
@@ -53,12 +59,6 @@
  * </p>
  * <pre>
  *     {@code Locks.withSupplier(SuperEpicLock::new)}
- * </pre>
- * <p>
- *     This can also be used if 'fair' versions of {@code ReentrantLock} or {@code ReentrantReadWriteLock} are needed, for example:
- * </p>
- * <pre>
- *     {@code Locks.withSupplier(() -> new ReentrantLock(true))}
  * </pre>
  * <h2 id="examples-heading">
  *     Examples

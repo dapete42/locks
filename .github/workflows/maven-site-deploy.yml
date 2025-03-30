@@ -19,7 +19,7 @@ jobs:
           cache: maven
       - name: Set up Git user
         run: git config --global user.email "dev@dapete.net" && git config --global user.name "GitHub action"
-      - uses: webfactory/ssh-agent@v0.9.0
+      - uses: webfactory/ssh-agent@v0.9.1
         with:
           ssh-private-key: ${{ secrets.SSH_DEPLOY_KEY }}
       - name: Maven site
