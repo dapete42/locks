@@ -33,7 +33,7 @@ class ReadWriteLocksTest {
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
 
-        var readWriteLock = readWriteLocks.readLock(1);
+        final var readWriteLock = readWriteLocks.readLock(1);
         try {
 
             Runnable runnable = () -> {

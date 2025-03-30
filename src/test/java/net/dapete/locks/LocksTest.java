@@ -30,26 +30,30 @@ class LocksTest {
     void testLocking() {
         final var locks = Locks.reentrant(Integer.class);
 
-        var lock = locks.lock(1);
-
-        // lock the lock in another thread and wait until it's running
         final AtomicBoolean threadHasStarted = new AtomicBoolean(false);
         final AtomicBoolean threadHasLocked = new AtomicBoolean(false);
-        Runnable runnable = () -> {
-            threadHasStarted.set(true);
-            final var lock2 = locks.lock(1);
-            assertEquals(lock, lock2);
-            try {
-                threadHasLocked.set(true);
-            } finally {
-                lock2.unlock();
-            }
-        };
-        new Thread(runnable).start();
-        await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasStarted);
-        assertFalse(threadHasLocked.get());
 
-        lock.unlock();
+        final var lock = locks.lock(1);
+        try {
+
+            // lock the lock in another thread and wait until it's running
+            Runnable runnable = () -> {
+                threadHasStarted.set(true);
+                final var lock2 = locks.lock(1);
+                assertEquals(lock, lock2);
+                try {
+                    threadHasLocked.set(true);
+                } finally {
+                    lock2.unlock();
+                }
+            };
+            new Thread(runnable).start();
+            await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasStarted);
+            assertFalse(threadHasLocked.get());
+
+        } finally {
+            lock.unlock();
+        }
 
         await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
