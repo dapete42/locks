@@ -272,8 +272,7 @@
                     <skipNotDeployed>false</skipNotDeployed>
                 </configuration>
             </plugin>
-            <!-- TODO 20250330: dependency issues, disable until the plugin has a 1.0.0 release -->
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.spdx</groupId>
                 <artifactId>spdx-maven-plugin</artifactId>
                 <executions>
@@ -292,7 +291,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
             <!-- site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
