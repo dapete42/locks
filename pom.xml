@@ -250,7 +250,7 @@
                 <artifactId>cyclonedx-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>makeAggregateBom</goal>
                         </goals>
@@ -331,7 +331,28 @@
                     <tryUpdate>true</tryUpdate>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Sbom-Location>META-INF/sbom/${project.artifactId}-${project.version}-cyclonedx.json</Sbom-Location>
+                            <Sbom-Format>CycloneDX</Sbom-Format>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}</directory>
+                <includes>
+                    <include>${project.artifactId}-${project.version}-cyclonedx.json</include>
+                </includes>
+                <targetPath>META-INF/sbom</targetPath>
+            </resource>
+        </resources>
     </build>
 
     <profiles>
