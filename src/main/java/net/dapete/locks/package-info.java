@@ -4,9 +4,9 @@
  * or {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock}s which are identified by a key. These locks are guaranteed to by different for each key and
  * will be kept as long as they are referenced.
  * </p>
- * <table>
+ * <table style="border-collapse:collapse">
  *     <caption>Obtaining instances</caption>
- *     <thead>
+ *     <thead class="table-header">
  *         <tr>
  *             <th>Type of Lock</th>
  *             <th>Method(s)</th>
@@ -14,20 +14,20 @@
  *         </tr>
  *     </thead>
  *     <tbody>
- *         <tr>
- *             <td>{@link java.util.concurrent.locks.ReentrantLock RentrantLock}</td>
+ *         <tr class="even-row-color">
+ *             <td>{@link java.util.concurrent.locks.ReentrantLock ReentrantLock}</td>
  *             <td>{@link net.dapete.locks.Locks#reentrant() Locks.reentrant()}<br>
  *                 {@link net.dapete.locks.Locks#reentrant(Class)}<br>
  *                 {@link net.dapete.locks.Locks#reentrant(boolean)}<br>
  *                 {@link net.dapete.locks.Locks#reentrant(boolean, Class)}</td>
  *             <td>{@link net.dapete.locks.ReentrantLocks}</td>
  *         </tr>
- *         <tr>
+ *         <tr class="odd-row-color">
  *             <td>any implementation of {@link java.util.concurrent.locks.Lock Lock}</td>
  *             <td>{@link net.dapete.locks.Locks#withSupplier(java.util.function.Supplier) Locks.withSupplier(Supplier)}</td>
  *             <td>{@link net.dapete.locks.Locks}</td>
  *         </tr>
- *         <tr>
+ *         <tr class="even-row-color">
  *             <td>{@link java.util.concurrent.locks.ReentrantReadWriteLock ReentrantReadWriteLock}</td>
  *             <td>{@link net.dapete.locks.ReadWriteLocks#reentrant()}<br>
  *                 {@link net.dapete.locks.ReadWriteLocks#reentrant(Class)}<br>
@@ -35,7 +35,7 @@
  *                 {@link net.dapete.locks.ReadWriteLocks#reentrant(boolean, Class)}</td>
  *             <td>{@link net.dapete.locks.ReentrantReadWriteLocks}</td>
  *         </tr>
- *         <tr>
+ *         <tr class="odd-row-color">
  *             <td>any implementation of {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock}</td>
  *             <td>{@link net.dapete.locks.ReadWriteLocks#withSupplier(java.util.function.Supplier) ReadWriteLocks.withSupplier(Supplier)}</td>
  *             <td>{@link net.dapete.locks.ReadWriteLocks}</td>
