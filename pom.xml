@@ -6,7 +6,7 @@
 
     <groupId>net.dapete</groupId>
     <artifactId>locks</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 
     <name>locks</name>
     <description>Library for key-based locking</description>
@@ -59,7 +59,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.12.1</version>
+                <version>5.12.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -114,7 +114,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.12</version>
+                    <version>0.8.13</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -184,17 +184,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.spdx</groupId>
                     <artifactId>spdx-maven-plugin</artifactId>
-                    <version>1.0.0-RC2</version>
+                    <version>1.0.2</version>
                 </plugin>
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
@@ -250,7 +250,7 @@
                 <artifactId>cyclonedx-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>makeAggregateBom</goal>
                         </goals>
@@ -272,8 +272,7 @@
                     <skipNotDeployed>false</skipNotDeployed>
                 </configuration>
             </plugin>
-            <!-- TODO 20250330: dependency issues, disable until the plugin has a 1.0.0 release -->
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.spdx</groupId>
                 <artifactId>spdx-maven-plugin</artifactId>
                 <executions>
@@ -292,7 +291,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
             <!-- site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -332,7 +331,28 @@
                     <tryUpdate>true</tryUpdate>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Sbom-Location>META-INF/sbom/${project.artifactId}-${project.version}-cyclonedx.json</Sbom-Location>
+                            <Sbom-Format>CycloneDX</Sbom-Format>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}</directory>
+                <includes>
+                    <include>${project.artifactId}-${project.version}-cyclonedx.json</include>
+                </includes>
+                <targetPath>META-INF/sbom</targetPath>
+            </resource>
+        </resources>
     </build>
 
     <profiles>

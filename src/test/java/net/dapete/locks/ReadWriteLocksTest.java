@@ -75,6 +75,8 @@ class ReadWriteLocksTest {
 
         final var lock = locks.readLock(1);
 
+        assertEquals(1, lock.getReadLockCount());
+
         lock.readLock().unlock();
     }
 
