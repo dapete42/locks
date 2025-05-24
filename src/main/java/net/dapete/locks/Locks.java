@@ -55,6 +55,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @param fair {@code true} if the locks should use a fair ordering policy (see {@link ReentrantLock#ReentrantLock(boolean)})
      * @param <K>  type of key
      * @return {@code ReentrantLocks} instance
+     * @since 1.2.0
      */
     public static <K> ReentrantLocks<K> reentrant(boolean fair) {
         return new ReentrantLocks<>(fair);
@@ -67,6 +68,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @param keyClass class of key
      * @param <K>      type of key
      * @return {@code ReentrantLocks} instance
+     * @since 1.2.0
      */
     public static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return new ReentrantLocks<>(fair);

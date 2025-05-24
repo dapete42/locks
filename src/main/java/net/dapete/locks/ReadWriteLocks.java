@@ -56,6 +56,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param fair {@code true} if the locks should use a fair ordering policy (see {@link ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)})
      * @param <K>  type of key
      * @return {@code ReentrantReadWriteLocks} instance
+     * @since 1.2.0
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
         return new ReentrantReadWriteLocks<>(fair);
@@ -68,6 +69,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param keyClass class of key
      * @param <K>      type of key
      * @return {@code ReentrantReadWriteLocks} instance
+     * @since 1.2.0
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return new ReentrantReadWriteLocks<>(fair);
