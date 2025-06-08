@@ -1,6 +1,8 @@
 package net.dapete.locks;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -75,12 +77,25 @@ class LocksTest {
     }
 
     @Test
-    void reentrant_fair() {
-        final var locks = Locks.reentrant(true, Integer.class);
+    void reentrant() {
+        final var locks = Locks.reentrant(Integer.class);
 
         final var lock = locks.lock(1);
         try {
-            assertTrue(lock.isFair());
+            assertFalse(lock.isFair());
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void reentrant_fair(boolean fair) {
+        final var locks = Locks.reentrant(fair, Integer.class);
+
+        final var lock = locks.lock(1);
+        try {
+            assertEquals(fair, lock.isFair());
         } finally {
             lock.unlock();
         }
