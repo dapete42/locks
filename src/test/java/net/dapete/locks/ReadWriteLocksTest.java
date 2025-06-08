@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
 
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ReadWriteLocksTest {
 
@@ -55,6 +58,20 @@ class ReadWriteLocksTest {
         }
 
         await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
+    }
+
+    @Test
+    void withSupplier() {
+        @SuppressWarnings("unchecked") final Supplier<ReentrantReadWriteLock> lockSupplier = mock(Supplier.class);
+        when(lockSupplier.get()).thenAnswer(invocation -> new ReentrantReadWriteLock());
+
+        final var locks = ReadWriteLocks.withSupplier(lockSupplier);
+
+        verifyNoInteractions(lockSupplier);
+
+        locks.readLock(1).readLock().unlock();
+
+        verify(lockSupplier).get();
     }
 
     @Test

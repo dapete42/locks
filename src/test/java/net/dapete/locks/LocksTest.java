@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class LocksTest {
 
@@ -58,6 +61,18 @@ class LocksTest {
         await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
 
+    @Test
+    void withSupplier() {
+        @SuppressWarnings("unchecked") final Supplier<ReentrantLock> lockSupplier = mock(Supplier.class);
+        when(lockSupplier.get()).thenAnswer(invocation -> new ReentrantLock());
+
+        final var locks = Locks.withSupplier(lockSupplier);
+        verifyNoInteractions(lockSupplier);
+
+        locks.lock(1).unlock();
+
+        verify(lockSupplier).get();
+    }
 
     @Test
     void reentrant_fair() {
