@@ -46,7 +46,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @return {@code ReentrantLocks} instance
      */
     public static <K> ReentrantLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
-        return new ReentrantLocks<>();
+        return reentrant();
     }
 
     /**
@@ -71,7 +71,7 @@ public class Locks<K, L extends Lock> extends AbstractLocks<K, L> {
      * @since 1.2.0
      */
     public static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
-        return new ReentrantLocks<>(fair);
+        return reentrant(fair);
     }
 
     /**

@@ -47,7 +47,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return {@code ReentrantReadWriteLocks} instance
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
-        return new ReentrantReadWriteLocks<>();
+        return reentrant();
     }
 
     /**
@@ -72,7 +72,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @since 1.2.0
      */
     public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
-        return new ReentrantReadWriteLocks<>(fair);
+        return reentrant(fair);
     }
 
     /**
