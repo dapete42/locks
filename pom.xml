@@ -229,10 +229,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!-- explicitly use the simplest GC for predictable behavior -->
-                    <argLine>-XX:+UseSerialGC</argLine>
-                    <!-- Mockito loads byte-buddy dynamically -->
-                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>
+                    <!-- @{argLine}: hack for Jacoco; it sets Surefire's argLine, but <argLine> entries overwrite this.
+                         This is also the reason this is a single <argLine>. -->
+                    <!-- UseSerialGC: explicitly use the simplest GC for predictable behavior -->
+                    <!-- EnableDynamicAgentLoading: Mockito loads byte-buddy dynamically -->
+                    <argLine>@{argLine} -XX:+UseSerialGC -XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -242,6 +243,13 @@
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
