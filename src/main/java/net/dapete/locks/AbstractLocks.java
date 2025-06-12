@@ -27,6 +27,12 @@ abstract class AbstractLocks<K, L> {
         this.lockSupplier = lockSupplier;
     }
 
+    private L createLock(K key) {
+        final var newLock = lockSupplier.get();
+        lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
+        return newLock;
+    }
+
     /**
      * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
      *
@@ -38,14 +44,13 @@ abstract class AbstractLocks<K, L> {
         instanceLock.lock();
         try {
             final var lockReference = lockReferenceMap.get(key);
-            final var lock = lockReference == null ? null : lockReference.get();
-            if (lock == null) {
-                final var newLock = lockSupplier.get();
-                lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
-                return newLock;
-            } else {
-                return lock;
+            if (lockReference != null) {
+                final L lock = lockReference.get();
+                if (lock != null) {
+                    return lock;
+                }
             }
+            return createLock(key);
         } finally {
             instanceLock.unlock();
         }
