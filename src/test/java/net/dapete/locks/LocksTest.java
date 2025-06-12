@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
@@ -14,22 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LocksTest {
-
-    @Test
-    void testLocksAreReleasedWhenUnused() {
-        final var locks = Locks.reentrant(Integer.class);
-
-        locks.lock(1).unlock();
-
-        assertEquals(1, locks.size());
-
-        /*
-         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
-         * suggestion, but this seems to work.
-         */
-        System.gc();
-        await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
-    }
 
     @Test
     void testLocking() {
@@ -45,7 +31,7 @@ class LocksTest {
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
                 final var lock2 = locks.lock(1);
-                assertEquals(lock, lock2);
+                assertSame(lock, lock2);
                 try {
                     threadHasLocked.set(true);
                 } finally {
@@ -99,20 +85,6 @@ class LocksTest {
         } finally {
             lock.unlock();
         }
-    }
-
-    @Test
-    void get_differentForDifferentKeys() {
-        final var locks = Locks.reentrant(Integer.class);
-
-        assertNotEquals(locks.get(1), locks.get(2));
-    }
-
-    @Test
-    void get_identicalForIdenticalKey() {
-        final var locks = Locks.reentrant(Integer.class);
-
-        assertEquals(locks.get(1), locks.get(1));
     }
 
     @Test

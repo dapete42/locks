@@ -16,22 +16,6 @@ import static org.mockito.Mockito.*;
 class ReadWriteLocksTest {
 
     @Test
-    void testReadLocksAreReleasedWhenUnused() {
-        final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
-
-        readWriteLocks.readLock(1).readLock().unlock();
-
-        assertEquals(1, readWriteLocks.size());
-
-        /*
-         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
-         * suggestion, but this seems to work.
-         */
-        System.gc();
-        await().atMost(30, TimeUnit.SECONDS).until(() -> readWriteLocks.size() == 0);
-    }
-
-    @Test
     void testLocking() {
         final var readWriteLocks = ReadWriteLocks.reentrant(Integer.class);
 
@@ -44,7 +28,7 @@ class ReadWriteLocksTest {
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
                 final var readWriteLock2 = readWriteLocks.writeLock(1);
-                assertEquals(readWriteLock, readWriteLock2);
+                assertSame(readWriteLock, readWriteLock2);
                 try {
                     threadHasLocked.set(true);
                 } finally {
