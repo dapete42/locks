@@ -3,7 +3,6 @@ package net.dapete.locks;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,9 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class AbstractLocksTest {
 
     private static class TestAbstractLocks extends AbstractLocks<Integer, ReentrantLock> {
+
         private TestAbstractLocks() {
             super(ReentrantLock::new);
         }
+
+        private void clearLockReference(Integer key) {
+            getLockReference(key).clear();
+        }
+
     }
 
     @Test
@@ -32,6 +37,21 @@ class AbstractLocksTest {
          */
         System.gc();
         await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
+    }
+
+    @Test
+    void get_createNewLockIfLockReferenceIsNull() {
+        final var locks = new TestAbstractLocks();
+
+        // get one lock and then clear the reference to it
+        final var lock1 = locks.get(1);
+        locks.clearLockReference(1);
+
+        // this should not be null, but a different lock
+        final var lock2 = locks.get(1);
+
+        assertNotNull(lock2);
+        assertNotSame(lock1, lock2);
     }
 
     @Test
