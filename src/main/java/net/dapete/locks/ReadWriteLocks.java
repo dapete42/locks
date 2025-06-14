@@ -11,11 +11,7 @@ import java.util.function.Supplier;
  * @param <K> type of key
  * @param <L> type of ReadWriteLock
  */
-public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K, L> {
-
-    ReadWriteLocks(Supplier<L> lockSupplier) {
-        super(lockSupplier);
-    }
+public interface ReadWriteLocks<K, L extends ReadWriteLock> {
 
     /**
      * Return an instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}.
@@ -25,8 +21,8 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param <L>          type of {@link Lock}
      * @return instance using {@code ReadWriteLock} implementations created by the specified {@code lockSupplier}
      */
-    public static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
-        return new ReadWriteLocks<>(lockSupplier);
+    static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
+        return new ReadWriteLocksImpl<>(lockSupplier);
     }
 
     /**
@@ -35,7 +31,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param <K> type of key
      * @return {@code ReentrantReadWriteLocks} instance
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant() {
+    static <K> ReentrantReadWriteLocks<K> reentrant() {
         return new ReentrantReadWriteLocks<>();
     }
 
@@ -46,7 +42,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param <K>      type of key
      * @return {@code ReentrantReadWriteLocks} instance
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
+    static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
     }
 
@@ -58,7 +54,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return {@code ReentrantReadWriteLocks} instance
      * @since 1.2.0
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
+    static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
         return new ReentrantReadWriteLocks<>(fair);
     }
 
@@ -71,9 +67,17 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @return {@code ReentrantReadWriteLocks} instance
      * @since 1.2.0
      */
-    public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
+    static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant(fair);
     }
+
+    /**
+     * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+     *
+     * @param key key
+     * @return lock
+     */
+    L get(K key);
 
     /**
      * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#readLock()} already locked using {@link Lock#lock()}.
@@ -81,11 +85,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param key key
      * @return already read locked lock
      */
-    public L readLock(K key) {
-        final var lock = get(key);
-        lock.readLock().lock();
-        return lock;
-    }
+    L readLock(K key);
 
     /**
      * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#writeLock()} already locked using {@link Lock#lock()}.
@@ -93,10 +93,13 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends AbstractLocks<K,
      * @param key key
      * @return already write locked lock
      */
-    public L writeLock(K key) {
-        final var lock = get(key);
-        lock.writeLock().lock();
-        return lock;
-    }
+    L writeLock(K key);
+
+    /**
+     * Returns the current number of locks managed by this instance.
+     *
+     * @return number of locks
+     */
+    int size();
 
 }
