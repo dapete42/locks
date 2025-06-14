@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @param <K> type of key
  */
-public class ReentrantReadWriteLocks<K> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
+public final class ReentrantReadWriteLocks<K> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
 
     ReentrantReadWriteLocks() {
         super(ReentrantReadWriteLock::new);
