@@ -10,7 +10,7 @@ class LocksImpl<K, L extends Lock> extends AbstractLocks<K, L> implements Locks<
     }
 
     @Override
-    public L lock(K key) {
+    public final L lock(K key) {
         final var lock = get(key);
         lock.lock();
         return lock;

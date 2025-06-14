@@ -41,7 +41,7 @@ abstract class AbstractLocks<K, L> {
      * @param key key
      * @return lock
      */
-    public L get(K key) {
+    public final L get(K key) {
         processQueue();
         instanceLock.lock();
         try {
@@ -58,9 +58,9 @@ abstract class AbstractLocks<K, L> {
         }
     }
 
-    // package-private to allow accessing this in tests
+    // protected to allow accessing this in tests
     @Nullable
-    LockReference<K, L> getLockReference(K key) {
+    protected final LockReference<K, L> getLockReference(K key) {
         return lockReferenceMap.get(key);
     }
 
@@ -69,7 +69,7 @@ abstract class AbstractLocks<K, L> {
      *
      * @return number of locks
      */
-    public int size() {
+    public final int size() {
         processQueue();
         instanceLock.lock();
         try {

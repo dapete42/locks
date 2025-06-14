@@ -10,14 +10,14 @@ class ReadWriteLocksImpl<K, L extends ReadWriteLock> extends AbstractLocks<K, L>
     }
 
     @Override
-    public L readLock(K key) {
+    public final L readLock(K key) {
         final var lock = get(key);
         lock.readLock().lock();
         return lock;
     }
 
     @Override
-    public L writeLock(K key) {
+    public final L writeLock(K key) {
         final var lock = get(key);
         lock.writeLock().lock();
         return lock;

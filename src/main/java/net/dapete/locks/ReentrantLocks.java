@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @param <K> type of key
  */
-public class ReentrantLocks<K> extends LocksImpl<K, ReentrantLock> {
+ public final class ReentrantLocks<K> extends LocksImpl<K, ReentrantLock> {
 
     ReentrantLocks() {
         super(ReentrantLock::new);
