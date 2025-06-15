@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReadWriteLocks.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">locks</a> &gt; <a href="index.source.html" class="el_package">net.dapete.locks</a> &gt; <span class="el_source">ReadWriteLocks.java</span></div><h1>ReadWriteLocks.java</h1><pre class="source lang-java linenums">package net.dapete.locks;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
+
+/**
+ * Key-based locking with implementations of {@link ReadWriteLock}.
+ *
+ * @param &lt;K&gt; type of key
+ * @param &lt;L&gt; type of ReadWriteLock
+ */
+public interface ReadWriteLocks&lt;K, L extends ReadWriteLock&gt; {
+
+    /**
+     * Return an instance using {@link ReadWriteLock} implementations created by the specified {@code lockSupplier}.
+     *
+     * @param lockSupplier Supplier for instances of {@link L} (usually the constructor of a class implementing {@link ReadWriteLock})
+     * @param &lt;K&gt;          type of key
+     * @param &lt;L&gt;          type of {@link Lock}
+     * @return instance using {@code ReadWriteLock} implementations created by the specified {@code lockSupplier}
+     */
+    static &lt;K, L extends ReadWriteLock&gt; ReadWriteLocks&lt;K, L&gt; withSupplier(Supplier&lt;L&gt; lockSupplier) {
+<span class="fc" id="L25">        return new ReadWriteLocksImpl&lt;&gt;(lockSupplier);</span>
+    }
+
+    /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}.
+     *
+     * @param &lt;K&gt; type of key
+     * @return {@code ReentrantReadWriteLocks} instance
+     */
+    static &lt;K&gt; ReentrantReadWriteLocks&lt;K&gt; reentrant() {
+<span class="fc" id="L35">        return new ReentrantReadWriteLocks&lt;&gt;();</span>
+    }
+
+    /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock}.
+     *
+     * @param keyClass class of key
+     * @param &lt;K&gt;      type of key
+     * @return {@code ReentrantReadWriteLocks} instance
+     */
+    static &lt;K&gt; ReentrantReadWriteLocks&lt;K&gt; reentrant(@SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
+<span class="fc" id="L46">        return reentrant();</span>
+    }
+
+    /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock} with the given fairness policy.
+     *
+     * @param fair {@code true} if the locks should use a fair ordering policy (see {@link ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)})
+     * @param &lt;K&gt;  type of key
+     * @return {@code ReentrantReadWriteLocks} instance
+     * @since 1.2.0
+     */
+    static &lt;K&gt; ReentrantReadWriteLocks&lt;K&gt; reentrant(boolean fair) {
+<span class="fc" id="L58">        return new ReentrantReadWriteLocks&lt;&gt;(fair);</span>
+    }
+
+    /**
+     * Return a {@link ReentrantReadWriteLocks} instance using {@link ReentrantReadWriteLock} with the given fairness policy.
+     *
+     * @param fair     {@code true} if the locks should use a fair ordering policy (see {@link ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)})
+     * @param keyClass class of key
+     * @param &lt;K&gt;      type of key
+     * @return {@code ReentrantReadWriteLocks} instance
+     * @since 1.2.0
+     */
+    static &lt;K&gt; ReentrantReadWriteLocks&lt;K&gt; reentrant(boolean fair, @SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
+<span class="fc" id="L71">        return reentrant(fair);</span>
+    }
+
+    /**
+     * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+     *
+     * @param key key
+     * @return lock
+     */
+    L get(K key);
+
+    /**
+     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#readLock()} already locked using {@link Lock#lock()}.
+     *
+     * @param key key
+     * @return already read locked lock
+     */
+    L readLock(K key);
+
+    /**
+     * Return a {@code ReadWriteLock} with its {@link ReadWriteLock#writeLock()} already locked using {@link Lock#lock()}.
+     *
+     * @param key key
+     * @return already write locked lock
+     */
+    L writeLock(K key);
+
+    /**
+     * Returns the current number of locks managed by this instance.
+     *
+     * @return number of locks
+     */
+    int size();
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
