@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.dapete</groupId>
     <artifactId>locks</artifactId>
-    <version>1.2.1</version>
+    <version>1.3.0</version>
 
     <name>locks</name>
     <description>Library for key-based locking</description>
@@ -59,7 +59,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.12.2</version>
+                <version>5.13.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,6 +67,11 @@
                 <groupId>org.jspecify</groupId>
                 <artifactId>jspecify</artifactId>
                 <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>5.18.0</version>
             </dependency>
             <dependency>
                 <groupId>org.awaitility</groupId>
@@ -85,6 +90,10 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.awaitility</groupId>
@@ -119,7 +128,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -220,8 +229,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!-- explicitly use the simplest GC for predictable behavior -->
-                    <argLine>-XX:+UseSerialGC</argLine>
+                    <!-- @{argLine}: hack for Jacoco; it sets Surefire's argLine, but <argLine> entries overwrite this.
+                         This is also the reason this is a single <argLine>. -->
+                    <!-- UseSerialGC: explicitly use the simplest GC for predictable behavior -->
+                    <!-- EnableDynamicAgentLoading: Mockito loads byte-buddy dynamically -->
+                    <argLine>@{argLine} -XX:+UseSerialGC -XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -231,6 +243,13 @@
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -337,7 +356,8 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Sbom-Location>META-INF/sbom/${project.artifactId}-${project.version}-cyclonedx.json</Sbom-Location>
+                            <Sbom-Location>META-INF/sbom/${project.artifactId}-${project.version}-cyclonedx.json
+                            </Sbom-Location>
                             <Sbom-Format>CycloneDX</Sbom-Format>
                         </manifestEntries>
                     </archive>

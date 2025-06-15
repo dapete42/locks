@@ -1,5 +1,7 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.Nullable;
+
 import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,28 +29,39 @@ abstract class AbstractLocks<K, L> {
         this.lockSupplier = lockSupplier;
     }
 
+    private L createLock(K key) {
+        final var newLock = lockSupplier.get();
+        lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
+        return newLock;
+    }
+
     /**
      * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
      *
      * @param key key
      * @return lock
      */
-    public L get(K key) {
+    public final L get(K key) {
         processQueue();
         instanceLock.lock();
         try {
-            final var lockReference = lockReferenceMap.get(key);
-            final var lock = lockReference == null ? null : lockReference.get();
-            if (lock == null) {
-                final var newLock = lockSupplier.get();
-                lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
-                return newLock;
-            } else {
-                return lock;
+            final var lockReference = getLockReference(key);
+            if (lockReference != null) {
+                final L lock = lockReference.get();
+                if (lock != null) {
+                    return lock;
+                }
             }
+            return createLock(key);
         } finally {
             instanceLock.unlock();
         }
+    }
+
+    // protected to allow accessing this in tests
+    @Nullable
+    protected final LockReference<K, L> getLockReference(K key) {
+        return lockReferenceMap.get(key);
     }
 
     /**
@@ -56,7 +69,7 @@ abstract class AbstractLocks<K, L> {
      *
      * @return number of locks
      */
-    public int size() {
+    public final int size() {
         processQueue();
         instanceLock.lock();
         try {

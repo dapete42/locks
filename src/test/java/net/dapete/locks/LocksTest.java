@@ -1,30 +1,19 @@
 package net.dapete.locks;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class LocksTest {
-
-    @Test
-    void testLocksAreReleasedWhenUnused() {
-        final var locks = Locks.reentrant(Integer.class);
-
-        locks.lock(1).unlock();
-
-        assertEquals(1, locks.size());
-
-        /*
-         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
-         * suggestion, but this seems to work.
-         */
-        System.gc();
-        await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
-    }
 
     @Test
     void testLocking() {
@@ -40,7 +29,7 @@ class LocksTest {
             Runnable runnable = () -> {
                 threadHasStarted.set(true);
                 final var lock2 = locks.lock(1);
-                assertEquals(lock, lock2);
+                assertSame(lock, lock2);
                 try {
                     threadHasLocked.set(true);
                 } finally {
@@ -58,31 +47,42 @@ class LocksTest {
         await().atMost(10, TimeUnit.SECONDS).untilTrue(threadHasLocked);
     }
 
+    @Test
+    void withSupplier() {
+        @SuppressWarnings("unchecked") final Supplier<ReentrantLock> lockSupplier = mock(Supplier.class);
+        when(lockSupplier.get()).thenAnswer(invocation -> new ReentrantLock());
+
+        final var locks = Locks.withSupplier(lockSupplier);
+        verifyNoInteractions(lockSupplier);
+
+        locks.lock(1).unlock();
+
+        verify(lockSupplier).get();
+    }
 
     @Test
-    void reentrant_fair() {
-        final var locks = Locks.reentrant(true, Integer.class);
+    void reentrant() {
+        final var locks = Locks.reentrant(Integer.class);
 
         final var lock = locks.lock(1);
         try {
-            assertTrue(lock.isFair());
+            assertFalse(lock.isFair());
         } finally {
             lock.unlock();
         }
     }
 
-    @Test
-    void get_differentForDifferentKeys() {
-        final var locks = Locks.reentrant(Integer.class);
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void reentrant_fair(boolean fair) {
+        final var locks = Locks.reentrant(fair, Integer.class);
 
-        assertNotEquals(locks.get(1), locks.get(2));
-    }
-
-    @Test
-    void get_identicalForIdenticalKey() {
-        final var locks = Locks.reentrant(Integer.class);
-
-        assertEquals(locks.get(1), locks.get(1));
+        final var lock = locks.lock(1);
+        try {
+            assertEquals(fair, lock.isFair());
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Test
