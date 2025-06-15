@@ -6,7 +6,7 @@
 
     <groupId>net.dapete</groupId>
     <artifactId>locks</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.3.0</version>
 
     <name>locks</name>
     <description>Library for key-based locking</description>
