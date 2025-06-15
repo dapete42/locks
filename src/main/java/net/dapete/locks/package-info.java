@@ -1,7 +1,7 @@
 /**
  * <p>
- * This package contains classes for key-based locking, as in a way to obtain {@link java.util.concurrent.locks.Lock Lock}s
- * or {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock}s which are identified by a key. These locks are guaranteed to by different for each key and
+ * This package contains classes for key-based locking, as in a way to obtain instances of {@link java.util.concurrent.locks.Lock Lock}
+ * or {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} which are identified by a key. These locks are guaranteed to by different for each key and
  * will be kept as long as they are referenced.
  * </p>
  * <table class="striped">
@@ -42,24 +42,29 @@
  *         </tr>
  *     </tbody>
  * </table>
- * <p>
+ * <ul>
+ * <li>
  *     All implementations use generics for the type of the key as well as the type of lock, if this is not fixed (as with
  *     {@link net.dapete.locks.ReentrantLocks} and {@link net.dapete.locks.ReentrantReadWriteLocks}).
- * </p>
- * <p>
- *     The parameter on the {@code reentrant(Class)} methods is the {@link java.lang.Class} of the key type. This is a shortcut for readability if the compiler
- *     does not automatically detect it, for example:
- * </p>
- * <pre>
- *     {@code var x = Locks.reentrant(String.class)}
- * </pre>
- * <p>
+ * </li>
+ * <li>
+ *     The {@link java.lang.Class} parameter on the {@code reentrant(Class)} and {@code reentrant(boolean, Class)} methods is the {@code Class} of the key type.
+ *     This is a shortcut for readability if the compiler does not automatically detect it, for example:
+ *     <br>
+ *     {@code Locks.reentrant(String.class)}
+ * </li>
+ * <li>
+ *     The {@code boolean} parameter on the {@code reentrant(boolean)} and {@code reentrant(boolean, Class)} sets the fairness policy of the reentrant lock
+ *     instances used. See also the constructors {@link java.util.concurrent.locks.ReentrantLock#ReentrantLock(boolean) ReentrantLock(boolean)} and
+ *     {@link java.util.concurrent.locks.ReentrantReadWriteLock#ReentrantReadWriteLock(boolean) ReentrantReadWriteLock(boolean)}.
+ * </li>
+ * <li>
  *     The {@code withSupplier(Supplier)} methods allow for any implementation of {@link java.util.concurrent.locks.Lock Lock} or
  *     {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} to be used. Just use the constructor as the {@code Supplier}, for example:
- * </p>
- * <pre>
+ *     <br>
  *     {@code Locks.withSupplier(SuperEpicLock::new)}
- * </pre>
+ * </li>
+ * </ul>
  * <h2 id="examples-heading">
  *     Examples
  * </h2>
@@ -68,62 +73,63 @@
  *     should look similar to this:
  * </p>
  * <pre>
- *     {@code public class LocksExample {
+ * {@code public class LocksExample {
  *
- *         private final ReentrantLocks<String> locks = Locks.reentrant();
+ * private final ReentrantLocks<String> locks = Locks.reentrant();
  *
- *         public void doSomething(String url) {
- *             var lock = locks.lock(url);
- *             try {
- *                 // do something with the URL
- *             } finally {
- *                 lock.unlock();
- *             }
+ *     public void doSomething(String url) {
+ *         final var lock = locks.lock(url);
+ *         try {
+ *             // do something with the URL
+ *         } finally {
+ *             lock.unlock();
  *         }
+ *     }
  *
- *     }}
+ * }}
  * </pre>
  * <p>
  *     It is important to keep the lock in a local variable while it is being used. It is stored in a {@link java.lang.ref.WeakReference WeakReference}, so it
  *     could be removed by the garbage collector at any time while it is not referenced.
  * </p>
  * <p>
- *     An alternative way which may be useful if the lock is not always used or used multiple times would be to split the {@code var lock = …} line in two:
+ *     An alternative way which may be useful if the lock is not always used or used multiple times would be to split the {@code final var lock = …} line
+ *     in two:
  * </p>
  * <pre>
- *     {@code var lock = locks.get(url);
- *     lock.lock();}
+ * {@code final var lock = locks.get(url);
+ * lock.lock();}
  * </pre>
  * <p>
  *     For {@link net.dapete.locks.ReadWriteLocks} it is similar to the first example:
  * </p>
  * <pre>
- *     {@code public class ReadWriteLocksExample {
+ * {@code public class ReadWriteLocksExample {
  *
- *         private final ReentrantReadWriteLocks<String> locks = ReadWriteLocks.reentrant();
+ *     private final ReentrantReadWriteLocks<String> locks = ReadWriteLocks.reentrant();
  *
- *         public void doSomethingRead(String url) {
- *             var lock = locks.readLock(url);
- *             try {
- *                 // do something with the URL
- *             } finally {
- *                 lock.readLock().unlock();
- *             }
+ *     public void doSomethingRead(String url) {
+ *         final var lock = locks.readLock(url);
+ *         try {
+ *             // do something with the URL
+ *         } finally {
+ *             lock.readLock().unlock();
  *         }
+ *     }
  *
- *         public void doSomethingWrite(String url) {
- *             var lock = locks.writeLock(url);
- *             try {
- *                 // do something with the URL
- *             } finally {
- *                 lock.writeLock().unlock();
- *             }
+ *     public void doSomethingWrite(String url) {
+ *         final var lock = locks.writeLock(url);
+ *         try {
+ *             // do something with the URL
+ *         } finally {
+ *             lock.writeLock().unlock();
  *         }
+ *     }
  *
- *     }}
+ * }}
  * </pre>
  * <p>
- *     Again the {@code var lock = …} lines could be split, which may be useful if both read and write locks are used in the method.
+ *     Again the {@code final var lock = …} lines could be split, which may be useful if both read and write locks are used in the method.
  * </p>
  */
 package net.dapete.locks;

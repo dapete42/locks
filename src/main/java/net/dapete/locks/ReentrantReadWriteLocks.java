@@ -3,9 +3,10 @@ package net.dapete.locks;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Key-based locking with {@link ReentrantReadWriteLock}s.
+ * Key-based locking using instances of {@link ReentrantReadWriteLock}.
  * <p>
- * Instances can be created using {@link ReadWriteLocks#reentrant()} and {@link ReadWriteLocks#reentrant(Class)}.
+ * Instances can be created using {@link ReadWriteLocks#reentrant()}, {@link ReadWriteLocks#reentrant(Class)}, {@link ReadWriteLocks#reentrant(boolean)} and
+ * {@link ReadWriteLocks#reentrant(boolean, Class)}.
  *
  * @param <K> type of key
  */
