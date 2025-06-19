@@ -75,7 +75,7 @@
  * <pre>
  * {@code public class LocksExample {
  *
- * private final ReentrantLocks<String> locks = Locks.reentrant();
+ *     private final ReentrantLocks<String> locks = Locks.reentrant();
  *
  *     public void doSomething(String url) {
  *         final var lock = locks.lock(url);
