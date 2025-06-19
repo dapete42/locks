@@ -5,12 +5,33 @@
 
 # Key-Based Locking
 
-This library contains classes for key-based locking, as in a way to obtain `Lock`s or `ReadWriteLock`s which are identified by a key. For more details please refer to the
-[Javadoc for the `net.dapete.locks` package](https://dapete42.github.io/locks/apidocs/net.dapete.locks/net/dapete/locks/package-summary.html).
+This library contains classes for key-based locking, as in a way to obtain `Lock`s or `ReadWriteLock`s which are identified by a key.
 
 Requires JDK 11 or later.
 
-Links:
+## Example
+
+``` java
+public class LocksExample {
+
+ private final ReentrantLocks<String> locks = Locks.reentrant();
+
+     public void doSomething(String url) {
+         final var lock = locks.lock(url);
+         try {
+             // do something with the URL
+         } finally {
+             lock.unlock();
+         }
+     }
+
+ }
+```
+
+For more details please refer to the
+[Javadoc for the `net.dapete.locks` package](https://dapete42.github.io/locks/apidocs/net.dapete.locks/net/dapete/locks/package-summary.html).
+
+## Links
 * [Maven Central](https://central.sonatype.com/artifact/net.dapete/locks)/[Maven Repository](https://mvnrepository.com/artifact/net.dapete/locks)
 * [Javadoc](https://dapete42.github.io/locks/apidocs/)
 * [Maven Site](https://dapete42.github.io/locks/)
