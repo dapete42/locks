@@ -72,8 +72,8 @@
  *     Following the same pattern as described in the JDK documentation for {@link java.util.concurrent.locks.Lock Lock}, using {@link net.dapete.locks.Locks}
  *     should look similar to this:
  * </p>
- * <pre>
- * {@code public class LocksExample {
+ * {@snippet :
+ * public class LocksExample {
  *
  *     private final ReentrantLocks<String> locks = Locks.reentrant();
  *
@@ -86,8 +86,8 @@
  *         }
  *     }
  *
- * }}
- * </pre>
+ * }
+ * }
  * <p>
  *     It is important to keep the lock in a local variable while it is being used. It is stored in a {@link java.lang.ref.WeakReference WeakReference}, so it
  *     could be removed by the garbage collector at any time while it is not referenced.
@@ -96,15 +96,15 @@
  *     An alternative way which may be useful if the lock is not always used or used multiple times would be to split the {@code final var lock = …} line
  *     in two:
  * </p>
- * <pre>
- * {@code final var lock = locks.get(url);
- * lock.lock();}
- * </pre>
+ * {@snippet :
+ * final var lock = locks.get(url);
+ * lock.lock();
+ * }
  * <p>
  *     For {@link net.dapete.locks.ReadWriteLocks} it is similar to the first example:
  * </p>
- * <pre>
- * {@code public class ReadWriteLocksExample {
+ * {@snippet :
+ * public class ReadWriteLocksExample {
  *
  *     private final ReentrantReadWriteLocks<String> locks = ReadWriteLocks.reentrant();
  *
@@ -126,8 +126,8 @@
  *         }
  *     }
  *
- * }}
- * </pre>
+ * }
+ * }
  * <p>
  *     Again the {@code final var lock = …} lines could be split, which may be useful if both read and write locks are used in the method.
  * </p>
