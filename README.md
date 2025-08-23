@@ -7,7 +7,7 @@
 
 This library contains classes for key-based locking, as in a way to obtain `Lock`s or `ReadWriteLock`s which are identified by a key.
 
-Requires JDK 11 or later.
+Requires JRE 11 or later to use and JDK 18 or later to build.
 
 ## Example
 
