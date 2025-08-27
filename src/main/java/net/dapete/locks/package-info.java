@@ -50,8 +50,9 @@
  * <li>
  *     The {@link java.lang.Class} parameter on the {@code reentrant(Class)} and {@code reentrant(boolean, Class)} methods is the {@code Class} of the key type.
  *     This is a shortcut for readability if the compiler does not automatically detect it, for example:
- *     <br>
- *     {@code Locks.reentrant(String.class)}
+ * {@snippet :
+ * Locks.reentrant(String.class)
+ * }
  * </li>
  * <li>
  *     The {@code boolean} parameter on the {@code reentrant(boolean)} and {@code reentrant(boolean, Class)} sets the fairness policy of the reentrant lock
@@ -60,9 +61,10 @@
  * </li>
  * <li>
  *     The {@code withSupplier(Supplier)} methods allow for any implementation of {@link java.util.concurrent.locks.Lock Lock} or
- *     {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} to be used. Just use the constructor as the {@code Supplier}, for example:
- *     <br>
- *     {@code Locks.withSupplier(SuperEpicLock::new)}
+ *     {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} to be used. You can use the constructor as the {@code Supplier}, for example:
+ * {@snippet :
+ * Locks.withSupplier(SuperEpicLock::new)
+ * }
  * </li>
  * </ul>
  * <h2 id="examples-heading">
