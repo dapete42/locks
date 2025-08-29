@@ -74,7 +74,7 @@ class LocksTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    void reentrant_fair(boolean fair) {
+    void reentrant(boolean fair) {
         final var locks = Locks.reentrant(fair, Integer.class);
 
         final var lock = locks.lock(1);
