@@ -2,6 +2,7 @@ package net.dapete.locks;
 
 import org.jspecify.annotations.Nullable;
 
+import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,9 +86,12 @@ abstract class AbstractLocks<K, L> {
     private void processQueue() {
         instanceLock.lock();
         try {
-            LockReference<?, ?> lockReference;
-            while ((lockReference = (LockReference<?, ?>) lockReferenceQueue.poll()) != null) {
-                lockReferenceMap.remove(lockReference.getKey());
+            Reference<?> reference;
+            while ((reference = lockReferenceQueue.poll()) != null) {
+                if (reference instanceof LockReference) {
+                    final var lockReference = (LockReference<?, ?>) reference;
+                    lockReferenceMap.remove(lockReference.getKey());
+                }
             }
         } finally {
             instanceLock.unlock();
