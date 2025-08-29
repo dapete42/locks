@@ -20,7 +20,7 @@ abstract class AbstractLocks<K, L> {
 
     private final Lock instanceLock = new ReentrantLock();
 
-    private final Map<Object, LockReference<K, L>> lockReferenceMap = new HashMap<>();
+    private final Map<K, LockReference<K, L>> lockReferenceMap = new HashMap<>();
 
     private final ReferenceQueue<L> lockReferenceQueue = new ReferenceQueue<>();
 
@@ -89,7 +89,7 @@ abstract class AbstractLocks<K, L> {
             Reference<?> reference;
             while ((reference = lockReferenceQueue.poll()) != null) {
                 if (reference instanceof LockReference) {
-                    final var lockReference = (LockReference<?, ?>) reference;
+                    final var lockReference = (LockReference<K, ?>) reference;
                     lockReferenceMap.remove(lockReference.getKey());
                 }
             }
