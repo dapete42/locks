@@ -1,5 +1,6 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,14 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AbstractLocksTest {
 
-    private static class TestAbstractLocks extends AbstractLocks<Integer, ReentrantLock> {
+    private static class TestAbstractLocks extends AbstractLocks<@NonNull Integer, @NonNull ReentrantLock> {
 
         private TestAbstractLocks() {
             super(ReentrantLock::new);
         }
 
         private void clearLockReference(Integer key) {
-            getLockReference(key).clear();
+            final var lockReference = getLockReference(key);
+            if (lockReference != null) {
+                lockReference.clear();
+            }
         }
 
     }

@@ -50,8 +50,9 @@
  * <li>
  *     The {@link java.lang.Class} parameter on the {@code reentrant(Class)} and {@code reentrant(boolean, Class)} methods is the {@code Class} of the key type.
  *     This is a shortcut for readability if the compiler does not automatically detect it, for example:
- *     <br>
- *     {@code Locks.reentrant(String.class)}
+ * {@snippet :
+ * Locks.reentrant(String.class)
+ * }
  * </li>
  * <li>
  *     The {@code boolean} parameter on the {@code reentrant(boolean)} and {@code reentrant(boolean, Class)} sets the fairness policy of the reentrant lock
@@ -60,9 +61,10 @@
  * </li>
  * <li>
  *     The {@code withSupplier(Supplier)} methods allow for any implementation of {@link java.util.concurrent.locks.Lock Lock} or
- *     {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} to be used. Just use the constructor as the {@code Supplier}, for example:
- *     <br>
- *     {@code Locks.withSupplier(SuperEpicLock::new)}
+ *     {@link java.util.concurrent.locks.ReadWriteLock ReadWriteLock} to be used. You can use the constructor as the {@code Supplier}, for example:
+ * {@snippet :
+ * Locks.withSupplier(SuperEpicLock::new)
+ * }
  * </li>
  * </ul>
  * <h2 id="examples-heading">
@@ -72,10 +74,10 @@
  *     Following the same pattern as described in the JDK documentation for {@link java.util.concurrent.locks.Lock Lock}, using {@link net.dapete.locks.Locks}
  *     should look similar to this:
  * </p>
- * <pre>
- * {@code public class LocksExample {
+ * {@snippet :
+ * public class LocksExample {
  *
- * private final ReentrantLocks<String> locks = Locks.reentrant();
+ *     private final ReentrantLocks<String> locks = Locks.reentrant();
  *
  *     public void doSomething(String url) {
  *         final var lock = locks.lock(url);
@@ -86,8 +88,8 @@
  *         }
  *     }
  *
- * }}
- * </pre>
+ * }
+ * }
  * <p>
  *     It is important to keep the lock in a local variable while it is being used. It is stored in a {@link java.lang.ref.WeakReference WeakReference}, so it
  *     could be removed by the garbage collector at any time while it is not referenced.
@@ -96,15 +98,15 @@
  *     An alternative way which may be useful if the lock is not always used or used multiple times would be to split the {@code final var lock = …} line
  *     in two:
  * </p>
- * <pre>
- * {@code final var lock = locks.get(url);
- * lock.lock();}
- * </pre>
+ * {@snippet :
+ * final var lock = locks.get(url);
+ * lock.lock();
+ * }
  * <p>
  *     For {@link net.dapete.locks.ReadWriteLocks} it is similar to the first example:
  * </p>
- * <pre>
- * {@code public class ReadWriteLocksExample {
+ * {@snippet :
+ * public class ReadWriteLocksExample {
  *
  *     private final ReentrantReadWriteLocks<String> locks = ReadWriteLocks.reentrant();
  *
@@ -126,8 +128,8 @@
  *         }
  *     }
  *
- * }}
- * </pre>
+ * }
+ * }
  * <p>
  *     Again the {@code final var lock = …} lines could be split, which may be useful if both read and write locks are used in the method.
  * </p>

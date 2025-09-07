@@ -74,7 +74,7 @@ class ReadWriteLocksTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    void reentrant_fair(boolean fair) {
+    void reentrant(boolean fair) {
         final var locks = ReadWriteLocks.reentrant(fair, Integer.class);
 
         final var lock = locks.readLock(1);
