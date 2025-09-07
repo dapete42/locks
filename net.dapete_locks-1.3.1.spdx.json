@@ -2,47 +2,47 @@
   "SPDXID" : "SPDXRef-DOCUMENT",
   "spdxVersion" : "SPDX-2.3",
   "creationInfo" : {
-    "created" : "2025-06-15T11:35:01Z",
+    "created" : "2025-09-07T09:44:11Z",
     "creators" : [ "Tool: spdx-maven-plugin" ],
-    "licenseListVersion" : "3.26.0"
+    "licenseListVersion" : "3.27.0"
   },
   "name" : "locks",
   "dataLicense" : "CC0-1.0",
-  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.3.0",
+  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.3.1",
   "packages" : [ {
-    "SPDXID" : "SPDXRef--1ad81ec40",
+    "SPDXID" : "SPDXRef--1ad81ec10",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-params\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@5.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@5.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter Params",
     "summary" : "Module \"junit-jupiter-params\" of JUnit 5.",
-    "versionInfo" : "5.13.1"
+    "versionInfo" : "5.13.4"
   }, {
-    "SPDXID" : "SPDXRef--3c6658440",
+    "SPDXID" : "SPDXRef--3c6658410",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-platform-engine\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@1.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@1.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Platform Engine API",
     "summary" : "Module \"junit-platform-engine\" of JUnit 5.",
-    "versionInfo" : "1.13.1"
+    "versionInfo" : "1.13.4"
   }, {
     "SPDXID" : "SPDXRef--4831b1a30",
     "copyrightText" : "UNSPECIFIED",
@@ -67,7 +67,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/net.dapete/locks@1.3.0",
+      "referenceLocator" : "pkg:maven/net.dapete/locks@1.3.1",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : true,
@@ -78,45 +78,45 @@
     "name" : "locks",
     "packageFileName" : "NOASSERTION",
     "packageVerificationCode" : {
-      "packageVerificationCodeValue" : "dfb07c92e2b689bc32668458f8efc64e0ffd181f"
+      "packageVerificationCodeValue" : "b820e9688a17cddefa84ac20519677f0ee3d975a"
     },
     "primaryPackagePurpose" : "LIBRARY",
     "summary" : "Library for key-based locking",
-    "versionInfo" : "1.3.0"
+    "versionInfo" : "1.3.1"
   }, {
-    "SPDXID" : "SPDXRef--5d8c02c0",
+    "SPDXID" : "SPDXRef--5d8c0290",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-api\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter API",
     "summary" : "Module \"junit-jupiter-api\" of JUnit 5.",
-    "versionInfo" : "5.13.1"
+    "versionInfo" : "5.13.4"
   }, {
-    "SPDXID" : "SPDXRef--7700b96e0",
+    "SPDXID" : "SPDXRef--7700b96b0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-platform-commons\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@1.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@1.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Platform Commons",
     "summary" : "Module \"junit-platform-commons\" of JUnit 5.",
-    "versionInfo" : "1.13.1"
+    "versionInfo" : "1.13.4"
   }, {
     "SPDXID" : "SPDXRef--7d9e5bf50",
     "copyrightText" : "UNSPECIFIED",
@@ -135,22 +135,22 @@
     "summary" : "Core API and libraries of hamcrest matcher framework.",
     "versionInfo" : "2.1"
   }, {
-    "SPDXID" : "SPDXRef-2bf7d5000",
+    "SPDXID" : "SPDXRef-2bf7d5030",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-engine\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter Engine",
     "summary" : "Module \"junit-jupiter-engine\" of JUnit 5.",
-    "versionInfo" : "5.13.1"
+    "versionInfo" : "5.13.4"
   }, {
     "SPDXID" : "SPDXRef-3401be2a0",
     "copyrightText" : "UNSPECIFIED",
@@ -170,30 +170,30 @@
     "summary" : "A library for instantiating Java objects",
     "versionInfo" : "3.3"
   }, {
-    "SPDXID" : "SPDXRef-3a61ebc10",
+    "SPDXID" : "SPDXRef-3a61ebc40",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter\" of JUnit 5.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
-    "homepage" : "https://junit.org/junit5/",
+    "homepage" : "https://junit.org/",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter (Aggregator)",
     "summary" : "Module \"junit-jupiter\" of JUnit 5.",
-    "versionInfo" : "5.13.1"
+    "versionInfo" : "5.13.4"
   }, {
-    "SPDXID" : "SPDXRef-494d73de0",
+    "SPDXID" : "SPDXRef-494d73df0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "The Byte Buddy agent offers convenience for attaching an agent to the local or a remote VM.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/net.bytebuddy/byte-buddy-agent@1.17.5",
+      "referenceLocator" : "pkg:maven/net.bytebuddy/byte-buddy-agent@1.17.6",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -202,7 +202,7 @@
     "licenseDeclared" : "Apache-2.0",
     "name" : "Byte Buddy agent",
     "summary" : "The Byte Buddy agent offers convenience for attaching an agent to the local or a remote VM.",
-    "versionInfo" : "1.17.5"
+    "versionInfo" : "1.17.6"
   }, {
     "SPDXID" : "SPDXRef-507cce4b0",
     "copyrightText" : "UNSPECIFIED",
@@ -238,22 +238,22 @@
     "summary" : "A Java DSL for synchronizing asynchronous operations",
     "versionInfo" : "4.3.0"
   }, {
-    "SPDXID" : "SPDXRef-5958a1600",
+    "SPDXID" : "SPDXRef-5958a5210",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Mockito mock objects library core API and implementation",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.mockito/mockito-core@5.18.0",
+      "referenceLocator" : "pkg:maven/org.mockito/mockito-core@5.19.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
     "homepage" : "https://github.com/mockito/mockito",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "MIT",
     "name" : "mockito-core",
     "summary" : "Mockito mock objects library core API and implementation",
-    "versionInfo" : "5.18.0"
+    "versionInfo" : "5.19.0"
   }, {
     "SPDXID" : "SPDXRef-60dab2ee0",
     "copyrightText" : "UNSPECIFIED",
@@ -272,30 +272,30 @@
     "summary" : "Open Test Alliance for the JVM",
     "versionInfo" : "1.3.0"
   }, {
-    "SPDXID" : "SPDXRef-61aebe7b0",
+    "SPDXID" : "SPDXRef-61aec23c0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Mockito JUnit 5 support",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.mockito/mockito-junit-jupiter@5.18.0",
+      "referenceLocator" : "pkg:maven/org.mockito/mockito-junit-jupiter@5.19.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
     "homepage" : "https://github.com/mockito/mockito",
     "licenseConcluded" : "NOASSERTION",
-    "licenseDeclared" : "NOASSERTION",
+    "licenseDeclared" : "MIT",
     "name" : "mockito-junit-jupiter",
     "summary" : "Mockito JUnit 5 support",
-    "versionInfo" : "5.18.0"
+    "versionInfo" : "5.19.0"
   }, {
-    "SPDXID" : "SPDXRef-6a8647560",
+    "SPDXID" : "SPDXRef-6a8647570",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Byte Buddy is a Java library for creating Java classes at run time.\n        This artifact is a build of Byte Buddy with all ASM dependencies repackaged into its own name space.",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/net.bytebuddy/byte-buddy@1.17.5",
+      "referenceLocator" : "pkg:maven/net.bytebuddy/byte-buddy@1.17.6",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -304,7 +304,7 @@
     "licenseDeclared" : "Apache-2.0",
     "name" : "Byte Buddy (without dependencies)",
     "summary" : "Byte Buddy is a Java library for creating Java classes at run time.\n        This artifact is a build of Byte Buddy with all ASM dependencies repackaged into its own name space.",
-    "versionInfo" : "1.17.5"
+    "versionInfo" : "1.17.6"
   } ],
   "files" : [ {
     "SPDXID" : "SPDXRef--132a53c0",
@@ -321,7 +321,7 @@
     "SPDXID" : "SPDXRef--1bd64d260",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "cfd449c290b97a2a8508db2f5a8f0f5071d0bef5"
+      "checksumValue" : "47992c8d6e4616ba5046a1a37cd44f3b4b724de0"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/test/java/net/dapete/locks/ReadWriteLocksTest.java",
@@ -332,7 +332,7 @@
     "SPDXID" : "SPDXRef--1f89ee830",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "9dcbac1018fcd0d61be0bc165a6103931b727e10"
+      "checksumValue" : "eef13df2c339472b4b40d3b2468e8add09e2c4be"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/package-info.java",
@@ -343,7 +343,7 @@
     "SPDXID" : "SPDXRef--622091180",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "e3c2bcdfae5337ee47b61d92a2ce7f815aa59099"
+      "checksumValue" : "c1242871568f0a841bc7a3fc6c42150d51882270"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/AbstractLocks.java",
@@ -376,7 +376,7 @@
     "SPDXID" : "SPDXRef-1564937b0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "d3b343e63f5487f7aaf253d295b58a787ea1d60c"
+      "checksumValue" : "d52d4a42ca2325494e0501db572a1044e9d50325"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/test/java/net/dapete/locks/LocksTest.java",
@@ -387,7 +387,7 @@
     "SPDXID" : "SPDXRef-31aa573d0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "cf5556732207a3721780293e312e406e12bf26bb"
+      "checksumValue" : "d7249a74f3627195ce2f49d77a4c06e0ea5077b5"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/test/java/net/dapete/locks/AbstractLocksTest.java",
@@ -521,64 +521,34 @@
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef--5d8c02c0",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef--4831b1a30",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef-3a61ebc10",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef--5d8c02c0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef--5d8c02c0",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef--7700b96e0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef-5958a1600",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-3401be2a0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef-5958a1600",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-494d73de0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "DYNAMIC_LINK",
     "relatedSpdxElement" : "SPDXRef-507cce4b0",
     "comment" : "Relationship based on Maven POM file dependency information"
   }, {
-    "spdxElementId" : "SPDXRef-61aebe7b0",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-5958a1600",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef--5d8c02c0",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-60dab2ee0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef--4b3779bf0",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-61aebe7b0",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef-5958a1600",
-    "relationshipType" : "DYNAMIC_LINK",
-    "relatedSpdxElement" : "SPDXRef-6a8647560",
-    "comment" : "Relationship based on Maven POM file dependency information"
-  }, {
-    "spdxElementId" : "SPDXRef-3a61ebc10",
+    "spdxElementId" : "SPDXRef-3a61ebc40",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--1ad81ec40",
+    "relatedSpdxElement" : "SPDXRef--1ad81ec10",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-2bf7d5000",
+    "spdxElementId" : "SPDXRef-2bf7d5030",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--3c6658440",
+    "relatedSpdxElement" : "SPDXRef--3c6658410",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef--5d8c0290",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef--4831b1a30",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef-3a61ebc40",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef--5d8c0290",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef--5d8c0290",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef--7700b96b0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef-533f21910",
@@ -586,19 +556,49 @@
     "relatedSpdxElement" : "SPDXRef--7d9e5bf50",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-3a61ebc10",
+    "spdxElementId" : "SPDXRef-3a61ebc40",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-2bf7d5000",
+    "relatedSpdxElement" : "SPDXRef-2bf7d5030",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef-5958a5210",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-3401be2a0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-3a61ebc10",
+    "relatedSpdxElement" : "SPDXRef-3a61ebc40",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef-5958a5210",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-494d73df0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
     "relatedSpdxElement" : "SPDXRef-533f21910",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef-61aec23c0",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-5958a5210",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef--5d8c0290",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-60dab2ee0",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef--4b3779bf0",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-61aec23c0",
+    "comment" : "Relationship created based on Maven POM information"
+  }, {
+    "spdxElementId" : "SPDXRef-5958a5210",
+    "relationshipType" : "TEST_DEPENDENCY_OF",
+    "relatedSpdxElement" : "SPDXRef-6a8647570",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",

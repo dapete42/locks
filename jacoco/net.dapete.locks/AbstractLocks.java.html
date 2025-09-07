@@ -2,6 +2,7 @@
 
 import org.jspecify.annotations.Nullable;
 
+import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,22 +18,22 @@ import java.util.function.Supplier;
  */
 abstract class AbstractLocks&lt;K, L&gt; {
 
-<span class="fc" id="L20">    private final Lock instanceLock = new ReentrantLock();</span>
+<span class="fc" id="L21">    private final Lock instanceLock = new ReentrantLock();</span>
 
-<span class="fc" id="L22">    private final Map&lt;Object, LockReference&lt;K, L&gt;&gt; lockReferenceMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L23">    private final Map&lt;K, LockReference&lt;K, L&gt;&gt; lockReferenceMap = new HashMap&lt;&gt;();</span>
 
-<span class="fc" id="L24">    private final ReferenceQueue&lt;L&gt; lockReferenceQueue = new ReferenceQueue&lt;&gt;();</span>
+<span class="fc" id="L25">    private final ReferenceQueue&lt;L&gt; lockReferenceQueue = new ReferenceQueue&lt;&gt;();</span>
 
     private final Supplier&lt;L&gt; lockSupplier;
 
-<span class="fc" id="L28">    protected AbstractLocks(Supplier&lt;L&gt; lockSupplier) {</span>
-<span class="fc" id="L29">        this.lockSupplier = lockSupplier;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L29">    protected AbstractLocks(Supplier&lt;L&gt; lockSupplier) {</span>
+<span class="fc" id="L30">        this.lockSupplier = lockSupplier;</span>
+<span class="fc" id="L31">    }</span>
 
     private L createLock(K key) {
-<span class="fc" id="L33">        final var newLock = lockSupplier.get();</span>
-<span class="fc" id="L34">        lockReferenceMap.put(key, new LockReference&lt;&gt;(key, newLock, lockReferenceQueue));</span>
-<span class="fc" id="L35">        return newLock;</span>
+<span class="fc" id="L34">        final var newLock = lockSupplier.get();</span>
+<span class="fc" id="L35">        lockReferenceMap.put(key, new LockReference&lt;&gt;(key, newLock, lockReferenceQueue));</span>
+<span class="fc" id="L36">        return newLock;</span>
     }
 
     /**
@@ -42,26 +43,26 @@ abstract class AbstractLocks&lt;K, L&gt; {
      * @return lock
      */
     public final L get(K key) {
-<span class="fc" id="L45">        processQueue();</span>
-<span class="fc" id="L46">        instanceLock.lock();</span>
+<span class="fc" id="L46">        processQueue();</span>
+<span class="fc" id="L47">        instanceLock.lock();</span>
         try {
-<span class="fc" id="L48">            final var lockReference = getLockReference(key);</span>
-<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (lockReference != null) {</span>
-<span class="fc" id="L50">                final L lock = lockReference.get();</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">                if (lock != null) {</span>
-<span class="fc" id="L52">                    return lock;</span>
+<span class="fc" id="L49">            final var lockReference = getLockReference(key);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (lockReference != null) {</span>
+<span class="fc" id="L51">                final L lock = lockReference.get();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                if (lock != null) {</span>
+<span class="fc" id="L53">                    return lock;</span>
                 }
             }
-<span class="fc" id="L55">            return createLock(key);</span>
+<span class="fc" id="L56">            return createLock(key);</span>
         } finally {
-<span class="fc" id="L57">            instanceLock.unlock();</span>
+<span class="fc" id="L58">            instanceLock.unlock();</span>
         }
     }
 
-    // protected to allow accessing this in tests
+    // package-private to allow accessing this in tests
     @Nullable
-    protected final LockReference&lt;K, L&gt; getLockReference(K key) {
-<span class="fc" id="L64">        return lockReferenceMap.get(key);</span>
+    final LockReference&lt;K, L&gt; getLockReference(K key) {
+<span class="fc" id="L65">        return lockReferenceMap.get(key);</span>
     }
 
     /**
@@ -70,12 +71,12 @@ abstract class AbstractLocks&lt;K, L&gt; {
      * @return number of locks
      */
     public final int size() {
-<span class="fc" id="L73">        processQueue();</span>
-<span class="fc" id="L74">        instanceLock.lock();</span>
+<span class="fc" id="L74">        processQueue();</span>
+<span class="fc" id="L75">        instanceLock.lock();</span>
         try {
-<span class="fc" id="L76">            return lockReferenceMap.size();</span>
+<span class="fc" id="L77">            return lockReferenceMap.size();</span>
         } finally {
-<span class="fc" id="L78">            instanceLock.unlock();</span>
+<span class="fc" id="L79">            instanceLock.unlock();</span>
         }
     }
 
@@ -83,16 +84,19 @@ abstract class AbstractLocks&lt;K, L&gt; {
      * Removes all locks that have been marked as unreachable by the garbage collector.
      */
     private void processQueue() {
-<span class="fc" id="L86">        instanceLock.lock();</span>
+<span class="fc" id="L87">        instanceLock.lock();</span>
         try {
-            LockReference&lt;?, ?&gt; lockReference;
-<span class="fc bfc" id="L89" title="All 2 branches covered.">            while ((lockReference = (LockReference&lt;?, ?&gt;) lockReferenceQueue.poll()) != null) {</span>
-<span class="fc" id="L90">                lockReferenceMap.remove(lockReference.getKey());</span>
+            Reference&lt;?&gt; reference;
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            while ((reference = lockReferenceQueue.poll()) != null) {</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                if (reference instanceof LockReference) {</span>
+<span class="fc" id="L92">                    final var lockReference = (LockReference&lt;K, ?&gt;) reference;</span>
+<span class="fc" id="L93">                    lockReferenceMap.remove(lockReference.getKey());</span>
+<span class="fc" id="L94">                }</span>
             }
         } finally {
-<span class="fc" id="L93">            instanceLock.unlock();</span>
+<span class="fc" id="L97">            instanceLock.unlock();</span>
         }
-<span class="fc" id="L95">    }</span>
+<span class="fc" id="L99">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
