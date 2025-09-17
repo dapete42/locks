@@ -23,7 +23,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Maven verify
-        run: ./mvnw -B javadoc:jar source:jar verify
+        run: ./mvnw -B verify javadoc:jar source:jar site
       - uses: codecov/test-results-action@v1
         if: ${{ !cancelled() }}
         with:
