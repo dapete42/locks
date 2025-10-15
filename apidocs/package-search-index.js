@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"net.dapete.locks","l":"net.dapete.locks"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"m":"net.dapete.locks","l":"net.dapete.locks"}];updateSearchResults();
