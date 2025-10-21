@@ -48,7 +48,7 @@ class ReadWriteLocksTest {
 
     @Test
     void withSupplier() {
-        @SuppressWarnings("unchecked") final Supplier<ReentrantReadWriteLock> lockSupplier = mock(Supplier.class);
+        final Supplier<ReentrantReadWriteLock> lockSupplier = mock();
         when(lockSupplier.get()).thenAnswer(invocation -> new ReentrantReadWriteLock());
 
         final var locks = ReadWriteLocks.withSupplier(lockSupplier);
