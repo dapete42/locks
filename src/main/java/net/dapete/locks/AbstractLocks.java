@@ -10,12 +10,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-/**
- * Abstract base implementation of key-based locking.
- *
- * @param <K> type of key
- * @param <L> type of lock
- */
+///
+/// Abstract base implementation of key-based locking.
+///
+/// @param <K> type of key
+/// @param <L> type of lock
+///
 abstract class AbstractLocks<K, L> {
 
     private final Lock instanceLock = new ReentrantLock();
@@ -36,12 +36,12 @@ abstract class AbstractLocks<K, L> {
         return newLock;
     }
 
-    /**
-     * Returns a lock for the supplied key. There will be at most one lock per key at any given time.
-     *
-     * @param key key
-     * @return lock
-     */
+    ///
+    /// Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+    ///
+    /// @param key key
+    /// @return lock
+    ///
     public final L get(K key) {
         processQueue();
         instanceLock.lock();
@@ -64,11 +64,11 @@ abstract class AbstractLocks<K, L> {
         return lockReferenceMap.get(key);
     }
 
-    /**
-     * Returns the current number of locks managed by this instance.
-     *
-     * @return number of locks
-     */
+    ///
+    /// Returns the current number of locks managed by this instance.
+    ///
+    /// @return number of locks
+    ///
     public final int size() {
         processQueue();
         instanceLock.lock();
@@ -79,9 +79,9 @@ abstract class AbstractLocks<K, L> {
         }
     }
 
-    /**
-     * Removes all locks that have been marked as unreachable by the garbage collector.
-     */
+    ///
+    /// Removes all locks that have been marked as unreachable by the garbage collector.
+    ///
     private void processQueue() {
         instanceLock.lock();
         try {

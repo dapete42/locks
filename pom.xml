@@ -244,10 +244,10 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>18</version>
+                                    <version>23</version>
                                     <message>
-                                        This project uses JEP 413 (Code Snippets in Java API Documentation) in its
-                                        JavaDoc documentation, which is only available in JDK 18+.
+                                        This project uses JEP 467 (Markdown Documentation Comments) in its
+                                        JavaDoc documentation, which is only available in JDK 23+.
                                     </message>
                                 </requireJavaVersion>
                             </rules>
