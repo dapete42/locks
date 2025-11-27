@@ -43,20 +43,24 @@ abstract class AbstractLocks<K, L> {
     /// @return lock
     ///
     public final L get(K key) {
-        processQueue();
         instanceLock.lock();
         try {
-            final var lockReference = getLockReference(key);
-            if (lockReference != null) {
-                final L lock = lockReference.get();
-                if (lock != null) {
-                    return lock;
-                }
-            }
-            return createLock(key);
+            processQueue();
+            return getInternal(key);
         } finally {
             instanceLock.unlock();
         }
+    }
+
+    private L getInternal(K key) {
+        final var lockReference = getLockReference(key);
+        if (lockReference != null) {
+            final L lock = lockReference.get();
+            if (lock != null) {
+                return lock;
+            }
+        }
+        return createLock(key);
     }
 
     // package-private to allow accessing this in tests
@@ -70,9 +74,9 @@ abstract class AbstractLocks<K, L> {
     /// @return number of locks
     ///
     public final int size() {
-        processQueue();
         instanceLock.lock();
         try {
+            processQueue();
             return lockReferenceMap.size();
         } finally {
             instanceLock.unlock();
@@ -83,17 +87,12 @@ abstract class AbstractLocks<K, L> {
     /// Removes all locks that have been marked as unreachable by the garbage collector.
     ///
     private void processQueue() {
-        instanceLock.lock();
-        try {
-            Reference<?> reference;
-            while ((reference = lockReferenceQueue.poll()) != null) {
-                if (reference instanceof LockReference) {
-                    final var lockReference = (LockReference<?, ?>) reference;
-                    lockReferenceMap.remove(lockReference.getKey());
-                }
+        Reference<?> reference;
+        while ((reference = lockReferenceQueue.poll()) != null) {
+            if (reference instanceof LockReference) {
+                final var lockReference = (LockReference<?, ?>) reference;
+                lockReferenceMap.remove(lockReference.getKey());
             }
-        } finally {
-            instanceLock.unlock();
         }
     }
 
