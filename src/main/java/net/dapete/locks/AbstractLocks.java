@@ -88,7 +88,7 @@ abstract class AbstractLocks<K, L> {
             Reference<?> reference;
             while ((reference = lockReferenceQueue.poll()) != null) {
                 if (reference instanceof LockReference) {
-                    final var lockReference = (LockReference<K, ?>) reference;
+                    final var lockReference = (LockReference<?, ?>) reference;
                     lockReferenceMap.remove(lockReference.getKey());
                 }
             }
