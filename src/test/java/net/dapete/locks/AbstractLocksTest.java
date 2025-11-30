@@ -1,6 +1,7 @@
 package net.dapete.locks;
 
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AbstractLocksTest {
 
-    private static class TestAbstractLocks extends AbstractLocks<@NonNull Integer, @NonNull ReentrantLock> {
+    private static class TestAbstractLocks extends AbstractLocks<@Nullable Integer, @NonNull ReentrantLock> {
 
         private TestAbstractLocks() {
             super(ReentrantLock::new);
@@ -41,6 +42,15 @@ class AbstractLocksTest {
          */
         System.gc();
         await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
+    }
+
+    @Test
+    void get_null() {
+        final var locks = new TestAbstractLocks();
+
+        final var lock = locks.get(null);
+
+        assertNotNull(lock);
     }
 
     @Test

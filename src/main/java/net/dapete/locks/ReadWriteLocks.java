@@ -1,5 +1,7 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -11,7 +13,7 @@ import java.util.function.Supplier;
 /// @param <K> type of key
 /// @param <L> type of ReadWriteLock
 ///
-public interface ReadWriteLocks<K, L extends ReadWriteLock> {
+public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock> {
 
     ///
     /// Return an instance using [ReadWriteLock] implementations created by the specified `lockSupplier`.
@@ -77,7 +79,7 @@ public interface ReadWriteLocks<K, L extends ReadWriteLock> {
     /// @param key key
     /// @return lock
     ///
-    L get(K key);
+    L get(@Nullable K key);
 
     ///
     /// Return a [ReadWriteLock] with its [ReadWriteLock#readLock()] already locked using [Lock#lock()].
@@ -85,7 +87,7 @@ public interface ReadWriteLocks<K, L extends ReadWriteLock> {
     /// @param key key
     /// @return already read locked lock
     ///
-    L readLock(K key);
+    L readLock(@Nullable K key);
 
     ///
     /// Return a [ReadWriteLock] with its [ReadWriteLock#writeLock()] already locked using [Lock#lock()].
@@ -93,7 +95,7 @@ public interface ReadWriteLocks<K, L extends ReadWriteLock> {
     /// @param key key
     /// @return already write locked lock
     ///
-    L writeLock(K key);
+    L writeLock(@Nullable K key);
 
     ///
     /// Returns the current number of locks managed by this instance.

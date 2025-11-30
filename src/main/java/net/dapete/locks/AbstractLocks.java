@@ -16,11 +16,11 @@ import java.util.function.Supplier;
 /// @param <K> type of key
 /// @param <L> type of lock
 ///
-abstract class AbstractLocks<K, L> {
+abstract class AbstractLocks<K extends @Nullable Object, L> {
 
     private final Lock instanceLock = new ReentrantLock();
 
-    private final Map<K, LockReference<K, L>> lockReferenceMap = new HashMap<>();
+    private final Map<@Nullable K, LockReference<@Nullable K, L>> lockReferenceMap = new HashMap<>();
 
     private final ReferenceQueue<L> lockReferenceQueue = new ReferenceQueue<>();
 
@@ -30,7 +30,7 @@ abstract class AbstractLocks<K, L> {
         this.lockSupplier = lockSupplier;
     }
 
-    private L createLock(K key) {
+    private L createLock(@Nullable K key) {
         final var newLock = lockSupplier.get();
         lockReferenceMap.put(key, new LockReference<>(key, newLock, lockReferenceQueue));
         return newLock;
@@ -42,7 +42,7 @@ abstract class AbstractLocks<K, L> {
     /// @param key key
     /// @return lock
     ///
-    public final L get(K key) {
+    public final L get(@Nullable K key) {
         instanceLock.lock();
         try {
             processQueue();
@@ -52,7 +52,7 @@ abstract class AbstractLocks<K, L> {
         }
     }
 
-    private L getInternal(K key) {
+    private L getInternal(@Nullable K key) {
         final var lockReference = getLockReference(key);
         if (lockReference != null) {
             final L lock = lockReference.get();
@@ -64,7 +64,7 @@ abstract class AbstractLocks<K, L> {
     }
 
     // package-private to allow accessing this in tests
-    final @Nullable LockReference<K, L> getLockReference(K key) {
+    final @Nullable LockReference<K, L> getLockReference(@Nullable K key) {
         return lockReferenceMap.get(key);
     }
 

@@ -1,5 +1,7 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
@@ -10,7 +12,7 @@ import java.util.function.Supplier;
 /// @param <K> type of key
 /// @param <L> type of [Lock]
 ///
-public interface Locks<K, L extends Lock> {
+public interface Locks<K extends @Nullable Object, L extends Lock> {
 
     ///
     /// Return an instance using [Lock] implementations created by the specified `lockSupplier`.
@@ -76,7 +78,7 @@ public interface Locks<K, L extends Lock> {
     /// @param key key
     /// @return lock
     ///
-    L get(K key);
+    L get(@Nullable K key);
 
     ///
     /// Return a lock already locked using [Lock#lock()].
@@ -84,7 +86,7 @@ public interface Locks<K, L extends Lock> {
     /// @param key key
     /// @return already locked lock
     ///
-    L lock(K key);
+    L lock(@Nullable K key);
 
     ///
     /// Returns the current number of locks managed by this instance.

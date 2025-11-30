@@ -1,5 +1,7 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 ///
@@ -10,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 ///
 /// @param <K> type of key
 ///
-public final class ReentrantReadWriteLocks<K> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
+public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
 
     ReentrantReadWriteLocks() {
         super(ReentrantReadWriteLock::new);
