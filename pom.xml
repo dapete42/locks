@@ -385,6 +385,7 @@
                     <links>
                         <link>https://jspecify.dev/docs/api/</link>
                     </links>
+                    <notimestamp>true</notimestamp>
                 </configuration>
             </plugin>
             <!-- site -->
