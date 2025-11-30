@@ -49,7 +49,7 @@ class LocksTest {
 
     @Test
     void withSupplier() {
-        @SuppressWarnings("unchecked") final Supplier<ReentrantLock> lockSupplier = mock(Supplier.class);
+        final Supplier<ReentrantLock> lockSupplier = mock();
         when(lockSupplier.get()).thenAnswer(invocation -> new ReentrantLock());
 
         final var locks = Locks.withSupplier(lockSupplier);

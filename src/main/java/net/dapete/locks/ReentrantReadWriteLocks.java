@@ -1,16 +1,18 @@
 package net.dapete.locks;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/**
- * Key-based locking using instances of {@link ReentrantReadWriteLock}.
- * <p>
- * Instances can be created using {@link ReadWriteLocks#reentrant()}, {@link ReadWriteLocks#reentrant(Class)}, {@link ReadWriteLocks#reentrant(boolean)} and
- * {@link ReadWriteLocks#reentrant(boolean, Class)}.
- *
- * @param <K> type of key
- */
-public final class ReentrantReadWriteLocks<K> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
+///
+/// Key-based locking using instances of [ReentrantReadWriteLock].
+///
+/// Instances can be created using [ReadWriteLocks#reentrant()], [ReadWriteLocks#reentrant(Class)], [ReadWriteLocks#reentrant(boolean)] and
+/// [ReadWriteLocks#reentrant(boolean, Class)].
+///
+/// @param <K> type of key
+///
+public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
 
     ReentrantReadWriteLocks() {
         super(ReentrantReadWriteLock::new);
