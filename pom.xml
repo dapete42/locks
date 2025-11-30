@@ -378,6 +378,15 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <links>
+                        <link>https://jspecify.dev/docs/api/</link>
+                    </links>
+                </configuration>
+            </plugin>
             <!-- site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
