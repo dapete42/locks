@@ -166,6 +166,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.12.0</version>
+                    <configuration>
+                        <links>
+                            <link>https://jspecify.dev/docs/api/</link>
+                        </links>
+                        <notimestamp>true</notimestamp>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -377,16 +383,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <links>
-                        <link>https://jspecify.dev/docs/api/</link>
-                    </links>
-                    <notimestamp>true</notimestamp>
-                </configuration>
             </plugin>
             <!-- site -->
             <plugin>
