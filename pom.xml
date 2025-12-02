@@ -252,8 +252,8 @@
                                 <requireJavaVersion>
                                     <version>23</version>
                                     <message>
-                                        This project uses JEP 467 (Markdown Documentation Comments) in its
-                                        JavaDoc documentation, which is only available in JDK 23+.
+                                        This project uses JEP 467 (Markdown Documentation Comments) in its Javadoc
+                                        documentation, which is only available in JDK 23+.
                                     </message>
                                 </requireJavaVersion>
                             </rules>
@@ -409,7 +409,7 @@
                 <artifactId>maven-scm-publish-plugin</artifactId>
                 <executions>
                     <execution>
-                        <!-- deploy site using this plugin instead of the maven-site-plugin -->
+                        <!-- deploy the site using this plugin instead of the maven-site-plugin -->
                         <id>scm-deploy</id>
                         <phase>site-deploy</phase>
                         <goals>

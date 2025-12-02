@@ -1,5 +1,5 @@
 ///
-/// This package contains classes for key-based locking, as in a way to obtain instances of [Lock][java.util.concurrent.locks.Lock] or
+/// This package contains classes for key-based locking, as in a way to create instances of [Lock][java.util.concurrent.locks.Lock] or
 /// [ReadWriteLock][java.util.concurrent.locks.ReadWriteLock] which are identified by a key. These locks are guaranteed to by different for each key and will be
 /// kept as long as they are referenced.
 ///

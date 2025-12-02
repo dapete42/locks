@@ -37,8 +37,8 @@ class AbstractLocksTest {
         assertEquals(1, locks.size());
 
         /*
-         * Wait up to 30 seconds for size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just a
-         * suggestion, but this seems to work.
+         * Wait up to 30 seconds for the size to change after dereferencing the lock. There is no way to force the garbage collector to run, System.gc() is just
+         * a suggestion, but this seems to work.
          */
         System.gc();
         await().atMost(30, TimeUnit.SECONDS).until(() -> locks.size() == 0);
@@ -86,7 +86,7 @@ class AbstractLocksTest {
     void size() {
         final var locks = new TestAbstractLocks();
 
-        // Initially the size should be 0
+        // Initially, the size should be 0
         assertEquals(0, locks.size(), "Initial size should be 0");
 
         // Add some locks
