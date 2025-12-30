@@ -37,10 +37,10 @@ abstract class AbstractLocks&lt;K extends @Nullable Object, L&gt; {
     }
 
     ///
-    /// Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+    /// Return a lock for the supplied `key`. There will be at most one lock per key at any given time.
     ///
-    /// @param key key
-    /// @return lock
+    /// @param key the key.
+    /// @return a lock for the supplied `key`.
     ///
     public final L get(@Nullable K key) {
 <span class="fc" id="L46">        instanceLock.lock();</span>
@@ -69,9 +69,9 @@ abstract class AbstractLocks&lt;K extends @Nullable Object, L&gt; {
     }
 
     ///
-    /// Returns the current number of locks managed by this instance.
+    /// Return the current number of locks managed by this instance.
     ///
-    /// @return number of locks
+    /// @return the current number of locks managed by this instance.
     ///
     public final int size() {
 <span class="fc" id="L77">        instanceLock.lock();</span>

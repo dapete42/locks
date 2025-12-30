@@ -9,18 +9,18 @@ import java.util.function.Supplier;
 ///
 /// Key-based locking with implementations of [Lock].
 ///
-/// @param &lt;K&gt; type of key
-/// @param &lt;L&gt; type of [Lock]
+/// @param &lt;K&gt; the key type..
+/// @param &lt;L&gt; the [Lock] type.
 ///
 public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
 
     ///
-    /// Return an instance using [Lock] implementations created by the specified `lockSupplier`.
+    /// Return an instance using [Lock] instances created by `lockSupplier`.
     ///
-    /// @param lockSupplier Supplier for instances of [L] (usually the constructor of a class implementing [Lock])
-    /// @param &lt;K&gt;          type of key
-    /// @param &lt;L&gt;          type of [Lock]
-    /// @return instance using [Lock] implementations created by the specified `lockSupplier`
+    /// @param lockSupplier a `Supplier` for instances of [L] (usually the constructor of a class implementing `Lock`).
+    /// @param &lt;K&gt;          the key type.
+    /// @param &lt;L&gt;          the `Lock` type.
+    /// @return an instance using `Lock` instances created by `lockSupplier`
     ///
     static &lt;K, L extends Lock&gt; Locks&lt;K, L&gt; withSupplier(Supplier&lt;L&gt; lockSupplier) {
 <span class="fc" id="L26">        return new LocksImpl&lt;&gt;(lockSupplier);</span>
@@ -29,8 +29,8 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     ///
     /// Return a [ReentrantLocks] instance using [ReentrantLock].
     ///
-    /// @param &lt;K&gt; type of key
-    /// @return [ReentrantLocks] instance
+    /// @param &lt;K&gt; the key type.
+    /// @return a `ReentrantLocks` instance.
     ///
     static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant() {
 <span class="fc" id="L36">        return new ReentrantLocks&lt;&gt;();</span>
@@ -39,9 +39,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     ///
     /// Return a [ReentrantLocks] instance using [ReentrantLock].
     ///
-    /// @param keyClass class of key
-    /// @param &lt;K&gt;      type of key
-    /// @return [ReentrantLocks] instance
+    /// @param keyClass the class for the key type.
+    /// @param &lt;K&gt;      the key type.
+    /// @return a `ReentrantLocks` instance.
     ///
     static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(@SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
 <span class="fc" id="L47">        return reentrant();</span>
@@ -50,9 +50,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     ///
     /// Return a [ReentrantLocks] instance using [ReentrantLock] with the given fairness policy.
     ///
-    /// @param fair `true` if the locks should use a fair ordering policy (see [ReentrantLock#ReentrantLock(boolean)])
-    /// @param &lt;K&gt;  type of key
-    /// @return [ReentrantLocks] instance
+    /// @param fair `true` if the locks should use a fair ordering policy (see [ReentrantLock#ReentrantLock(boolean)]).
+    /// @param &lt;K&gt;  the key type.
+    /// @return a `ReentrantLocks` instance.
     /// @since 1.2.0
     ///
     static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair) {
@@ -62,10 +62,10 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     ///
     /// Return a [ReentrantLocks] instance using [ReentrantLock] with the given fairness policy.
     ///
-    /// @param fair     `true` if the locks should use a fair ordering policy (see [ReentrantLock#ReentrantLock(boolean)])
-    /// @param keyClass class of key
-    /// @param &lt;K&gt;      type of key
-    /// @return [ReentrantLocks] instance
+    /// @param fair     `true` if the locks should use a fair ordering policy (see [ReentrantLock#(ReentrantLock(boolean)]).
+    /// @param keyClass the class for the key type.
+    /// @param &lt;K&gt;      the key type.
+    /// @return a `ReentrantLocks` instance
     /// @since 1.2.0
     ///
     static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair, @SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
@@ -73,25 +73,25 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     }
 
     ///
-    /// Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+    /// Return a lock for `key`. There will be at most one lock per key at any given time.
     ///
-    /// @param key key
-    /// @return lock
+    /// @param key the key
+    /// @return a lock for `key`.
     ///
     L get(@Nullable K key);
 
     ///
-    /// Return a lock already locked using [Lock#lock()].
+    /// Return a lock for `key` already locked using [Lock#lock()].
     ///
-    /// @param key key
-    /// @return already locked lock
+    /// @param key the key
+    /// @return a lock for `key` already locked.
     ///
     L lock(@Nullable K key);
 
     ///
-    /// Returns the current number of locks managed by this instance.
+    /// Return the current number of locks managed by this instance.
     ///
-    /// @return number of locks
+    /// @return the current number of locks managed by this instance.
     ///
     int size();
 

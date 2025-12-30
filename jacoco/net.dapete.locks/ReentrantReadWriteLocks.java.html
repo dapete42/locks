@@ -10,17 +10,30 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /// Instances can be created using [ReadWriteLocks#reentrant()], [ReadWriteLocks#reentrant(Class)], [ReadWriteLocks#reentrant(boolean)] and
 /// [ReadWriteLocks#reentrant(boolean, Class)].
 ///
-/// @param &lt;K&gt; type of key
+/// @param &lt;K&gt; the key type.
 ///
 public final class ReentrantReadWriteLocks&lt;K extends @Nullable Object&gt; extends ReadWriteLocksImpl&lt;K, ReentrantReadWriteLock&gt; {
 
+    private final boolean fair;
+
     ReentrantReadWriteLocks() {
-<span class="fc" id="L18">        super(ReentrantReadWriteLock::new);</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L20">        this(false);</span>
+<span class="fc" id="L21">    }</span>
 
     ReentrantReadWriteLocks(boolean fair) {
-<span class="fc" id="L22">        super(() -&gt; new ReentrantReadWriteLock(fair));</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L24">        super(() -&gt; new ReentrantReadWriteLock(fair));</span>
+<span class="fc" id="L25">        this.fair = fair;</span>
+<span class="fc" id="L26">    }</span>
+
+    ///
+    /// Return `true` if locks returned by this instance have fairness set true.
+    ///
+    /// @return `true` if locks returned by this instance have fairness set true.
+    /// @since 1.3.3
+    ///
+    public boolean isFair() {
+<span class="fc" id="L35">        return fair;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
