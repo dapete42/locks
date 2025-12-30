@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /// Instances can be created using [ReadWriteLocks#reentrant()], [ReadWriteLocks#reentrant(Class)], [ReadWriteLocks#reentrant(boolean)] and
 /// [ReadWriteLocks#reentrant(boolean, Class)].
 ///
-/// @param <K> type of key
+/// @param <K> the key type.
 ///
 public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
 
