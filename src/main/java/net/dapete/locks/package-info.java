@@ -1,5 +1,5 @@
 ///
-/// This package contains classes for key-based locking, as in a way to obtain instances of [Lock][java.util.concurrent.locks.Lock] or
+/// This package contains classes for key-based locking, as in a way to create instances of [Lock][java.util.concurrent.locks.Lock] or
 /// [ReadWriteLock][java.util.concurrent.locks.ReadWriteLock] which are identified by a key. These locks are guaranteed to by different for each key and will be
 /// kept as long as they are referenced.
 ///
@@ -7,9 +7,9 @@
 ///     <caption>Obtaining instances</caption>
 ///     <thead>
 ///         <tr>
-///             <th>Type of Lock</th>
+///             <th>Lock type</th>
 ///             <th>Method(s)</th>
-///             <th>Type returned</th>
+///             <th>Return type</th>
 ///         </tr>
 ///     </thead>
 ///     <tbody>
@@ -42,8 +42,8 @@
 ///     </tbody>
 /// </table>
 ///
-/// - All implementations use generics for the type of the key as well as the type of lock, if this is not fixed (as with
-///   [ReentrantLocks][net.dapete.locks.ReentrantLocks] and [ReentrantReadWriteLocks][net.dapete.locks.ReentrantReadWriteLocks]).
+/// - All implementations use generics for the key type as well as the lock type, if this is not fixed (as with [net.dapete.locks.ReentrantLocks] and
+///   [net.dapete.locks.ReentrantReadWriteLocks]).
 ///
 /// - The [Class][java.lang.Class] parameter on the `reentrant(Class)` and `reentrant(boolean, Class)` methods is the `Class` of the key type. This is a
 ///   shortcut for readability if the compiler does not automatically detect it, for example:
@@ -65,8 +65,8 @@
 ///
 /// # Examples
 ///
-/// Following the same pattern as described in the JDK documentation for [Lock][java.util.concurrent.locks.Lock], using [Locks][net.dapete.locks.Locks] should
-/// look similar to this:
+/// Following the same pattern as described in the JDK documentation for [Lock][java.util.concurrent.locks.Lock], using [net.dapete.locks.Locks] should look
+/// similar to this:
 ///
 /// ```
 /// public class LocksExample {
@@ -96,7 +96,7 @@
 /// lock.lock();
 /// ```
 ///
-/// For [ReadWriteLocks][net.dapete.locks.ReadWriteLocks] it is similar to the first example:
+/// For [net.dapete.locks.ReadWriteLocks] it is similar to the first example:
 ///
 /// ```
 /// public class ReadWriteLocksExample {

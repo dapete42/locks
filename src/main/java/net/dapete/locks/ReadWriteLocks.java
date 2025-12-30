@@ -10,18 +10,18 @@ import java.util.function.Supplier;
 ///
 /// Key-based locking with implementations of [ReadWriteLock].
 ///
-/// @param <K> type of key
-/// @param <L> type of ReadWriteLock
+/// @param <K> the key type
+/// @param <L> the `ReadWriteLock` type
 ///
 public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock> {
 
     ///
     /// Return an instance using [ReadWriteLock] implementations created by the specified `lockSupplier`.
     ///
-    /// @param lockSupplier Supplier for instances of [L] (usually the constructor of a class implementing [ReadWriteLock])
-    /// @param <K>          type of key
-    /// @param <L>          type of [ReadWriteLock]
-    /// @return instance using [ReadWriteLock] implementations created by the specified `lockSupplier`
+    /// @param lockSupplier a `Supplier` for instances of [L] (usually the constructor of a class implementing `ReadWriteLock`)
+    /// @param <K>          the key type
+    /// @param <L>          the `ReadWriteLock` type
+    /// @return an instance using `ReadWriteLock` implementations created by the specified `lockSupplier`
     ///
     static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
         return new ReadWriteLocksImpl<>(lockSupplier);
@@ -30,8 +30,8 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     ///
     /// Return a [ReentrantReadWriteLocks] instance using [ReentrantReadWriteLock].
     ///
-    /// @param <K> type of key
-    /// @return [ReentrantReadWriteLocks] instance
+    /// @param <K> the key type.
+    /// @return a `ReentrantReadWriteLocks` instance.
     ///
     static <K> ReentrantReadWriteLocks<K> reentrant() {
         return new ReentrantReadWriteLocks<>();
@@ -40,9 +40,9 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     ///
     /// Return a [ReentrantReadWriteLocks] instance using [ReentrantReadWriteLock].
     ///
-    /// @param keyClass class of key
-    /// @param <K>      type of key
-    /// @return [ReentrantReadWriteLocks] instance
+    /// @param keyClass the key type class.
+    /// @param <K>      the key type.
+    /// @return a `ReentrantReadWriteLocks` instance.
     ///
     static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
@@ -51,9 +51,9 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     ///
     /// Return a [ReentrantReadWriteLocks] instance using [ReentrantReadWriteLock] with the given fairness policy.
     ///
-    /// @param fair `true` if the locks should use a fair ordering policy (see [ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)])
-    /// @param <K>  type of key
-    /// @return [ReentrantReadWriteLocks] instance
+    /// @param fair `true` if the locks should use a fair ordering policy (see [ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)]).
+    /// @param <K>  the key type.
+    /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
     static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
@@ -63,10 +63,10 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     ///
     /// Return a [ReentrantReadWriteLocks] instance using [ReentrantReadWriteLock] with the given fairness policy.
     ///
-    /// @param fair     `true` if the locks should use a fair ordering policy (see [ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)])
-    /// @param keyClass class of key
-    /// @param <K>      type of key
-    /// @return [ReentrantReadWriteLocks] instance
+    /// @param fair     `true` if the locks should use a fair ordering policy (see [ReentrantReadWriteLock#ReentrantReadWriteLock(boolean)]).
+    /// @param keyClass the key type class.
+    /// @param <K>      the key type.
+    /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
     static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
@@ -74,33 +74,33 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     }
 
     ///
-    /// Returns a lock for the supplied key. There will be at most one lock per key at any given time.
+    /// Return a lock for `key`. There will be at most one lock per key at any given time.
     ///
-    /// @param key key
+    /// @param key the key
     /// @return lock
     ///
     L get(@Nullable K key);
 
     ///
-    /// Return a [ReadWriteLock] with its [ReadWriteLock#readLock()] already locked using [Lock#lock()].
+    /// Return a `ReadWriteLock` for `key` with its [readLock][ReadWriteLock#readLock()] already locked using [Lock#lock()].
     ///
-    /// @param key key
-    /// @return already read locked lock
+    /// @param key the key
+    /// @return a `ReadWriteLock` already read locked.
     ///
     L readLock(@Nullable K key);
 
     ///
-    /// Return a [ReadWriteLock] with its [ReadWriteLock#writeLock()] already locked using [Lock#lock()].
+    /// Return a [ReadWriteLock] for `key` with its [writeLock][ReadWriteLock#writeLock()] already locked using [Lock#lock()].
     ///
-    /// @param key key
-    /// @return already write locked lock
+    /// @param key the key
+    /// @return a `ReadWriteLock` already write locked.
     ///
     L writeLock(@Nullable K key);
 
     ///
-    /// Returns the current number of locks managed by this instance.
+    /// Return the current number of locks managed by this instance.
     ///
-    /// @return number of locks
+    /// @return the current number of locks managed by this instance.
     ///
     int size();
 
