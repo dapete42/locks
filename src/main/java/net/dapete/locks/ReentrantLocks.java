@@ -13,12 +13,25 @@ import java.util.concurrent.locks.ReentrantLock;
 ///
 public final class ReentrantLocks<K extends @Nullable Object> extends LocksImpl<K, ReentrantLock> {
 
+    private final boolean fair;
+
     ReentrantLocks() {
-        super(ReentrantLock::new);
+        this(false);
     }
 
     ReentrantLocks(boolean fair) {
         super(() -> new ReentrantLock(fair));
+        this.fair = fair;
+    }
+
+    ///
+    /// Return `true` if locks returned by this instance have fairness set true.
+    ///
+    /// @return `true` if locks returned by this instance have fairness set true.
+    /// @since 1.3.3
+    ///
+    public boolean isFair() {
+        return fair;
     }
 
 }

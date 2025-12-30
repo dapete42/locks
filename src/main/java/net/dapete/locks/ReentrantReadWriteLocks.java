@@ -14,12 +14,25 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 ///
 public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
 
+    private final boolean fair;
+
     ReentrantReadWriteLocks() {
-        super(ReentrantReadWriteLock::new);
+        this(false);
     }
 
     ReentrantReadWriteLocks(boolean fair) {
         super(() -> new ReentrantReadWriteLock(fair));
+        this.fair = fair;
+    }
+
+    ///
+    /// Return `true` if locks returned by this instance have fairness set true.
+    ///
+    /// @return `true` if locks returned by this instance have fairness set true.
+    /// @since 1.3.3
+    ///
+    public boolean isFair() {
+        return fair;
     }
 
 }

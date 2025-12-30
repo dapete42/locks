@@ -31,6 +31,8 @@ class ReadWriteLocksTest {
     void reentrant() {
         final var locks = ReadWriteLocks.reentrant(Integer.class);
 
+        assertFalse(locks.isFair());
+
         final var lock = locks.readLock(1);
         try {
             assertFalse(lock.isFair());
@@ -43,6 +45,8 @@ class ReadWriteLocksTest {
     @ValueSource(booleans = {true, false})
     void reentrant(boolean fair) {
         final var locks = ReadWriteLocks.reentrant(fair, Integer.class);
+
+        assertEquals(fair, locks.isFair());
 
         final var lock = locks.readLock(1);
         try {

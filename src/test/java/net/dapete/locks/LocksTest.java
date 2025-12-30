@@ -30,6 +30,8 @@ class LocksTest {
     void reentrant() {
         final var locks = Locks.reentrant(Integer.class);
 
+        assertFalse(locks.isFair());
+
         final var lock = locks.lock(1);
         try {
             assertFalse(lock.isFair());
@@ -42,6 +44,8 @@ class LocksTest {
     @ValueSource(booleans = {true, false})
     void reentrant(boolean fair) {
         final var locks = Locks.reentrant(fair, Integer.class);
+
+        assertEquals(fair, locks.isFair());
 
         final var lock = locks.lock(1);
         try {
