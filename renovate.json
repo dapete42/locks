@@ -6,7 +6,7 @@
     "packageRules": [
         {
             "description": "Automerge Maven and Maven Wrapper updates",
-            "matchPackageNames": ["maven", "maven-wrapper"],
+            "matchDepNames": ["maven", "maven-wrapper"],
             "automerge": true
         },
         {
@@ -16,7 +16,7 @@
         },
         {
             "description": "Automerge update for test library BOMs",
-            "matchPackageNames": [
+            "matchDepNames": [
                 "org.junit:junit-bom",
                 "org.mockito:mockito-bom"
             ],
@@ -24,14 +24,14 @@
         },
         {
             "description": "Automerge Error Prone updates",
-            "matchPackageNames": [
+            "matchDepNames": [
                 "com.google.errorprone:error_prone_core",
                 "com.uber.nullaway:nullaway"
             ]
         },
         {
             "description": "Automerge default Maven plugin updates",
-            "matchPackageNames": ["org.apache.maven.plugins:*"],
+            "matchDepNames": ["org.apache.maven.plugins:*"],
             "automerge": true
         }
     ]
