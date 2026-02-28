@@ -25,9 +25,17 @@
         {
             "description": "Automerge Error Prone updates",
             "matchDepNames": [
-                "com.google.errorprone:error_prone_core",
+                "com.google.errorprone:**",
                 "com.uber.nullaway:nullaway"
-            ]
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Automerge PMD updates",
+            "matchDepNames": [
+                "net.sourceforge.pmd:**"
+            ],
+            "automerge": true
         },
         {
             "description": "Automerge default Maven plugin updates",
