@@ -42,6 +42,11 @@
             "description": "Automerge default Maven plugin updates",
             "matchDepNames": ["org.apache.maven.plugins:*"],
             "automerge": true
+        },
+        {
+            "description": "Automerge static code analysis plugin updates",
+            "matchDepNames": ["com.github.spotbugs:spotbugs-maven-plugin"],
+            "automerge": true
         }
     ]
 }
