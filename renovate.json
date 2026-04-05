@@ -48,5 +48,10 @@
             "matchDepNames": ["com.github.spotbugs:spotbugs-maven-plugin"],
             "automerge": true
         }
-    ]
+    ],
+    "osvVulnerabilityAlerts": true,
+    "dependencyDashboardOSVVulnerabilitySummary": "unresolved",
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
+    }
 }
