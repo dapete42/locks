@@ -298,9 +298,8 @@
                 <configuration>
                     <!-- @{argLine}: hack for Jacoco; it sets Surefire's argLine, but <argLine> entries overwrite this.
                          This is also the reason this is a single <argLine>. -->
-                    <!-- UseSerialGC: explicitly use the simplest GC for predictable behavior -->
                     <!-- EnableDynamicAgentLoading: Mockito loads byte-buddy dynamically -->
-                    <argLine>@{argLine} -XX:+UseSerialGC -XX:+EnableDynamicAgentLoading</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
             <plugin>
