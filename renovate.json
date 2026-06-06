@@ -41,13 +41,9 @@
             "description": "Automerge Maven plugin updates",
             "matchDepNames": [
                 "org.apache.maven.plugins:*",
-                "org.jacoco:jacoco-maven-plugin"
+                "org.jacoco:jacoco-maven-plugin",
+                "com.github.spotbugs:spotbugs-maven-plugin"
             ],
-            "automerge": true
-        },
-        {
-            "description": "Automerge static code analysis plugin updates",
-            "matchDepNames": ["com.github.spotbugs:spotbugs-maven-plugin"],
             "automerge": true
         }
     ],
