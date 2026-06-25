@@ -2,8 +2,11 @@ package net.dapete.locks;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,13 +22,20 @@ class AbstractLocksTest {
             super(ReentrantLock::new);
         }
 
-        private void clearLockReference(Integer key) {
-            final var lockReference = getLockReference(key);
-            if (lockReference != null) {
-                lockReference.clear();
-            }
-        }
+    }
 
+    private static MethodHandle getLockReferenceMethodHandle;
+
+    @BeforeAll
+    static void beforeAll() throws IllegalAccessException, NoSuchMethodException {
+        final var getLockReferenceMethod = AbstractLocks.class.getDeclaredMethod("getLockReference", Object.class);
+        getLockReferenceMethod.setAccessible(true);
+        getLockReferenceMethodHandle = MethodHandles.lookup().unreflect(getLockReferenceMethod);
+    }
+
+    private void clearLockReference(AbstractLocks<?, ?> locks, Integer key) throws Throwable {
+        final var lockReference = getLockReferenceMethodHandle.invoke(locks, key);
+        ((LockReference<?, ?>) lockReference).clear();
     }
 
     @Test
@@ -54,12 +64,12 @@ class AbstractLocksTest {
     }
 
     @Test
-    void get_createNewLockIfLockReferenceIsNull() {
+    void get_createNewLockIfLockReferenceIsNull() throws Throwable {
         final var locks = new TestAbstractLocks();
 
         // get one lock and then clear the reference to it
         final var lock1 = locks.get(1);
-        locks.clearLockReference(1);
+        clearLockReference(locks, 1);
 
         // this should not be null, but a different lock
         final var lock2 = locks.get(1);

@@ -63,8 +63,7 @@ abstract class AbstractLocks<K extends @Nullable Object, L> {
         return createLock(key);
     }
 
-    // package-private to allow accessing this in tests
-    final @Nullable LockReference<K, L> getLockReference(@Nullable K key) {
+    private @Nullable LockReference<K, L> getLockReference(@Nullable K key) {
         return lockReferenceMap.get(key);
     }
 
