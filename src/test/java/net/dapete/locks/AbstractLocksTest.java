@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
@@ -25,17 +28,32 @@ class AbstractLocksTest {
     }
 
     private static MethodHandle getLockReferenceMethodHandle;
+    private static VarHandle lockReferenceQueueVarHandle;
+    private static MethodHandle processQueueMethodHandle;
 
     @BeforeAll
-    static void beforeAll() throws IllegalAccessException, NoSuchMethodException {
+    static void beforeAll() throws IllegalAccessException, NoSuchMethodException, NoSuchFieldException {
+        final var lookup = MethodHandles.lookup();
+        final var privateLookup = MethodHandles.privateLookupIn(AbstractLocks.class, lookup);
+
         final var getLockReferenceMethod = AbstractLocks.class.getDeclaredMethod("getLockReference", Object.class);
         getLockReferenceMethod.setAccessible(true);
-        getLockReferenceMethodHandle = MethodHandles.lookup().unreflect(getLockReferenceMethod);
+        getLockReferenceMethodHandle = lookup.unreflect(getLockReferenceMethod);
+
+        lockReferenceQueueVarHandle = privateLookup.findVarHandle(AbstractLocks.class, "lockReferenceQueue", ReferenceQueue.class);
+
+        final var processQueueMethod = AbstractLocks.class.getDeclaredMethod("processQueue");
+        processQueueMethod.setAccessible(true);
+        processQueueMethodHandle = lookup.unreflect(processQueueMethod);
     }
 
     private void clearLockReference(AbstractLocks<?, ?> locks, Integer key) throws Throwable {
         final var lockReference = getLockReferenceMethodHandle.invoke(locks, key);
         ((LockReference<?, ?>) lockReference).clear();
+    }
+
+    private static ReferenceQueue<ReentrantLock> getLockReferenceQueue(TestAbstractLocks locks) {
+        return (ReferenceQueue<ReentrantLock>) lockReferenceQueueVarHandle.get(locks);
     }
 
     @Test
@@ -90,6 +108,18 @@ class AbstractLocksTest {
         final var locks = new TestAbstractLocks();
 
         assertSame(locks.get(1), locks.get(1));
+    }
+
+    @Test
+    void processQueue_ignoresNonLockReference() throws Throwable {
+        final var locks = new TestAbstractLocks();
+        final var queue = getLockReferenceQueue(locks);
+        final var nonLockReference = new WeakReference<>(new ReentrantLock(), queue);
+        nonLockReference.enqueue();
+
+        processQueueMethodHandle.invoke(locks);
+
+        assertNull(queue.poll());
     }
 
     @Test
