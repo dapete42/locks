@@ -12,7 +12,11 @@ import java.util.function.Supplier;
 /// @param <K> the key type..
 /// @param <L> the [Lock] type.
 ///
-public interface Locks<K extends @Nullable Object, L extends Lock> {
+public class Locks<K extends @Nullable Object, L extends Lock> extends WeakKeyReferences<K, L> {
+
+    Locks(Supplier<L> lockSupplier) {
+        super(lockSupplier);
+    }
 
     ///
     /// Return an instance using [Lock] instances created by `lockSupplier`.
@@ -22,8 +26,8 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <L>          the `Lock` type.
     /// @return an instance using `Lock` instances created by `lockSupplier`
     ///
-    static <K, L extends Lock> Locks<K, L> withSupplier(Supplier<L> lockSupplier) {
-        return new LocksImpl<>(lockSupplier);
+    public static <K, L extends Lock> Locks<K, L> withSupplier(Supplier<L> lockSupplier) {
+        return new Locks<>(lockSupplier);
     }
 
     ///
@@ -32,7 +36,7 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <K> the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static <K> ReentrantLocks<K> reentrant() {
+    public static <K> ReentrantLocks<K> reentrant() {
         return new ReentrantLocks<>();
     }
 
@@ -43,7 +47,7 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <K>      the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static <K> ReentrantLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
+    public static <K> ReentrantLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
     }
 
@@ -55,7 +59,7 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @return a `ReentrantLocks` instance.
     /// @since 1.2.0
     ///
-    static <K> ReentrantLocks<K> reentrant(boolean fair) {
+    public static <K> ReentrantLocks<K> reentrant(boolean fair) {
         return new ReentrantLocks<>(fair);
     }
 
@@ -68,7 +72,7 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @return a `ReentrantLocks` instance
     /// @since 1.2.0
     ///
-    static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
+    public static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant(fair);
     }
 
@@ -78,7 +82,10 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param key the key
     /// @return a lock for `key`.
     ///
-    L get(@Nullable K key);
+    @Override
+    public L get(@Nullable K key) {
+        return super.get(key);
+    }
 
     ///
     /// Return a lock for `key` already locked using [Lock#lock()].
@@ -86,13 +93,20 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param key the key
     /// @return a lock for `key` already locked.
     ///
-    L lock(@Nullable K key);
+    public final L lock(@Nullable K key) {
+        final var lock = get(key);
+        lock.lock();
+        return lock;
+    }
 
     ///
     /// Return the current number of locks managed by this instance.
     ///
     /// @return the current number of locks managed by this instance.
     ///
-    int size();
+    @Override
+    public int size() {
+        return super.size();
+    }
 
 }

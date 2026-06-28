@@ -3,11 +3,13 @@
 /// [ReadWriteLock][java.util.concurrent.locks.ReadWriteLock] which are identified by a key. These locks are guaranteed to by different for each key and will be
 /// kept as long as they are referenced.
 ///
+/// Key-base semaphores are also available from [Semaphores][net.dapete.locks.Semaphores].
+///
 /// <table class="striped">
 ///     <caption>Obtaining instances</caption>
 ///     <thead>
 ///         <tr>
-///             <th>Lock type</th>
+///             <th>Type</th>
 ///             <th>Method(s)</th>
 ///             <th>Return type</th>
 ///         </tr>
@@ -39,6 +41,14 @@
 ///             <td>{@link net.dapete.locks.ReadWriteLocks#withSupplier(java.util.function.Supplier) ReadWriteLocks.withSupplier(Supplier)}</td>
 ///             <td>{@link net.dapete.locks.ReadWriteLocks}</td>
 ///         </tr>
+///         <tr>
+///             <td>{@link java.util.concurrent.Semaphore Semaphore}</td>
+///             <td>{@link net.dapete.locks.Semaphores#instance(int)}<br>
+///                 {@link net.dapete.locks.Semaphores#instance(int, Class)}<br>
+///                 {@link net.dapete.locks.Semaphores#instance(boolean, int)}<br>
+///                 {@link net.dapete.locks.Semaphores#instance(boolean, int, Class)}</td>
+///             <td>{@link net.dapete.locks.Semaphores}</td>
+///         </tr>
 ///     </tbody>
 /// </table>
 ///
@@ -64,6 +74,8 @@
 ///    ```
 ///
 /// # Examples
+///
+/// ## Locks
 ///
 /// Following the same pattern as described in the JDK documentation for [Lock][java.util.concurrent.locks.Lock], using [net.dapete.locks.Locks] should look
 /// similar to this:
@@ -95,8 +107,9 @@
 /// final var lock = locks.get(url);
 /// lock.lock();
 /// ```
+/// ## ReadWriteLocks
 ///
-/// For [net.dapete.locks.ReadWriteLocks] it is similar to the first example:
+/// For [net.dapete.locks.ReadWriteLocks] it is similar to the first example for Locks:
 ///
 /// ```
 /// public class ReadWriteLocksExample {

@@ -13,7 +13,11 @@ import java.util.function.Supplier;
 /// @param <K> the key type
 /// @param <L> the `ReadWriteLock` type
 ///
-public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock> {
+public class ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock> extends WeakKeyReferences<K, L> {
+
+    ReadWriteLocks(Supplier<L> lockSupplier) {
+        super(lockSupplier);
+    }
 
     ///
     /// Return an instance using [ReadWriteLock] implementations created by the specified `lockSupplier`.
@@ -23,8 +27,8 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @param <L>          the `ReadWriteLock` type
     /// @return an instance using `ReadWriteLock` implementations created by the specified `lockSupplier`
     ///
-    static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
-        return new ReadWriteLocksImpl<>(lockSupplier);
+    public static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
+        return new ReadWriteLocks<>(lockSupplier);
     }
 
     ///
@@ -33,7 +37,7 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @param <K> the key type.
     /// @return a `ReentrantReadWriteLocks` instance.
     ///
-    static <K> ReentrantReadWriteLocks<K> reentrant() {
+    public static <K> ReentrantReadWriteLocks<K> reentrant() {
         return new ReentrantReadWriteLocks<>();
     }
 
@@ -44,7 +48,7 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @param <K>      the key type.
     /// @return a `ReentrantReadWriteLocks` instance.
     ///
-    static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
+    public static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
     }
 
@@ -56,7 +60,7 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
-    static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
+    public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
         return new ReentrantReadWriteLocks<>(fair);
     }
 
@@ -69,8 +73,32 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
-    static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
+    public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant(fair);
+    }
+
+    ///
+    /// Return a `ReadWriteLock` for `key` with its [readLock][ReadWriteLock#readLock()] already locked using [Lock#lock()].
+    ///
+    /// @param key the key
+    /// @return a `ReadWriteLock` already read locked.
+    ///
+    public L readLock(@Nullable K key) {
+        final var lock = get(key);
+        lock.readLock().lock();
+        return lock;
+    }
+
+    ///
+    /// Return a [ReadWriteLock] for `key` with its [writeLock][ReadWriteLock#writeLock()] already locked using [Lock#lock()].
+    ///
+    /// @param key the key
+    /// @return a `ReadWriteLock` already write locked.
+    ///
+    public L writeLock(@Nullable K key) {
+        final var lock = get(key);
+        lock.writeLock().lock();
+        return lock;
     }
 
     ///
@@ -79,29 +107,19 @@ public interface ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteL
     /// @param key the key
     /// @return lock
     ///
-    L get(@Nullable K key);
-
-    ///
-    /// Return a `ReadWriteLock` for `key` with its [readLock][ReadWriteLock#readLock()] already locked using [Lock#lock()].
-    ///
-    /// @param key the key
-    /// @return a `ReadWriteLock` already read locked.
-    ///
-    L readLock(@Nullable K key);
-
-    ///
-    /// Return a [ReadWriteLock] for `key` with its [writeLock][ReadWriteLock#writeLock()] already locked using [Lock#lock()].
-    ///
-    /// @param key the key
-    /// @return a `ReadWriteLock` already write locked.
-    ///
-    L writeLock(@Nullable K key);
+    @Override
+    public L get(@Nullable K key) {
+        return super.get(key);
+    }
 
     ///
     /// Return the current number of locks managed by this instance.
     ///
     /// @return the current number of locks managed by this instance.
     ///
-    int size();
+    @Override
+    public int size() {
+        return super.size();
+    }
 
 }

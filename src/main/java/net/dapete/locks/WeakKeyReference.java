@@ -5,11 +5,11 @@ import org.jspecify.annotations.Nullable;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
-final class LockReference<K extends @Nullable Object, L> extends WeakReference<L> {
+final class WeakKeyReference<K extends @Nullable Object, T> extends WeakReference<T> {
 
     private final @Nullable K key;
 
-    LockReference(@Nullable K key, L value, ReferenceQueue<? super L> referenceQueue) {
+    WeakKeyReference(@Nullable K key, T value, ReferenceQueue<? super T> referenceQueue) {
         super(value, referenceQueue);
         this.key = key;
     }
