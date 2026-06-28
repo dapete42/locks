@@ -10,61 +10,61 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-abstract class WeakKeyReferences<K extends @Nullable Object, T> {
+abstract class WeakKeyReferences<K extends @Nullable Object, V> {
 
     private final Lock instanceLock = new ReentrantLock();
 
-    private final Map<@Nullable K, WeakKeyReference<@Nullable K, T>> referenceMap = new HashMap<>();
+    private final Map<@Nullable K, WeakKeyReference<@Nullable K, V>> referenceMap = new HashMap<>();
 
-    private final ReferenceQueue<T> referenceQueue = new ReferenceQueue<>();
+    private final ReferenceQueue<V> referenceQueue = new ReferenceQueue<>();
 
-    private final Supplier<T> supplier;
+    private final Supplier<V> supplier;
 
-    protected WeakKeyReferences(Supplier<T> supplier) {
+    protected WeakKeyReferences(Supplier<V> supplier) {
         this.supplier = supplier;
     }
 
-    private T createObject(@Nullable K key) {
-        final var newObject = supplier.get();
-        referenceMap.put(key, new WeakKeyReference<>(key, newObject, referenceQueue));
-        return newObject;
+    private V createValue(@Nullable K key) {
+        final var newValue = supplier.get();
+        referenceMap.put(key, new WeakKeyReference<>(key, newValue, referenceQueue));
+        return newValue;
     }
 
     ///
-    /// Return a reference for the supplied `key`. There will be at most one reference per key at any given time.
+    /// Return a value for the supplied `key`. There will be at most one value per key at any given time.
     ///
     /// @param key the key.
-    /// @return a reference for the supplied `key`.
+    /// @return a value for the supplied `key`.
     ///
-    protected T get(@Nullable K key) {
+    protected V get(@Nullable K key) {
         instanceLock.lock();
         try {
             processQueue();
-            return getInternal(key);
+            return getValue(key);
         } finally {
             instanceLock.unlock();
         }
     }
 
-    private T getInternal(@Nullable K key) {
+    private V getValue(@Nullable K key) {
         final var reference = getReference(key);
         if (reference != null) {
-            final T object = reference.get();
-            if (object != null) {
-                return object;
+            final V value = reference.get();
+            if (value != null) {
+                return value;
             }
         }
-        return createObject(key);
+        return createValue(key);
     }
 
-    private @Nullable WeakKeyReference<K, T> getReference(@Nullable K key) {
+    private @Nullable WeakKeyReference<K, V> getReference(@Nullable K key) {
         return referenceMap.get(key);
     }
 
     ///
-    /// Return the current number of references managed by this instance.
+    /// Return the current number of values managed by this instance.
     ///
-    /// @return the current number of references managed by this instance.
+    /// @return the current number of values managed by this instance.
     ///
     protected int size() {
         instanceLock.lock();
@@ -77,7 +77,7 @@ abstract class WeakKeyReferences<K extends @Nullable Object, T> {
     }
 
     ///
-    /// Removes all objects that have been marked as unreachable by the garbage collector.
+    /// Removes all values that have been marked as unreachable by the garbage collector.
     ///
     private void processQueue() {
         Reference<?> reference;
