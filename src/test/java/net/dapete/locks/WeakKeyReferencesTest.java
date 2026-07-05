@@ -110,6 +110,16 @@ class WeakKeyReferencesTest {
     }
 
     @Test
+    void get_identicalForEqualsKey() {
+        final var objects = new TestWeakKeyReferences();
+        final var key1 = new String("1");
+        final var key2 = new String("1");
+        assertNotSame(key1, key2);
+
+        assertSame(objects.get(key1), objects.get(key2));
+    }
+
+    @Test
     void processQueue_ignoresNonKeyReference() throws Throwable {
         final var objects = new TestWeakKeyReferences();
         final var queue = getReferenceQueue(objects);
