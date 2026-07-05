@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WeakKeyReferencesTest {
 
-    private static class TestWeakKeyReferences extends WeakKeyReferences<@Nullable Integer, Object> {
+    private static class TestWeakKeyReferences extends WeakKeyReferences<@Nullable String, Object> {
 
         private TestWeakKeyReferences() {
             super(Object::new);
@@ -45,7 +45,7 @@ class WeakKeyReferencesTest {
         processQueueMethodHandle = lookup.unreflect(processQueueMethod);
     }
 
-    private void clearKeyReference(WeakKeyReferences<?, ?> objects, Integer key) throws Throwable {
+    private void clearKeyReference(WeakKeyReferences<?, ?> objects, String key) throws Throwable {
         final var objectReference = getReferenceMethodHandle.invoke(objects, key);
         ((WeakKeyReference<?, ?>) objectReference).clear();
     }
@@ -58,7 +58,7 @@ class WeakKeyReferencesTest {
     void testObjectsAreReleasedWhenUnused() {
         final var objects = new TestWeakKeyReferences();
 
-        objects.get(1);
+        objects.get("1");
 
         assertEquals(1, objects.size());
 
@@ -84,11 +84,11 @@ class WeakKeyReferencesTest {
         final var objects = new TestWeakKeyReferences();
 
         // get one object and then clear the reference to it
-        final var object1 = objects.get(1);
-        clearKeyReference(objects, 1);
+        final var object1 = objects.get("1");
+        clearKeyReference(objects, "1");
 
         // this should not be null, but a different object
-        final var object2 = objects.get(1);
+        final var object2 = objects.get("1");
 
         assertNotNull(object2);
         assertNotSame(object1, object2);
@@ -98,14 +98,15 @@ class WeakKeyReferencesTest {
     void get_differentForDifferentKeys() {
         final var objects = new TestWeakKeyReferences();
 
-        assertNotSame(objects.get(1), objects.get(2));
+        assertNotSame(objects.get("1"), objects.get("2"));
     }
 
     @Test
     void get_identicalForIdenticalKey() {
         final var objects = new TestWeakKeyReferences();
+        final var key = "1";
 
-        assertSame(objects.get(1), objects.get(1));
+        assertSame(objects.get(key), objects.get(key));
     }
 
     @Test
@@ -130,7 +131,7 @@ class WeakKeyReferencesTest {
         // Add some objects
         final var objectList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            objectList.add(objects.get(i));
+            objectList.add(objects.get(Integer.toString(i)));
         }
 
         // Size should reflect the number of objects
