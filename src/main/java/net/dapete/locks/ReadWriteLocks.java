@@ -1,7 +1,5 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -13,7 +11,7 @@ import java.util.function.Supplier;
 /// @param <K> the key type
 /// @param <L> the `ReadWriteLock` type
 ///
-public class ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock> extends WeakKeyReferences<K, L> {
+public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReferences<K, L> {
 
     ReadWriteLocks(Supplier<L> lockSupplier) {
         super(lockSupplier);
@@ -83,7 +81,7 @@ public class ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock>
     /// @param key the key
     /// @return a `ReadWriteLock` already read locked.
     ///
-    public L readLock(@Nullable K key) {
+    public L readLock(K key) {
         final var lock = get(key);
         lock.readLock().lock();
         return lock;
@@ -95,7 +93,7 @@ public class ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock>
     /// @param key the key
     /// @return a `ReadWriteLock` already write locked.
     ///
-    public L writeLock(@Nullable K key) {
+    public L writeLock(K key) {
         final var lock = get(key);
         lock.writeLock().lock();
         return lock;
@@ -108,7 +106,7 @@ public class ReadWriteLocks<K extends @Nullable Object, L extends ReadWriteLock>
     /// @return lock
     ///
     @Override
-    public L get(@Nullable K key) {
+    public L get(K key) {
         return super.get(key);
     }
 

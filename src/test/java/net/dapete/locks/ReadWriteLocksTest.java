@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
 
 class ReadWriteLocksTest {
 

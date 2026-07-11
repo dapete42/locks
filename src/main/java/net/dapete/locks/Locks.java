@@ -1,7 +1,5 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
@@ -12,7 +10,7 @@ import java.util.function.Supplier;
 /// @param <K> the key type..
 /// @param <L> the [Lock] type.
 ///
-public class Locks<K extends @Nullable Object, L extends Lock> extends WeakKeyReferences<K, L> {
+public class Locks<K, L extends Lock> extends WeakKeyReferences<K, L> {
 
     Locks(Supplier<L> lockSupplier) {
         super(lockSupplier);
@@ -83,7 +81,7 @@ public class Locks<K extends @Nullable Object, L extends Lock> extends WeakKeyRe
     /// @return a lock for `key`.
     ///
     @Override
-    public L get(@Nullable K key) {
+    public L get(K key) {
         return super.get(key);
     }
 
@@ -93,7 +91,7 @@ public class Locks<K extends @Nullable Object, L extends Lock> extends WeakKeyRe
     /// @param key the key
     /// @return a lock for `key` already locked.
     ///
-    public final L lock(@Nullable K key) {
+    public final L lock(K key) {
         final var lock = get(key);
         lock.lock();
         return lock;

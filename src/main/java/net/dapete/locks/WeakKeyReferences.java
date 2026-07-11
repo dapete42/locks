@@ -10,11 +10,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-abstract class WeakKeyReferences<K extends @Nullable Object, V> {
+abstract class WeakKeyReferences<K, V> {
 
     private final Lock instanceLock = new ReentrantLock();
 
-    private final Map<@Nullable K, WeakKeyReference<@Nullable K, V>> referenceMap = new HashMap<>();
+    private final Map<K, WeakKeyReference<K, V>> referenceMap = new HashMap<>();
 
     private final ReferenceQueue<V> referenceQueue = new ReferenceQueue<>();
 
@@ -24,7 +24,7 @@ abstract class WeakKeyReferences<K extends @Nullable Object, V> {
         this.supplier = supplier;
     }
 
-    private V createValue(@Nullable K key) {
+    private V createValue(K key) {
         final var newValue = supplier.get();
         referenceMap.put(key, new WeakKeyReference<>(key, newValue, referenceQueue));
         return newValue;
@@ -36,7 +36,7 @@ abstract class WeakKeyReferences<K extends @Nullable Object, V> {
     /// @param key the key.
     /// @return a value for the supplied `key`.
     ///
-    protected V get(@Nullable K key) {
+    protected V get(K key) {
         instanceLock.lock();
         try {
             processQueue();
@@ -46,7 +46,7 @@ abstract class WeakKeyReferences<K extends @Nullable Object, V> {
         }
     }
 
-    private V getValue(@Nullable K key) {
+    private V getValue(K key) {
         final var reference = getReference(key);
         if (reference != null) {
             final V value = reference.get();
@@ -57,7 +57,7 @@ abstract class WeakKeyReferences<K extends @Nullable Object, V> {
         return createValue(key);
     }
 
-    private @Nullable WeakKeyReference<K, V> getReference(@Nullable K key) {
+    private @Nullable WeakKeyReference<K, V> getReference(K key) {
         return referenceMap.get(key);
     }
 

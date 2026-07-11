@@ -1,6 +1,5 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WeakKeyReferencesTest {
 
-    private static class TestWeakKeyReferences extends WeakKeyReferences<@Nullable String, Object> {
+    private static class TestWeakKeyReferences extends WeakKeyReferences<String, Object> {
 
         private TestWeakKeyReferences() {
             super(Object::new);
@@ -68,15 +67,6 @@ class WeakKeyReferencesTest {
          */
         System.gc();
         await().atMost(30, TimeUnit.SECONDS).until(() -> objects.size() == 0);
-    }
-
-    @Test
-    void get_null() {
-        final var objects = new TestWeakKeyReferences();
-
-        final var object = objects.get(null);
-
-        assertNotNull(object);
     }
 
     @Test

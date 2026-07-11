@@ -1,7 +1,5 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
-
 import java.util.concurrent.locks.ReentrantLock;
 
 ///
@@ -11,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 ///
 /// @param <K> the key type.
 ///
-public final class ReentrantLocks<K extends @Nullable Object> extends Locks<K, ReentrantLock> {
+public final class ReentrantLocks<K> extends Locks<K, ReentrantLock> {
 
     private final boolean fair;
 
