@@ -1,9 +1,13 @@
 package net.dapete.locks;
 
+import org.apiguardian.api.API;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking with implementations of [ReadWriteLock].
@@ -11,6 +15,7 @@ import java.util.function.Supplier;
 /// @param <K> the key type
 /// @param <L> the `ReadWriteLock` type
 ///
+@API(status = STABLE)
 public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReferences<K, L> {
 
     ReadWriteLocks(Supplier<L> lockSupplier) {
@@ -25,6 +30,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param <L>          the `ReadWriteLock` type
     /// @return an instance using `ReadWriteLock` implementations created by the specified `lockSupplier`
     ///
+    @API(status = STABLE)
     public static <K, L extends ReadWriteLock> ReadWriteLocks<K, L> withSupplier(Supplier<L> lockSupplier) {
         return new ReadWriteLocks<>(lockSupplier);
     }
@@ -35,6 +41,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param <K> the key type.
     /// @return a `ReentrantReadWriteLocks` instance.
     ///
+    @API(status = STABLE)
     public static <K> ReentrantReadWriteLocks<K> reentrant() {
         return new ReentrantReadWriteLocks<>();
     }
@@ -46,6 +53,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param <K>      the key type.
     /// @return a `ReentrantReadWriteLocks` instance.
     ///
+    @API(status = STABLE)
     public static <K> ReentrantReadWriteLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
     }
@@ -58,6 +66,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
+    @API(status = STABLE, since = "1.2.0")
     public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair) {
         return new ReentrantReadWriteLocks<>(fair);
     }
@@ -71,6 +80,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @return a `ReentrantReadWriteLocks` instance.
     /// @since 1.2.0
     ///
+    @API(status = STABLE, since = "1.2.0")
     public static <K> ReentrantReadWriteLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant(fair);
     }
@@ -81,6 +91,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param key the key
     /// @return a `ReadWriteLock` already read locked.
     ///
+    @API(status = STABLE)
     public L readLock(K key) {
         final var lock = get(key);
         lock.readLock().lock();
@@ -93,6 +104,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param key the key
     /// @return a `ReadWriteLock` already write locked.
     ///
+    @API(status = STABLE)
     public L writeLock(K key) {
         final var lock = get(key);
         lock.writeLock().lock();
@@ -105,6 +117,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     /// @param key the key
     /// @return lock
     ///
+    @API(status = STABLE)
     @Override
     public L get(K key) {
         return super.get(key);
@@ -115,6 +128,7 @@ public class ReadWriteLocks<K, L extends ReadWriteLock> extends WeakKeyReference
     ///
     /// @return the current number of locks managed by this instance.
     ///
+    @API(status = STABLE)
     @Override
     public int size() {
         return super.size();

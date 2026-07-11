@@ -129,4 +129,7 @@
 ///
 /// Again, the `final var lock = …` lines could be split, which may be useful if both read and write locks are used in the method.
 ///
+@API(status = API.Status.STABLE)
 package net.dapete.locks;
+
+import org.apiguardian.api.API;

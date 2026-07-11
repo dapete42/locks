@@ -1,6 +1,10 @@
 package net.dapete.locks;
 
+import org.apiguardian.api.API;
+
 import java.util.concurrent.locks.ReentrantLock;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking using instances of [ReentrantLock].
@@ -9,6 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 ///
 /// @param <K> the key type.
 ///
+@API(status = STABLE)
 public final class ReentrantLocks<K> extends Locks<K, ReentrantLock> {
 
     private final boolean fair;
@@ -28,6 +33,7 @@ public final class ReentrantLocks<K> extends Locks<K, ReentrantLock> {
     /// @return `true` if locks returned by this instance have fairness set true.
     /// @since 1.3.3
     ///
+    @API(status = STABLE, since = "1.3.3")
     public boolean isFair() {
         return fair;
     }
