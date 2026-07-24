@@ -51,13 +51,11 @@ Required permissions on GitHub:
    ```
    You will be prompted for a version number. This will update the `main` and `release` branches and create a tag in the form `v1.2.3`.
 
-2. Create a release in GitHub from this tag.
-
-3. The release will be built and deployed to Maven Central.
+2. The release will be built and deployed to Maven Central.
 
 ### How to Create and Push Maven Site
 
-**Note:** This happens automatically after a release has been created.
+**Note:** This happens automatically when changes are pushed to the `release` branch.
 
 Required permissions on GitHub:
 * Push to `gh-pages`

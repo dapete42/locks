@@ -1,8 +1,10 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
+import org.apiguardian.api.API;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking using instances of [ReentrantReadWriteLock].
@@ -12,7 +14,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 ///
 /// @param <K> the key type.
 ///
-public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends ReadWriteLocksImpl<K, ReentrantReadWriteLock> {
+@API(status = STABLE)
+public final class ReentrantReadWriteLocks<K> extends ReadWriteLocks<K, ReentrantReadWriteLock> {
 
     private final boolean fair;
 
@@ -31,6 +34,7 @@ public final class ReentrantReadWriteLocks<K extends @Nullable Object> extends R
     /// @return `true` if locks returned by this instance have fairness set true.
     /// @since 1.3.3
     ///
+    @API(status = STABLE, since = "1.3.3")
     public boolean isFair() {
         return fair;
     }

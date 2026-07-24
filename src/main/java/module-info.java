@@ -9,6 +9,7 @@ import org.jspecify.annotations.NullMarked;
 ///
 @NullMarked
 module net.dapete.locks {
+    requires static transitive org.apiguardian.api;
     requires org.jspecify;
     exports net.dapete.locks;
 }

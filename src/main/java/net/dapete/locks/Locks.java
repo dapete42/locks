@@ -1,10 +1,12 @@
 package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
+import org.apiguardian.api.API;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking with implementations of [Lock].
@@ -12,7 +14,12 @@ import java.util.function.Supplier;
 /// @param <K> the key type..
 /// @param <L> the [Lock] type.
 ///
-public interface Locks<K extends @Nullable Object, L extends Lock> {
+@API(status = STABLE)
+public class Locks<K, L extends Lock> extends WeakKeyReferences<K, L> {
+
+    Locks(Supplier<L> lockSupplier) {
+        super(lockSupplier);
+    }
 
     ///
     /// Return an instance using [Lock] instances created by `lockSupplier`.
@@ -22,8 +29,9 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <L>          the `Lock` type.
     /// @return an instance using `Lock` instances created by `lockSupplier`
     ///
-    static <K, L extends Lock> Locks<K, L> withSupplier(Supplier<L> lockSupplier) {
-        return new LocksImpl<>(lockSupplier);
+    @API(status = STABLE)
+    public static <K, L extends Lock> Locks<K, L> withSupplier(Supplier<L> lockSupplier) {
+        return new Locks<>(lockSupplier);
     }
 
     ///
@@ -32,7 +40,8 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <K> the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static <K> ReentrantLocks<K> reentrant() {
+    @API(status = STABLE)
+    public static <K> ReentrantLocks<K> reentrant() {
         return new ReentrantLocks<>();
     }
 
@@ -43,7 +52,8 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param <K>      the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static <K> ReentrantLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
+    @API(status = STABLE)
+    public static <K> ReentrantLocks<K> reentrant(@SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant();
     }
 
@@ -55,7 +65,8 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @return a `ReentrantLocks` instance.
     /// @since 1.2.0
     ///
-    static <K> ReentrantLocks<K> reentrant(boolean fair) {
+    @API(status = STABLE, since = "1.2.0")
+    public static <K> ReentrantLocks<K> reentrant(boolean fair) {
         return new ReentrantLocks<>(fair);
     }
 
@@ -68,7 +79,8 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @return a `ReentrantLocks` instance
     /// @since 1.2.0
     ///
-    static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
+    @API(status = STABLE, since = "1.2.0")
+    public static <K> ReentrantLocks<K> reentrant(boolean fair, @SuppressWarnings("unused") Class<K> keyClass) {
         return reentrant(fair);
     }
 
@@ -78,7 +90,11 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param key the key
     /// @return a lock for `key`.
     ///
-    L get(@Nullable K key);
+    @API(status = STABLE)
+    @Override
+    public L get(K key) {
+        return super.get(key);
+    }
 
     ///
     /// Return a lock for `key` already locked using [Lock#lock()].
@@ -86,13 +102,22 @@ public interface Locks<K extends @Nullable Object, L extends Lock> {
     /// @param key the key
     /// @return a lock for `key` already locked.
     ///
-    L lock(@Nullable K key);
+    @API(status = STABLE)
+    public final L lock(K key) {
+        final var lock = get(key);
+        lock.lock();
+        return lock;
+    }
 
     ///
     /// Return the current number of locks managed by this instance.
     ///
     /// @return the current number of locks managed by this instance.
     ///
-    int size();
+    @API(status = STABLE)
+    @Override
+    public int size() {
+        return super.size();
+    }
 
 }

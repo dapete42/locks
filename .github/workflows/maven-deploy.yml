@@ -3,17 +3,17 @@
 name: Maven deploy
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ release ]
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Set up JDK 25 and Maven Central
         uses: actions/setup-java@v5
         with:
@@ -31,3 +31,10 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSWORD }}
         run: ./mvnw -B -P deploy-to-maven-central deploy
+      - name: Set up Git user
+        run: git config --global user.email "dev@dapete.net" && git config --global user.name "GitHub action"
+      - uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_DEPLOY_KEY }}
+      - name: Maven site-deploy
+        run: ./mvnw -B site-deploy

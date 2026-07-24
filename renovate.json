@@ -1,6 +1,55 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended"
+    ],
+    "packageRules": [
+        {
+            "description": "Automerge Maven and Maven Wrapper updates",
+            "matchDepNames": ["maven", "maven-wrapper"],
+            "automerge": true
+        },
+        {
+            "description": "Automerge updates for test-scoped dependencies",
+            "matchDepTypes": ["test"],
+            "automerge": true
+        },
+        {
+            "description": "Automerge update for test library BOMs",
+            "matchDepNames": [
+                "org.junit:junit-bom",
+                "org.mockito:mockito-bom"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Automerge Error Prone updates",
+            "matchDepNames": [
+                "com.google.errorprone:**",
+                "com.uber.nullaway:nullaway"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Automerge PMD updates",
+            "matchDepNames": [
+                "net.sourceforge.pmd:**"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Automerge Maven plugin updates",
+            "matchDepNames": [
+                "org.apache.maven.plugins:*",
+                "org.jacoco:jacoco-maven-plugin",
+                "com.github.spotbugs:spotbugs-maven-plugin"
+            ],
+            "automerge": true
+        }
+    ],
+    "osvVulnerabilityAlerts": true,
+    "dependencyDashboardOSVVulnerabilitySummary": "unresolved",
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
+    }
 }

@@ -65,6 +65,8 @@
 ///
 /// # Examples
 ///
+/// ## Locks
+///
 /// Following the same pattern as described in the JDK documentation for [Lock][java.util.concurrent.locks.Lock], using [net.dapete.locks.Locks] should look
 /// similar to this:
 ///
@@ -95,8 +97,9 @@
 /// final var lock = locks.get(url);
 /// lock.lock();
 /// ```
+/// ## ReadWriteLocks
 ///
-/// For [net.dapete.locks.ReadWriteLocks] it is similar to the first example:
+/// For [net.dapete.locks.ReadWriteLocks] it is similar to the first example for Locks:
 ///
 /// ```
 /// public class ReadWriteLocksExample {
@@ -126,4 +129,7 @@
 ///
 /// Again, the `final var lock = …` lines could be split, which may be useful if both read and write locks are used in the method.
 ///
+@API(status = API.Status.STABLE)
 package net.dapete.locks;
+
+import org.apiguardian.api.API;
