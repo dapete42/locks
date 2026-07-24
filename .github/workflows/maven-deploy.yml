@@ -7,7 +7,7 @@ on:
     branches: [ release ]
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,3 +31,10 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSWORD }}
         run: ./mvnw -B -P deploy-to-maven-central deploy
+      - name: Set up Git user
+        run: git config --global user.email "dev@dapete.net" && git config --global user.name "GitHub action"
+      - uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_DEPLOY_KEY }}
+      - name: Maven site-deploy
+        run: ./mvnw -B site-deploy
