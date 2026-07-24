@@ -3,8 +3,8 @@
 name: Maven deploy
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ release ]
 
 jobs:
   publish:
