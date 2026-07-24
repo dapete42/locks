@@ -2,21 +2,21 @@
   "SPDXID" : "SPDXRef-DOCUMENT",
   "spdxVersion" : "SPDX-2.3",
   "creationInfo" : {
-    "created" : "2025-12-30T21:04:50Z",
+    "created" : "2026-07-24T20:29:34Z",
     "creators" : [ "Tool: spdx-maven-plugin" ],
-    "licenseListVersion" : "3.27.0"
+    "licenseListVersion" : "3.28.0"
   },
   "name" : "locks",
   "dataLicense" : "CC0-1.0",
-  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.3.3",
+  "documentNamespace" : "http://spdx.org/spdxpackages/net.dapete_locks-1.4.0",
   "packages" : [ {
-    "SPDXID" : "SPDXRef--1f8f17870",
+    "SPDXID" : "SPDXRef--1f8f13c50",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-engine\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-engine@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -25,7 +25,7 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter Engine",
     "summary" : "Module \"junit-jupiter-engine\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
     "SPDXID" : "SPDXRef--4831b1a30",
     "copyrightText" : "UNSPECIFIED",
@@ -50,7 +50,7 @@
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/net.dapete/locks@1.3.3",
+      "referenceLocator" : "pkg:maven/net.dapete/locks@1.4.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : true,
@@ -61,19 +61,19 @@
     "name" : "locks",
     "packageFileName" : "NOASSERTION",
     "packageVerificationCode" : {
-      "packageVerificationCodeValue" : "296ea146e0c722b844053cdaa16eb7f4052192be"
+      "packageVerificationCodeValue" : "d90e79c96e58eb4b68d03a45f505c19c3122c753"
     },
     "primaryPackagePurpose" : "LIBRARY",
     "summary" : "Library for key-based locking",
-    "versionInfo" : "1.3.3"
+    "versionInfo" : "1.4.0"
   }, {
-    "SPDXID" : "SPDXRef--7c012cdb0",
+    "SPDXID" : "SPDXRef--7c0129190",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-api\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-api@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -82,7 +82,7 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter API",
     "summary" : "Module \"junit-jupiter-api\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
     "SPDXID" : "SPDXRef--7d9e5bf50",
     "copyrightText" : "UNSPECIFIED",
@@ -101,13 +101,13 @@
     "summary" : "Core API and libraries of hamcrest matcher framework.",
     "versionInfo" : "2.1"
   }, {
-    "SPDXID" : "SPDXRef--cf9b430",
+    "SPDXID" : "SPDXRef--cf97810",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter-params\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter-params@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -116,15 +116,15 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter Params",
     "summary" : "Module \"junit-jupiter-params\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
-    "SPDXID" : "SPDXRef-22f875980",
+    "SPDXID" : "SPDXRef-22f8795a0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-jupiter\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.jupiter/junit-jupiter@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -133,7 +133,7 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Jupiter (Aggregator)",
     "summary" : "Module \"junit-jupiter\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
     "SPDXID" : "SPDXRef-3401be2a0",
     "copyrightText" : "UNSPECIFIED",
@@ -153,13 +153,13 @@
     "summary" : "A library for instantiating Java objects",
     "versionInfo" : "3.3"
   }, {
-    "SPDXID" : "SPDXRef-40642c410",
+    "SPDXID" : "SPDXRef-406430030",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-platform-engine\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-engine@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -168,7 +168,7 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Platform Engine API",
     "summary" : "Module \"junit-platform-engine\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
     "SPDXID" : "SPDXRef-494d73e00",
     "copyrightText" : "UNSPECIFIED",
@@ -187,13 +187,13 @@
     "summary" : "The Byte Buddy agent offers convenience for attaching an agent to the local or a remote VM.",
     "versionInfo" : "1.17.7"
   }, {
-    "SPDXID" : "SPDXRef-4f045aab0",
+    "SPDXID" : "SPDXRef-4f045e6d0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Module \"junit-platform-commons\" of JUnit",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@6.0.1",
+      "referenceLocator" : "pkg:maven/org.junit.platform/junit-platform-commons@6.1.2",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -202,7 +202,7 @@
     "licenseDeclared" : "EPL-2.0",
     "name" : "JUnit Platform Commons",
     "summary" : "Module \"junit-platform-commons\" of JUnit",
-    "versionInfo" : "6.0.1"
+    "versionInfo" : "6.1.2"
   }, {
     "SPDXID" : "SPDXRef-507cce4b0",
     "copyrightText" : "UNSPECIFIED",
@@ -238,13 +238,13 @@
     "summary" : "A Java DSL for synchronizing asynchronous operations",
     "versionInfo" : "4.3.0"
   }, {
-    "SPDXID" : "SPDXRef-5958fb780",
+    "SPDXID" : "SPDXRef-595902fa0",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Mockito mock objects library core API and implementation",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.mockito/mockito-core@5.21.0",
+      "referenceLocator" : "pkg:maven/org.mockito/mockito-core@5.23.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -253,7 +253,7 @@
     "licenseDeclared" : "MIT",
     "name" : "mockito-core",
     "summary" : "Mockito mock objects library core API and implementation",
-    "versionInfo" : "5.21.0"
+    "versionInfo" : "5.23.0"
   }, {
     "SPDXID" : "SPDXRef-60dab2ee0",
     "copyrightText" : "UNSPECIFIED",
@@ -272,13 +272,13 @@
     "summary" : "Open Test Alliance for the JVM",
     "versionInfo" : "1.3.0"
   }, {
-    "SPDXID" : "SPDXRef-61af18930",
+    "SPDXID" : "SPDXRef-61af20150",
     "copyrightText" : "UNSPECIFIED",
     "description" : "Mockito JUnit 5 support",
     "downloadLocation" : "NOASSERTION",
     "externalRefs" : [ {
       "referenceCategory" : "PACKAGE-MANAGER",
-      "referenceLocator" : "pkg:maven/org.mockito/mockito-junit-jupiter@5.21.0",
+      "referenceLocator" : "pkg:maven/org.mockito/mockito-junit-jupiter@5.23.0",
       "referenceType" : "purl"
     } ],
     "filesAnalyzed" : false,
@@ -287,7 +287,7 @@
     "licenseDeclared" : "MIT",
     "name" : "mockito-junit-jupiter",
     "summary" : "Mockito JUnit 5 support",
-    "versionInfo" : "5.21.0"
+    "versionInfo" : "5.23.0"
   }, {
     "SPDXID" : "SPDXRef-6a8647580",
     "copyrightText" : "UNSPECIFIED",
@@ -310,7 +310,7 @@
     "SPDXID" : "SPDXRef--132a53c0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "4fd258df1b8ae11705749db31f7da2fb9d5728aa"
+      "checksumValue" : "4b638d879be0cec1eff23b23d102937445ec1963"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/module-info.java",
@@ -321,7 +321,7 @@
     "SPDXID" : "SPDXRef--1bd64d260",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "352706bb2bcba58a16d48e3895692ca3ba594166"
+      "checksumValue" : "3775ca00fe9e817026690d1c8c55c68ff50f9562"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/test/java/net/dapete/locks/ReadWriteLocksTest.java",
@@ -332,7 +332,7 @@
     "SPDXID" : "SPDXRef--1f89ee830",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "fb26c4b72ea78b26836242663f787cca48cea0af"
+      "checksumValue" : "248fe7ee0eab51fdc4a243c92391cc4ed68d9115"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/package-info.java",
@@ -340,46 +340,35 @@
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef--3620f9660",
+    "SPDXID" : "SPDXRef--2df1364f0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "053e3d01184d409279a6c9dbc12817db8679ba72"
+      "checksumValue" : "102f7335d8fa79b931d938314ac4c2f6c620a65c"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/test/java/net/dapete/locks/ReadWriteLocksImplTest.java",
+    "fileName" : "./target/locks-1.4.0-cyclonedx.json",
+    "fileTypes" : [ "OTHER" ],
+    "licenseConcluded" : "NOASSERTION",
+    "licenseInfoInFiles" : [ "NOASSERTION" ]
+  }, {
+    "SPDXID" : "SPDXRef--40f9012c0",
+    "checksums" : [ {
+      "algorithm" : "SHA1",
+      "checksumValue" : "791566304bc33974365346d66b77902ad7c7b5b6"
+    } ],
+    "copyrightText" : "NOASSERTION",
+    "fileName" : "./src/test/java/net/dapete/locks/WeakKeyReferencesTest.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef--622091180",
+    "SPDXID" : "SPDXRef--7e9cbfb20",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "f6f0784b7230172e5240822335dfdb3202a8ad30"
+      "checksumValue" : "7c60a0913dc751e39935413c59c148db5fe3c527"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/AbstractLocks.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
-    "SPDXID" : "SPDXRef--d3d21920",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
-      "checksumValue" : "e649dbbfa2821e64bddd37f9c2817c428da637a6"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/LockReference.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
-    "SPDXID" : "SPDXRef--dae861a0",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
-      "checksumValue" : "5208a3b9f7f85086117eb819cec52c46262bde1c"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/LocksImpl.java",
+    "fileName" : "./src/main/java/net/dapete/locks/WeakKeyReference.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
@@ -387,7 +376,7 @@
     "SPDXID" : "SPDXRef-1564937b0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "e3d22b28a01f0b31d29cef8aa61eab627109da40"
+      "checksumValue" : "12b577f9e8fae7d659fee6f482f8ec76fc2f0751"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/test/java/net/dapete/locks/LocksTest.java",
@@ -395,24 +384,13 @@
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef-2b86aebb0",
+    "SPDXID" : "SPDXRef-1d79757f0",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "042261565ae156c08a803849793ebed086ca785c"
+      "checksumValue" : "d0a4adbd2bfd6cec0c4ee288f5524eade83c9f86"
     } ],
     "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/test/java/net/dapete/locks/LocksImplTest.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
-    "SPDXID" : "SPDXRef-31aa573d0",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
-      "checksumValue" : "5b998ade13d24b467da0db67be44e7e1bbd5b2ac"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/test/java/net/dapete/locks/AbstractLocksTest.java",
+    "fileName" : "./src/main/java/net/dapete/locks/WeakKeyReferences.java",
     "fileTypes" : [ "SOURCE" ],
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
@@ -420,7 +398,7 @@
     "SPDXID" : "SPDXRef-536843260",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "edb0a06f820823822e4aaae98ddbe4c6023c70f8"
+      "checksumValue" : "b4a9778a3baa150d9d4c3950782081db2973bf2b"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/Locks.java",
@@ -431,7 +409,7 @@
     "SPDXID" : "SPDXRef-64b8e9220",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "aad51739417033aa88e8f14c1173af0cf34dc37b"
+      "checksumValue" : "1f5e7b01bda0f91ff7ceda9b9e497a4a8d8002fd"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/ReentrantReadWriteLocks.java",
@@ -442,7 +420,7 @@
     "SPDXID" : "SPDXRef-66c09bd70",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "12e6514d2f26ab401fe3849efc0267f7961367a3"
+      "checksumValue" : "91d23a6f5838d3953746cd37a3c03dedbd0e572c"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/ReentrantLocks.java",
@@ -450,21 +428,10 @@
     "licenseConcluded" : "NOASSERTION",
     "licenseInfoInFiles" : [ "NOASSERTION" ]
   }, {
-    "SPDXID" : "SPDXRef-7b57b2f30",
-    "checksums" : [ {
-      "algorithm" : "SHA1",
-      "checksumValue" : "f78267f43f4f5a529f79d7b1e92aa741353b815b"
-    } ],
-    "copyrightText" : "NOASSERTION",
-    "fileName" : "./src/main/java/net/dapete/locks/ReadWriteLocksImpl.java",
-    "fileTypes" : [ "SOURCE" ],
-    "licenseConcluded" : "NOASSERTION",
-    "licenseInfoInFiles" : [ "NOASSERTION" ]
-  }, {
     "SPDXID" : "SPDXRef-f670ab30",
     "checksums" : [ {
       "algorithm" : "SHA1",
-      "checksumValue" : "93aac4e43baff591948f9590b1e862f45db213e2"
+      "checksumValue" : "69c3d311c1bb4e582a8967a5812cb8fc8949cf0d"
     } ],
     "copyrightText" : "NOASSERTION",
     "fileName" : "./src/main/java/net/dapete/locks/ReadWriteLocks.java",
@@ -493,22 +460,17 @@
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef--3620f9660",
+    "spdxElementId" : "SPDXRef--2df1364f0",
     "relationshipType" : "GENERATES",
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef--622091180",
+    "spdxElementId" : "SPDXRef--40f9012c0",
     "relationshipType" : "GENERATES",
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef--d3d21920",
-    "relationshipType" : "GENERATES",
-    "relatedSpdxElement" : "SPDXRef--4b3779bf0",
-    "comment" : ""
-  }, {
-    "spdxElementId" : "SPDXRef--dae861a0",
+    "spdxElementId" : "SPDXRef--7e9cbfb20",
     "relationshipType" : "GENERATES",
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
@@ -518,12 +480,7 @@
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef-2b86aebb0",
-    "relationshipType" : "GENERATES",
-    "relatedSpdxElement" : "SPDXRef--4b3779bf0",
-    "comment" : ""
-  }, {
-    "spdxElementId" : "SPDXRef-31aa573d0",
+    "spdxElementId" : "SPDXRef-1d79757f0",
     "relationshipType" : "GENERATES",
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
@@ -543,11 +500,6 @@
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
     "comment" : ""
   }, {
-    "spdxElementId" : "SPDXRef-7b57b2f30",
-    "relationshipType" : "GENERATES",
-    "relatedSpdxElement" : "SPDXRef--4b3779bf0",
-    "comment" : ""
-  }, {
     "spdxElementId" : "SPDXRef-f670ab30",
     "relationshipType" : "GENERATES",
     "relatedSpdxElement" : "SPDXRef--4b3779bf0",
@@ -555,22 +507,22 @@
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "DYNAMIC_LINK",
+    "relatedSpdxElement" : "SPDXRef--4831b1a30",
+    "comment" : "Relationship based on Maven POM file dependency information"
+  }, {
+    "spdxElementId" : "SPDXRef--4b3779bf0",
+    "relationshipType" : "DYNAMIC_LINK",
     "relatedSpdxElement" : "SPDXRef-507cce4b0",
     "comment" : "Relationship based on Maven POM file dependency information"
   }, {
-    "spdxElementId" : "SPDXRef-22f875980",
+    "spdxElementId" : "SPDXRef-22f8795a0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--1f8f17870",
+    "relatedSpdxElement" : "SPDXRef--1f8f13c50",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef--7c012cdb0",
+    "spdxElementId" : "SPDXRef-22f8795a0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--4831b1a30",
-    "comment" : "Relationship created based on Maven POM information"
-  }, {
-    "spdxElementId" : "SPDXRef-22f875980",
-    "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--7c012cdb0",
+    "relatedSpdxElement" : "SPDXRef--7c0129190",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef-533f21910",
@@ -578,34 +530,34 @@
     "relatedSpdxElement" : "SPDXRef--7d9e5bf50",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-22f875980",
+    "spdxElementId" : "SPDXRef-22f8795a0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef--cf9b430",
+    "relatedSpdxElement" : "SPDXRef--cf97810",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-22f875980",
+    "relatedSpdxElement" : "SPDXRef-22f8795a0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-5958fb780",
+    "spdxElementId" : "SPDXRef-595902fa0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
     "relatedSpdxElement" : "SPDXRef-3401be2a0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef--1f8f17870",
+    "spdxElementId" : "SPDXRef--1f8f13c50",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-40642c410",
+    "relatedSpdxElement" : "SPDXRef-406430030",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-5958fb780",
+    "spdxElementId" : "SPDXRef-595902fa0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
     "relatedSpdxElement" : "SPDXRef-494d73e00",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef--7c012cdb0",
+    "spdxElementId" : "SPDXRef--7c0129190",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-4f045aab0",
+    "relatedSpdxElement" : "SPDXRef-4f045e6d0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
@@ -613,22 +565,22 @@
     "relatedSpdxElement" : "SPDXRef-533f21910",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-61af18930",
+    "spdxElementId" : "SPDXRef-61af20150",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-5958fb780",
+    "relatedSpdxElement" : "SPDXRef-595902fa0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef--7c012cdb0",
+    "spdxElementId" : "SPDXRef--7c0129190",
     "relationshipType" : "TEST_DEPENDENCY_OF",
     "relatedSpdxElement" : "SPDXRef-60dab2ee0",
     "comment" : "Relationship created based on Maven POM information"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
-    "relatedSpdxElement" : "SPDXRef-61af18930",
+    "relatedSpdxElement" : "SPDXRef-61af20150",
     "comment" : "Relationship created based on Maven POM information"
   }, {
-    "spdxElementId" : "SPDXRef-5958fb780",
+    "spdxElementId" : "SPDXRef-595902fa0",
     "relationshipType" : "TEST_DEPENDENCY_OF",
     "relatedSpdxElement" : "SPDXRef-6a8647580",
     "comment" : "Relationship created based on Maven POM information"
@@ -647,19 +599,15 @@
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef--3620f9660"
+    "relatedSpdxElement" : "SPDXRef--2df1364f0"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef--622091180"
+    "relatedSpdxElement" : "SPDXRef--40f9012c0"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef--d3d21920"
-  }, {
-    "spdxElementId" : "SPDXRef--4b3779bf0",
-    "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef--dae861a0"
+    "relatedSpdxElement" : "SPDXRef--7e9cbfb20"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
@@ -667,11 +615,7 @@
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-2b86aebb0"
-  }, {
-    "spdxElementId" : "SPDXRef--4b3779bf0",
-    "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-31aa573d0"
+    "relatedSpdxElement" : "SPDXRef-1d79757f0"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
@@ -684,10 +628,6 @@
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",
     "relatedSpdxElement" : "SPDXRef-66c09bd70"
-  }, {
-    "spdxElementId" : "SPDXRef--4b3779bf0",
-    "relationshipType" : "CONTAINS",
-    "relatedSpdxElement" : "SPDXRef-7b57b2f30"
   }, {
     "spdxElementId" : "SPDXRef--4b3779bf0",
     "relationshipType" : "CONTAINS",

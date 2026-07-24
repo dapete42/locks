@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReentrantLocks.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">locks</a> &gt; <a href="index.source.html" class="el_package">net.dapete.locks</a> &gt; <span class="el_source">ReentrantLocks.java</span></div><h1>ReentrantLocks.java</h1><pre class="source lang-java linenums">package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
+import org.apiguardian.api.API;
 
 import java.util.concurrent.locks.ReentrantLock;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking using instances of [ReentrantLock].
@@ -11,18 +13,19 @@ import java.util.concurrent.locks.ReentrantLock;
 ///
 /// @param &lt;K&gt; the key type.
 ///
-public final class ReentrantLocks&lt;K extends @Nullable Object&gt; extends LocksImpl&lt;K, ReentrantLock&gt; {
+@API(status = STABLE)
+public final class ReentrantLocks&lt;K&gt; extends Locks&lt;K, ReentrantLock&gt; {
 
     private final boolean fair;
 
     ReentrantLocks() {
-<span class="fc" id="L19">        this(false);</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L22">        this(false);</span>
+<span class="fc" id="L23">    }</span>
 
     ReentrantLocks(boolean fair) {
-<span class="fc" id="L23">        super(() -&gt; new ReentrantLock(fair));</span>
-<span class="fc" id="L24">        this.fair = fair;</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L26">        super(() -&gt; new ReentrantLock(fair));</span>
+<span class="fc" id="L27">        this.fair = fair;</span>
+<span class="fc" id="L28">    }</span>
 
     ///
     /// Return `true` if locks returned by this instance have fairness set true.
@@ -30,9 +33,10 @@ public final class ReentrantLocks&lt;K extends @Nullable Object&gt; extends Lock
     /// @return `true` if locks returned by this instance have fairness set true.
     /// @since 1.3.3
     ///
+    @API(status = STABLE, since = &quot;1.3.3&quot;)
     public boolean isFair() {
-<span class="fc" id="L34">        return fair;</span>
+<span class="fc" id="L38">        return fair;</span>
     }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

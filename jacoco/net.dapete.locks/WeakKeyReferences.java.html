@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WeakKeyReferences.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">locks</a> &gt; <a href="index.source.html" class="el_package">net.dapete.locks</a> &gt; <span class="el_source">WeakKeyReferences.java</span></div><h1>WeakKeyReferences.java</h1><pre class="source lang-java linenums">package net.dapete.locks;
+
+import org.jspecify.annotations.Nullable;
+
+import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
+
+abstract class WeakKeyReferences&lt;K, V&gt; {
+
+<span class="fc" id="L15">    private final Lock instanceLock = new ReentrantLock();</span>
+
+<span class="fc" id="L17">    private final Map&lt;K, WeakKeyReference&lt;K, V&gt;&gt; referenceMap = new HashMap&lt;&gt;();</span>
+
+<span class="fc" id="L19">    private final ReferenceQueue&lt;V&gt; referenceQueue = new ReferenceQueue&lt;&gt;();</span>
+
+    private final Supplier&lt;V&gt; supplier;
+
+<span class="fc" id="L23">    protected WeakKeyReferences(Supplier&lt;V&gt; supplier) {</span>
+<span class="fc" id="L24">        this.supplier = supplier;</span>
+<span class="fc" id="L25">    }</span>
+
+    private V createValue(K key) {
+<span class="fc" id="L28">        final var newValue = supplier.get();</span>
+<span class="fc" id="L29">        referenceMap.put(key, new WeakKeyReference&lt;&gt;(key, newValue, referenceQueue));</span>
+<span class="fc" id="L30">        return newValue;</span>
+    }
+
+    ///
+    /// Return a value for the supplied `key`. There will be at most one value per key at any given time.
+    ///
+    /// @param key the key.
+    /// @return a value for the supplied `key`.
+    ///
+    protected V get(K key) {
+<span class="fc" id="L40">        instanceLock.lock();</span>
+        try {
+<span class="fc" id="L42">            processQueue();</span>
+<span class="fc" id="L43">            return getValue(key);</span>
+        } finally {
+<span class="fc" id="L45">            instanceLock.unlock();</span>
+        }
+    }
+
+    private V getValue(K key) {
+<span class="fc" id="L50">        final var reference = getReference(key);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (reference != null) {</span>
+<span class="fc" id="L52">            final V value = reference.get();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (value != null) {</span>
+<span class="fc" id="L54">                return value;</span>
+            }
+        }
+<span class="fc" id="L57">        return createValue(key);</span>
+    }
+
+    private @Nullable WeakKeyReference&lt;K, V&gt; getReference(K key) {
+<span class="fc" id="L61">        return referenceMap.get(key);</span>
+    }
+
+    ///
+    /// Return the current number of values managed by this instance.
+    ///
+    /// @return the current number of values managed by this instance.
+    ///
+    protected int size() {
+<span class="fc" id="L70">        instanceLock.lock();</span>
+        try {
+<span class="fc" id="L72">            processQueue();</span>
+<span class="fc" id="L73">            return referenceMap.size();</span>
+        } finally {
+<span class="fc" id="L75">            instanceLock.unlock();</span>
+        }
+    }
+
+    ///
+    /// Removes all values that have been marked as unreachable by the garbage collector.
+    ///
+    private void processQueue() {
+        Reference&lt;?&gt; reference;
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        while ((reference = referenceQueue.poll()) != null) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (reference instanceof WeakKeyReference) {</span>
+<span class="fc" id="L86">                final var keyReference = (WeakKeyReference&lt;?, ?&gt;) reference;</span>
+<span class="fc" id="L87">                referenceMap.remove(keyReference.getKey());</span>
+<span class="fc" id="L88">            }</span>
+        }
+<span class="fc" id="L90">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Locks.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">locks</a> &gt; <a href="index.source.html" class="el_package">net.dapete.locks</a> &gt; <span class="el_source">Locks.java</span></div><h1>Locks.java</h1><pre class="source lang-java linenums">package net.dapete.locks;
 
-import org.jspecify.annotations.Nullable;
+import org.apiguardian.api.API;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
+
+import static org.apiguardian.api.API.Status.STABLE;
 
 ///
 /// Key-based locking with implementations of [Lock].
@@ -12,7 +14,12 @@ import java.util.function.Supplier;
 /// @param &lt;K&gt; the key type..
 /// @param &lt;L&gt; the [Lock] type.
 ///
-public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
+@API(status = STABLE)
+public class Locks&lt;K, L extends Lock&gt; extends WeakKeyReferences&lt;K, L&gt; {
+
+    Locks(Supplier&lt;L&gt; lockSupplier) {
+<span class="fc" id="L21">        super(lockSupplier);</span>
+<span class="fc" id="L22">    }</span>
 
     ///
     /// Return an instance using [Lock] instances created by `lockSupplier`.
@@ -22,8 +29,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @param &lt;L&gt;          the `Lock` type.
     /// @return an instance using `Lock` instances created by `lockSupplier`
     ///
-    static &lt;K, L extends Lock&gt; Locks&lt;K, L&gt; withSupplier(Supplier&lt;L&gt; lockSupplier) {
-<span class="fc" id="L26">        return new LocksImpl&lt;&gt;(lockSupplier);</span>
+    @API(status = STABLE)
+    public static &lt;K, L extends Lock&gt; Locks&lt;K, L&gt; withSupplier(Supplier&lt;L&gt; lockSupplier) {
+<span class="fc" id="L34">        return new Locks&lt;&gt;(lockSupplier);</span>
     }
 
     ///
@@ -32,8 +40,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @param &lt;K&gt; the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant() {
-<span class="fc" id="L36">        return new ReentrantLocks&lt;&gt;();</span>
+    @API(status = STABLE)
+    public static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant() {
+<span class="fc" id="L45">        return new ReentrantLocks&lt;&gt;();</span>
     }
 
     ///
@@ -43,8 +52,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @param &lt;K&gt;      the key type.
     /// @return a `ReentrantLocks` instance.
     ///
-    static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(@SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
-<span class="fc" id="L47">        return reentrant();</span>
+    @API(status = STABLE)
+    public static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(@SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
+<span class="fc" id="L57">        return reentrant();</span>
     }
 
     ///
@@ -55,8 +65,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @return a `ReentrantLocks` instance.
     /// @since 1.2.0
     ///
-    static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair) {
-<span class="fc" id="L59">        return new ReentrantLocks&lt;&gt;(fair);</span>
+    @API(status = STABLE, since = &quot;1.2.0&quot;)
+    public static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair) {
+<span class="fc" id="L70">        return new ReentrantLocks&lt;&gt;(fair);</span>
     }
 
     ///
@@ -68,8 +79,9 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @return a `ReentrantLocks` instance
     /// @since 1.2.0
     ///
-    static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair, @SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
-<span class="fc" id="L72">        return reentrant(fair);</span>
+    @API(status = STABLE, since = &quot;1.2.0&quot;)
+    public static &lt;K&gt; ReentrantLocks&lt;K&gt; reentrant(boolean fair, @SuppressWarnings(&quot;unused&quot;) Class&lt;K&gt; keyClass) {
+<span class="fc" id="L84">        return reentrant(fair);</span>
     }
 
     ///
@@ -78,7 +90,11 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @param key the key
     /// @return a lock for `key`.
     ///
-    L get(@Nullable K key);
+    @API(status = STABLE)
+    @Override
+    public L get(K key) {
+<span class="fc" id="L96">        return super.get(key);</span>
+    }
 
     ///
     /// Return a lock for `key` already locked using [Lock#lock()].
@@ -86,14 +102,23 @@ public interface Locks&lt;K extends @Nullable Object, L extends Lock&gt; {
     /// @param key the key
     /// @return a lock for `key` already locked.
     ///
-    L lock(@Nullable K key);
+    @API(status = STABLE)
+    public final L lock(K key) {
+<span class="fc" id="L107">        final var lock = get(key);</span>
+<span class="fc" id="L108">        lock.lock();</span>
+<span class="fc" id="L109">        return lock;</span>
+    }
 
     ///
     /// Return the current number of locks managed by this instance.
     ///
     /// @return the current number of locks managed by this instance.
     ///
-    int size();
+    @API(status = STABLE)
+    @Override
+    public int size() {
+<span class="fc" id="L120">        return super.size();</span>
+    }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
